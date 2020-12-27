@@ -19,6 +19,7 @@ last_name VARCHAR(50),
 email VARCHAR(50),
 username VARCHAR(20),
 password VARCHAR(20),
+joined TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 zip INT,
 neighborhood VARCHAR(50),
 avatar VARCHAR(100),
@@ -40,13 +41,19 @@ CREATE TABLE threads (
   id BIGSERIAL PRIMARY KEY,
   title VARCHAR(100),
   text VARCHAR(500),
+  date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  interest_id INT,
+  city_id INT,
   user_id INT,
+  FOREIGN KEY(interest_id) REFERENCES interests(id),
+  FOREIGN KEY(city_id) REFERENCES cities(id),
   FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
 CREATE TABLE replies (
   id BIGSERIAL PRIMARY KEY,
   text VARCHAR(500),
+  date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   user_id INT,
   thread_id INT,
   FOREIGN KEY(user_id) REFERENCES users(id),
