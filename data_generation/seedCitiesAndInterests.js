@@ -1,26 +1,7 @@
-const pool = require('./index.js');
+const pool = require('../database/index.js');
 
 const cities = [
-  'New York City',
-  'Los Angeles',
-  'Chicago',
-  'Dallas',
-  'Houston',
-  'Washington, D.C.',
-  'Miami',
-  'Philadelphia',
-  'Atlanta',
-  'Phoenix',
-  'Boston',
-  'San Francisco',
-  'Riverside',
-  'Detroit',
-  'Seattle',
-  'Minneapolis',
-  'San Diego',
-  'Tampa',
-  'Denver',
-  'St. Louis'
+  'Seattle'  // for now just populating Seattle with information, for demo purposes
 ];
 
 const interests = [
@@ -36,7 +17,6 @@ const interests = [
   'Pop Culture'
 ];
 
-// could abstract into just one insert function
 const insertCity = (value) => {
   const sql = 'INSERT INTO cities(city) VALUES($1)';
   pool
