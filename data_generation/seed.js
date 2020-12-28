@@ -74,11 +74,25 @@ const cityId = 1; // just Seattle for now
 const numThreads = 100;
 const numReplies = 500;
 
-generateUsers(numUsers)
-  .then(() => {
-    generateThreads(numThreads);
-  })
-  .then(() => {
-    generateReplies(numReplies);
-  })
-  .catch(err => console.log(err));
+// generateUsers(numUsers)
+//   .then(() => {
+//     generateThreads(numThreads);
+//   })
+//   .then(() => {
+//     generateReplies(numReplies);
+//   })
+//   .catch(err => console.log(err));
+
+// added this after populating rest of table
+const populateUsersInterestsTable = () => {
+  for (let l = 1; l <= numUsers; l++) {
+    const numInterests = Math.floor((Math.random() * 3) + 1);
+    for (let m = 0; m < numInterests; m++) {
+      const sql = 'INSERT INTO users_interests(user_id, interest_id) VALUES($1, $2)';
+      const values = [l, Math.floor((Math.random() * 10) + 1)];
+      insert(sql, values);
+    }
+  }
+}
+
+populateUsersInterestsTable();
