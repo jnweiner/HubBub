@@ -28,21 +28,6 @@ app.get('/api/cities', (req, res) => {
     })
 });
 
-// get all interests supported by app for that city
-    // should create cities_interests table?
-app.get('/api/cities/:cityId/interests', (req, res) => {
-  const sql = 'SELECT * from interests';
-  pool
-    .query(sql)
-    .then(data => {
-      res.send(data.rows)
-    })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500);
-    })
-});
-
 // get num of users associated with a city
 app.get('/api/cities/:cityId/users', (req, res) => {
   const sql = 'SELECT COUNT(*) FROM users WHERE city_id = $1';
@@ -58,15 +43,32 @@ app.get('/api/cities/:cityId/users', (req, res) => {
     })
 });
 
-// get number of users associated with each interest within a city
-app.get('/api/cities/:cityId/interests/:interestId/users', (req, res) => {
-  const sql = 'SELECT COUNT(users.id) FROM users, users_interests WHERE users.city_id = $1 AND users.id = users_interests.user_id AND users_interests.interest_id = $2';
-  const values = [req.params.cityId, req.params.interestId];
+// get all interests for city, along with follower counts
+// should there be a cities_interests table, to account for diff cities having diff interests (stretch goal)
+app.get('/api/cities/:cityId/interests', (req, res) => {
+  const sql = 'SELECT * from interests';
   pool
-    .query(sql, values)
+    .query(sql)
     .then(data => {
-      res.send(data.rows)
+      // for each interest, get num of users in city following that interest
+      const interests = data.rows;
+      const interestsWithUserCount = interests.map(interest => {
+        const sqlUsers = 'SELECT COUNT(users.id) FROM users, users_interests WHERE users.city_id = $1 AND users.id = users_interests.user_id AND users_interests.interest_id = $2';
+        const values = [req.params.cityId, interest.id];
+        return new Promise((resolve, reject) => {
+          pool.query(sqlUsers, values, (err, data) => {
+            if (err) {
+              reject(err);
+            } else {
+              interest.userCount = data.rows[0].count;
+              resolve(interest);
+            }
+          })
+        });
+      });
+      return Promise.all(interestsWithUserCount)
     })
+    .then(interestsWithUserCount => res.send(interestsWithUserCount))
     .catch(err => {
       console.log(err);
       res.sendStatus(500);
