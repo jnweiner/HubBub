@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const DropdownContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 const InterestDropdown = ({ userInterests, changeView }) => {
 
@@ -9,16 +15,12 @@ const InterestDropdown = ({ userInterests, changeView }) => {
   };
 
   return (
-    <table>
-      <tbody>
-        <tr onClick={toggleSelected}>
-          <td> My Interests </td>
-        </tr>
-        { selected ? 
-          userInterests.map((interest, i) => <tr key={i} onClick={() => changeView(interest.name)}><td>{interest.name}</td></tr>)
-        : null }
-      </tbody>
-    </table>
+    <DropdownContainer>
+      <div onClick={toggleSelected}>My Interests</div>
+      { selected ? 
+        userInterests.map((interest, i) => <div key={i} onClick={() => changeView(interest.name)}>{interest.name}</div>)
+      : null }
+    </DropdownContainer>
   )
 }
 

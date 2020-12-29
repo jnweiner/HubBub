@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 
 import NavBar from './NavBar.jsx';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: 'Krub', sans-serif;
+    font-weight: 400;
+    background-color: #2d4059;
+  }
+  button {
+    font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
+  }
+`
 
 const App = () => {
   const [username, setUsername] = useState('Julie78');
@@ -38,6 +52,7 @@ const App = () => {
 
   return (
     <div>
+      <GlobalStyle />
       <NavBar city={city} userInterests={userInterests} changeView={changeView}/>
     </div>
   )
