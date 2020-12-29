@@ -7,17 +7,14 @@ const NavContainer = styled.div`
   background-color: #294059;
   color: #f5f5f5;
   font-size: 18px;
-  border-radius: 10px;
   padding: 10px;
   align-items: center;
   justify-content: space-between;
 `;
 
 const Logo = styled.span`
-  font-family: 'Mitr', sans-serif;
   color: #ffd460;
   font-size: 30px;
-  font-weight: 600px;
 `;
 
 const NavSection = styled.div`
@@ -30,13 +27,18 @@ const NavOption = styled.span`
   cursor: pointer;
 `;
 
+const City = styled.div`
+  font-size: 30px;
+  cursor: pointer;
+`;
+
 const NavBar = ({ city, userInterests, changeView }) => {
 
   return (
     <NavContainer>
       <NavSection>
         <Logo><i className="fas fa-city"></i>HubBub</Logo>
-        <NavOption onClick={() => changeView('cityHub')}><em><strong>{city.name}</strong></em></NavOption>
+        <City onClick={() => changeView('cityHub')}>{city.name}</City>
       </NavSection>
       <NavSection>
         <NavOption><InterestDropdown userInterests={userInterests} changeView={changeView}/></NavOption>

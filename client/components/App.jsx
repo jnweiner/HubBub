@@ -4,18 +4,26 @@ import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
 
 import NavBar from './NavBar.jsx';
+import CityHub from './CityHub.jsx';
 
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Krub', sans-serif;
     font-weight: 400;
+    color: #294059;
     background-color: #f5f5f5;
   }
   button {
     font-family: 'Open Sans', sans-serif;
     cursor: pointer;
   }
-`
+`;
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 const App = () => {
   const [username, setUsername] = useState('Julie78');
@@ -51,10 +59,11 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <AppContainer>
       <GlobalStyle />
       <NavBar city={city} userInterests={userInterests} changeView={changeView}/>
-    </div>
+      {view === 'cityHub' ? <CityHub city={city} userInterests={userInterests}/> : null}
+    </AppContainer>
   )
 }
 

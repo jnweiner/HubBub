@@ -35,7 +35,7 @@ app.get('/api/cities/:cityId/users', (req, res) => {
   pool
     .query(sql, values)
     .then(data => {
-      res.send(data.rows)
+      res.send(data.rows[0])
     })
     .catch(err => {
       console.log(err);
@@ -46,7 +46,7 @@ app.get('/api/cities/:cityId/users', (req, res) => {
 // get all interests for city, along with follower counts
 // should there be a cities_interests table, to account for diff cities having diff interests (stretch goal)
 app.get('/api/cities/:cityId/interests', (req, res) => {
-  const sql = 'SELECT * from interests';
+  const sql = 'SELECT id, interest AS name, icon from interests';
   pool
     .query(sql)
     .then(data => {
