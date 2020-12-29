@@ -13,7 +13,7 @@ const NavContainer = styled.div`
 `;
 
 const Logo = styled.span`
-  color: #ffd460;
+  color: #e1ad01;
   font-size: 30px;
 `;
 
