@@ -5,16 +5,46 @@ const cities = [
 ];
 
 const interests = [
-  'Fitness',
-  'Outdoors & Recreation',
-  'Reading & Writing',
-  'Arts & Crafts',
-  'Tech',
-  'Food & Drink',
-  'Music',
-  'Gaming',
-  'Sports',
-  'Pop Culture'
+  {
+    interest: 'Fitness',
+    icon: 'fas fa-running'
+  },
+  {
+    interest: 'Outdoors & Recreation',
+    icon: 'fas fa-hiking'
+  },
+  {
+    interest: 'Reading & Writing',
+    icon: 'fas fa-book-open'
+  },
+  {
+    interest: 'Arts & Crafts',
+    icon: 'fas fa-palette'
+  },
+  {
+    interest: 'Tech',
+    icon: 'fas fa-robot'
+  },
+  {
+    interest: 'Food & Drink',
+    icon: 'fas fa-utensils'
+  },
+  {
+    interest: 'Music',
+    icon: 'fas fa-music'
+  },
+  {
+    interest: 'Gaming',
+    icon: 'fas fa-gamepad'
+  },
+  {
+    interest: 'Sports',
+    icon: 'fas fa-football-ball'
+  },
+  {
+    interest: 'Pop Culture',
+    icon: 'fas fa-film'
+  }
 ];
 
 const insertCity = (value) => {
@@ -27,10 +57,10 @@ const insertCity = (value) => {
     .catch(err => console.log(err));
 };
 
-const insertInterest = (value) => {
-  const sql = 'INSERT INTO interests(interest) VALUES($1)';
+const insertInterest = (interest, icon) => {
+  const sql = 'INSERT INTO interests(interest) VALUES($1, $2)';
   pool
-    .query(sql, [value])
+    .query(sql, [interest, icon])
     .then(res => {
       console.log('success');
     })
@@ -42,6 +72,5 @@ cities.forEach(city => {
 });
 
 interests.forEach(interest => {
-  insertInterest(interest);
+  insertInterest(interest.interest, interest.icon);
 });
-

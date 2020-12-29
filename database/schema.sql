@@ -9,7 +9,8 @@ CREATE TABLE cities (
 
 CREATE TABLE interests (
   id BIGSERIAL PRIMARY KEY,
-  interest VARCHAR(50)
+  interest VARCHAR(50),
+  icon VARCHAR(20)
 );
 
 CREATE TABLE users (
