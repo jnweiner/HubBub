@@ -33,8 +33,8 @@ const Interest = styled.li`
 const Nav = ({ city, userInterests, changeView, currentView }) => (
   <NavContainer>
     <NavOption 
-      isCurrentView={currentView === 'cityHub'}
-      onClick={() => changeView('cityHub')}
+      isCurrentView={currentView.name === 'cityHub'}
+      onClick={() => changeView({name: 'cityHub'})}
     >
     {city.name} Hub
     </NavOption>
@@ -42,14 +42,14 @@ const Nav = ({ city, userInterests, changeView, currentView }) => (
       <span>My Interests</span>
       <StyledList>
         {userInterests.map((interest, i) =>
-          <Interest key={i} onClick={() => changeView(interest.interest_id)}>
-          <NavOption isCurrentView={currentView === interest.interest_id}>{interest.name}</NavOption>
+          <Interest key={i} onClick={() => changeView(interest)}>
+          <NavOption isCurrentView={currentView.name === interest.name}>{interest.name}</NavOption>
           </Interest>)}
       </StyledList>
     </NavOption>
     <NavOption 
-      isCurrentView={currentView === 'accountSettings'}
-      onClick={() => changeView('accountSettings')}
+      isCurrentView={currentView.name === 'accountSettings'}
+      onClick={() => changeView({name: 'accountSettings'})}
     >
     My Account
     </NavOption>

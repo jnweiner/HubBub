@@ -38,10 +38,10 @@ const Header = ({ city, userInterests, changeView }) => {
     <HeaderContainer>
       <HeaderSection>
         <Logo><i className="fas fa-city"></i>HubBub</Logo>
-        <City onClick={() => changeView('cityHub')}>{city.name}</City>
+        <City onClick={() => changeView({name: 'cityHub'})}>{city.name}</City>
       </HeaderSection>
       <HeaderSection>
-        <HeaderOption onClick={() => changeView('accountSettings')}><i className="fas fa-cog"></i></HeaderOption>
+        <HeaderOption onClick={() => changeView({name: 'accountSettings'})}><i className="fas fa-cog"></i></HeaderOption>
       </HeaderSection>
     </HeaderContainer>
   )

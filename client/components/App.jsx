@@ -7,6 +7,7 @@ import Header from './Header.jsx';
 import CityHub from './CityHub.jsx';
 import Nav from './Nav.jsx';
 import AccountSettings from './AccountSettings.jsx';
+import InterestHub from './InterestHub.jsx';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -37,7 +38,7 @@ const App = () => {
   const [city, setCity] = useState({});
   const [cityInterests, setCityInterests] = useState([]);
   const [userInterests, setUserInterests] = useState([]);
-  const [view, setView] = useState('cityHub');
+  const [view, setView] = useState({name: 'cityHub'});
   const [loaded, setLoaded] = useState(false);
 
   const fetchUserInfo = (username) => {
@@ -67,6 +68,34 @@ const App = () => {
 
   const changeView = (newView) => {
     setView(newView);
+  };
+
+  const renderView = () => {
+    if (view.name === 'cityHub') {
+      return (
+        <CityHub
+        city={city}
+        userInterests={userInterests}
+        cityInterests={cityInterests}
+        fetchCityInterests={fetchCityInterests}
+        addUserInterest={addUserInterest}
+        deleteUserInterest={deleteUserInterest}
+        changeView={changeView}
+      />
+      )
+    } else if (view.name === 'accountSettings') {
+      return (
+        <AccountSettings
+          userInfo={userInfo}
+        />
+      )
+    } else {
+      return (
+        <InterestHub
+          interest={view}
+        />
+      )
+    }
   };
 
   const addUserInterest = (interestId) => {
@@ -115,22 +144,7 @@ const App = () => {
           changeView={changeView}
           currentView={view}
         />
-        {view === 'cityHub' && loaded === true ?
-        <CityHub
-          city={city}
-          userInterests={userInterests}
-          cityInterests={cityInterests}
-          fetchCityInterests={fetchCityInterests}
-          addUserInterest={addUserInterest}
-          deleteUserInterest={deleteUserInterest}
-          changeView={changeView}
-        />
-        : null}
-         {view === 'accountSettings' && loaded === true ?
-        <AccountSettings
-          userInfo={userInfo}
-        />
-        : null}
+        {loaded === true ? renderView() : null}
       </DisplayContainer>
     </AppContainer>
   )
