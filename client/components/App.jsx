@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Header from './Header.jsx';
 import CityHub from './CityHub.jsx';
 import Nav from './Nav.jsx';
+import AccountSettings from './AccountSettings.jsx';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -31,7 +32,7 @@ const DisplayContainer = styled.div`
 `;
 
 const App = () => {
-  const [username, setUsername] = useState('Chanelle48');
+  const [username, setUsername] = useState('Julie78');
   const [userInfo, setUserInfo] = useState({});
   const [city, setCity] = useState({});
   const [cityInterests, setCityInterests] = useState([]);
@@ -123,6 +124,11 @@ const App = () => {
           addUserInterest={addUserInterest}
           deleteUserInterest={deleteUserInterest}
           changeView={changeView}
+        />
+        : null}
+         {view === 'accountSettings' && loaded === true ?
+        <AccountSettings
+          userInfo={userInfo}
         />
         : null}
       </DisplayContainer>

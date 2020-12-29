@@ -16,6 +16,7 @@ const CityTitle = styled.div`
   font-size: 25px;
   font-weight: 600;
   margin: 20px 0;
+  width: 80vw;
 `;
 
 const Row = styled.div`

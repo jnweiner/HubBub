@@ -41,7 +41,7 @@ const Header = ({ city, userInterests, changeView }) => {
         <City onClick={() => changeView('cityHub')}>{city.name}</City>
       </HeaderSection>
       <HeaderSection>
-        <HeaderOption onClick={() => changeView('accountSettings')}><i class="fas fa-cog"></i></HeaderOption>
+        <HeaderOption onClick={() => changeView('accountSettings')}><i className="fas fa-cog"></i></HeaderOption>
       </HeaderSection>
     </HeaderContainer>
   )
