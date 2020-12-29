@@ -13,7 +13,7 @@ const CityTitle = styled.div`
   border-top: 1px solid #2d4059;
   border-bottom: 1px solid #2d4059;
   padding: 10px;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 600;
   margin: 20px 0;
 `;
@@ -50,16 +50,16 @@ const CityHub = ({ city, userInterests }) => {
   };
 
   useEffect(() => {
-    fetchCityUsers(1) // current bug where city.id is showing up as undefined
+    fetchCityUsers(city.id)
       .then(() => {
-        fetchCityInterests(1);
+        fetchCityInterests(city.id);
       })
       .catch(err => console.log(err));
   }, []);
 
   return (
     <CityHubContainer>
-      <CityTitle><i className="fas fa-map-pin"></i> Seattle Interests</CityTitle>
+      <CityTitle><i className="fas fa-map-pin"></i> Connect with {cityUsers} neighbors in the {city.name} area</CityTitle>
       <Row>{cityInterests.slice(0, 5).map(interest => <InterestPreview key={interest.id} interest={interest} isUserInterest={isUserInterest(interest.id)}/>)}</Row>
       <Row>{cityInterests.slice(5).map(interest => <InterestPreview key={interest.id} interest={interest} isUserInterest={isUserInterest(interest.id)}/>)}</Row>
     </CityHubContainer>

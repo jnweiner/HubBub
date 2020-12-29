@@ -31,9 +31,10 @@ const App = () => {
   const [city, setCity] = useState({});
   const [userInterests, setUserInterests] = useState([]);
   const [view, setView] = useState('cityHub');
+  const [loaded, setLoaded] = useState(false);
 
   const fetchUserInfo = (username) => {
-    axios.get(`/api/users/${username}`)
+    return axios.get(`/api/users/${username}`)
       .then(({ data }) => {
         setUserInfo(data);
         setCity({name: data.city, id: data.city_id});
@@ -42,7 +43,7 @@ const App = () => {
   };
 
   const fetchUserInterests = (username) => {
-    axios.get(`api/users/${username}/interests`)
+    return axios.get(`api/users/${username}/interests`)
       .then(({ data }) => {
         setUserInterests(data)
       })
@@ -54,15 +55,17 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchUserInfo(username);
-    fetchUserInterests(username);
+    fetchUserInfo(username)
+      .then(() => fetchUserInterests(username))
+      .then(() => setLoaded(true))
+      .catch(err => console.log(err));
   }, []);
 
   return (
     <AppContainer>
       <GlobalStyle />
       <NavBar city={city} userInterests={userInterests} changeView={changeView}/>
-      {view === 'cityHub' ? <CityHub city={city} userInterests={userInterests}/> : null}
+      {view === 'cityHub' && loaded === true ? <CityHub city={city} userInterests={userInterests}/> : null}
     </AppContainer>
   )
 }
