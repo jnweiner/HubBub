@@ -3,7 +3,7 @@ import axios from 'axios';
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
 
-import NavBar from './NavBar.jsx';
+import Header from './Header.jsx';
 import CityHub from './CityHub.jsx';
 
 const GlobalStyle = createGlobalStyle`
@@ -64,7 +64,7 @@ const App = () => {
   return (
     <AppContainer>
       <GlobalStyle />
-      <NavBar city={city} userInterests={userInterests} changeView={changeView}/>
+      <Header city={city} userInterests={userInterests} changeView={changeView}/>
       {view === 'cityHub' && loaded === true ? <CityHub city={city} userInterests={userInterests}/> : null}
     </AppContainer>
   )

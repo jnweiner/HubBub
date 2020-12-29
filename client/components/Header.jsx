@@ -2,7 +2,7 @@ import React from 'react';
 import InterestDropdown from './InterestDropdown.jsx';
 import styled from 'styled-components';
 
-const NavContainer = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   background-color: #294059;
   color: #f5f5f5;
@@ -17,12 +17,12 @@ const Logo = styled.span`
   font-size: 30px;
 `;
 
-const NavSection = styled.div`
+const HeaderSection = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const NavOption = styled.span`
+const HeaderOption = styled.span`
   margin: 10px;
   cursor: pointer;
 `;
@@ -32,21 +32,21 @@ const City = styled.div`
   cursor: pointer;
 `;
 
-const NavBar = ({ city, userInterests, changeView }) => {
+const Header = ({ city, userInterests, changeView }) => {
 
   return (
-    <NavContainer>
-      <NavSection>
+    <HeaderContainer>
+      <HeaderSection>
         <Logo><i className="fas fa-city"></i>HubBub</Logo>
         <City onClick={() => changeView('cityHub')}>{city.name}</City>
-      </NavSection>
-      <NavSection>
-        <NavOption><InterestDropdown userInterests={userInterests} changeView={changeView}/></NavOption>
-        <NavOption onClick={() => changeView('accountSettings')}>My Account</NavOption>
-      </NavSection>
-    </NavContainer>
+      </HeaderSection>
+      <HeaderSection>
+        <HeaderOption><InterestDropdown userInterests={userInterests} changeView={changeView}/></HeaderOption>
+        <HeaderOption onClick={() => changeView('accountSettings')}>My Account</HeaderOption>
+      </HeaderSection>
+    </HeaderContainer>
   )
 
 };
 
-export default NavBar;
+export default Header;
