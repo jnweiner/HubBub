@@ -196,16 +196,16 @@ app.post('/api/users', (req, res) => {
     })
 });
 
-// get information for a specific user
+// get information for a specific user (getting based on username, from login)
 // how to neatly get number of posts by a user?
 // stretch goal: patch/delete handlers for this endpoint
-app.get('/api/users/:userId', (req, res) => {
-  const sql = 'SELECT * FROM users WHERE id = $1';
-  const values = [req.params.userId];
+app.get('/api/users/:username', (req, res) => {
+  const sql = 'SELECT users.*, cities.id as city_id, cities.city FROM users, cities WHERE users.city_id = cities.id AND username = $1';
+  const values = [req.params.username];
   pool
     .query(sql, values)
     .then(data => {
-      res.send(data.rows)
+      res.send(data.rows[0])
     })
     .catch(err => {
       console.log(err);
@@ -217,9 +217,9 @@ app.get('/api/users/:userId', (req, res) => {
 // path to validate that username is not already taken?
 
 // get all interests for a specific user
-app.get('/api/users/:userId/interests', (req, res) => {
-  const sql = 'SELECT users_interests.*, interests.id AS interest_id, interests.interest from users_interests, interests WHERE users_interests.user_id = $1 AND users_interests.interest_id = interests.id';
-  const values = [req.params.userId];
+app.get('/api/users/:username/interests', (req, res) => {
+  const sql = 'SELECT users.username, users.id AS user_id, users_interests.*, interests.id AS interest_id, interests.interest from users_interests, users, interests WHERE users.username = $1 AND users_interests.user_id = users.id AND users_interests.interest_id = interests.id';
+  const values = [req.params.username];
   pool
     .query(sql, values)
     .then(data => {
@@ -232,8 +232,8 @@ app.get('/api/users/:userId/interests', (req, res) => {
 });
 
 // add an interest for current user
-app.post('/api/users/:userId/interests', (req, res) => {
-  const user_id = req.params.userId;
+app.post('/api/users/:username/interests', (req, res) => {
+  const user_id = req.body.userId;
   const interest_id = req.body.interestId;
   const sql = 'INSERT INTO users_interests(user_id, interest_id) VALUES($1, $2)';
   const values = [user_id, interest_id];
@@ -250,7 +250,7 @@ app.post('/api/users/:userId/interests', (req, res) => {
 
 // delete an interest for current user
 app.delete('/api/users/:userId/interests', (req, res) => {
-  const user_id = req.params.userId;
+  const user_id = req.body.userId;
   const interest_id = req.body.interestId;
   const sql = 'DELETE FROM users_interests WHERE user_id = $1 AND interest_id = $2';
   const values = [user_id, interest_id];
