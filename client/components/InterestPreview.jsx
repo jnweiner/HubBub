@@ -25,14 +25,21 @@ const Icon = styled.span`
   font-size: 30px;
 `;
 
-const InterestPreview = ({ interest, isUserInterest, setHoveredInterest, isHoveredInterest }) => (
+const InterestPreview = ({ interest, isUserInterest, setHoveredInterest, isHoveredInterest, addUserInterest, deleteUserInterest }) => (
   <div>
     <StyledInterestPreview
       isUserInterest={isUserInterest}
       onMouseOver={() => setHoveredInterest(interest.id)}
       onMouseLeave={() => setHoveredInterest(null)}
     >
-      {isHoveredInterest ? <ToggleInterest isUserInterest={isUserInterest}/> : null}
+      {isHoveredInterest ?
+        <ToggleInterest
+          id={interest.id}
+          isUserInterest={isUserInterest}
+          addUserInterest={addUserInterest}
+          deleteUserInterest={deleteUserInterest}
+        />
+        : null}
       <Icon><i className={interest.icon}></i></Icon>
       <strong>{interest.name}</strong>
       <span><em>{interest.userCount} following</em></span>

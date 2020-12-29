@@ -10,9 +10,12 @@ const ToggleInterestContainer = styled.div`
   position: absolute;
 `;
 
-const ToggleInterest = ({ isUserInterest }) => (
+const ToggleInterest = ({ id, isUserInterest, addUserInterest, deleteUserInterest }) => (
   <ToggleInterestContainer>
-    {isUserInterest ? <i className="fas fa-minus-circle"></i>: <i className="fas fa-plus-circle"></i>}
+    <i
+      onClick={isUserInterest ? () => deleteUserInterest(id) : () => addUserInterest(id)}
+      className={isUserInterest ? "fas fa-minus-circle" : "fas fa-plus-circle"}
+    ></i>
   </ToggleInterestContainer>
 );
 

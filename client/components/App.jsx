@@ -31,9 +31,10 @@ const DisplayContainer = styled.div`
 `;
 
 const App = () => {
-  const [username, setUsername] = useState('Julie78');
+  const [username, setUsername] = useState('Chanelle48');
   const [userInfo, setUserInfo] = useState({});
   const [city, setCity] = useState({});
+  const [cityInterests, setCityInterests] = useState([]);
   const [userInterests, setUserInterests] = useState([]);
   const [view, setView] = useState('cityHub');
   const [loaded, setLoaded] = useState(false);
@@ -55,13 +56,49 @@ const App = () => {
       .catch(err => console.log(err));
   };
 
+  const fetchCityInterests = (cityId) => {
+    return axios.get(`api/cities/${cityId}/interests`)
+    .then(({ data }) => {
+      setCityInterests(data);
+    })
+    .catch(err => console.log(err));
+  };
+
   const changeView = (newView) => {
     setView(newView);
   };
 
+  const addUserInterest = (interestId) => {
+    axios.post(`/api/users/${username}/interests`, {
+      userId: userInfo.id,
+      interestId: interestId
+    })
+      .then(() => {
+        fetchUserInterests(username);
+        fetchCityInterests(city.id);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const deleteUserInterest = (interestId) => {
+    axios.delete(`/api/users/${username}/interests`, {
+      data: {
+        userId: userInfo.id,
+        interestId: interestId
+      }
+    })
+      .then(() => {
+        fetchUserInterests(username);
+        fetchCityInterests(city.id);
+      })
+      .catch(err => console.log(err));
+  };
+
   useEffect(() => {
     fetchUserInfo(username)
-      .then(() => fetchUserInterests(username))
+      .then(() => {
+        fetchUserInterests(username);
+      })
       .then(() => setLoaded(true))
       .catch(err => console.log(err));
   }, []);
@@ -77,7 +114,16 @@ const App = () => {
           changeView={changeView}
           currentView={view}
         />
-        {view === 'cityHub' && loaded === true ? <CityHub city={city} userInterests={userInterests}/> : null}
+        {view === 'cityHub' && loaded === true ?
+        <CityHub
+          city={city}
+          userInterests={userInterests}
+          cityInterests={cityInterests}
+          fetchCityInterests={fetchCityInterests}
+          addUserInterest={addUserInterest}
+          deleteUserInterest={deleteUserInterest}
+        />
+        : null}
       </DisplayContainer>
     </AppContainer>
   )

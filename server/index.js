@@ -249,7 +249,7 @@ app.post('/api/users/:username/interests', (req, res) => {
 });
 
 // delete an interest for current user
-app.delete('/api/users/:userId/interests', (req, res) => {
+app.delete('/api/users/:username/interests', (req, res) => {
   const user_id = req.body.userId;
   const interest_id = req.body.interestId;
   const sql = 'DELETE FROM users_interests WHERE user_id = $1 AND interest_id = $2';

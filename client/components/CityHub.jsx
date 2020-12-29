@@ -23,10 +23,10 @@ const Row = styled.div`
   justify-content: space-around;
 `;
 
-const CityHub = ({ city, userInterests }) => {
+const CityHub = ({ city, userInterests, cityInterests, fetchCityInterests, addUserInterest, deleteUserInterest }) => {
 
   const [cityUsers, setCityUsers] = useState(null);
-  const [cityInterests, setCityInterests] = useState([]);
+  // const [cityInterests, setCityInterests] = useState([]);
   const [hoveredInterest, setHoveredInterest] = useState(null);
 
   const fetchCityUsers = (cityId) => {
@@ -37,14 +37,6 @@ const CityHub = ({ city, userInterests }) => {
       .catch(err => console.log(err));
   };
 
-  const fetchCityInterests = (cityId) => {
-    axios.get(`api/cities/${cityId}/interests`)
-    .then(({ data }) => {
-      setCityInterests(data);
-    })
-    .catch(err => console.log(err));
-  };
-
   const isUserInterest = (interestId) => {
     const userInterestIds = userInterests.map(interest => interest.interest_id);
     return userInterestIds.includes(interestId);
@@ -52,9 +44,7 @@ const CityHub = ({ city, userInterests }) => {
 
   useEffect(() => {
     fetchCityUsers(city.id)
-      .then(() => {
-        fetchCityInterests(city.id);
-      })
+      .then(() => fetchCityInterests(city.id))
       .catch(err => console.log(err));
   }, []);
 
@@ -68,6 +58,8 @@ const CityHub = ({ city, userInterests }) => {
           isUserInterest={isUserInterest(interest.id)}
           setHoveredInterest={setHoveredInterest}
           isHoveredInterest={hoveredInterest === interest.id}
+          addUserInterest={addUserInterest}
+          deleteUserInterest={deleteUserInterest}
         />)}
       </Row>
       <Row>{cityInterests.slice(5).map(interest =>
@@ -77,6 +69,8 @@ const CityHub = ({ city, userInterests }) => {
           isUserInterest={isUserInterest(interest.id)}
           setHoveredInterest={setHoveredInterest}
           isHoveredInterest={hoveredInterest === interest.id}
+          addUserInterest={addUserInterest}
+          deleteUserInterest={deleteUserInterest}
         />)}
       </Row>
     </CityHubContainer>
