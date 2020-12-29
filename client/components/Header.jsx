@@ -1,5 +1,4 @@
 import React from 'react';
-import InterestDropdown from './InterestDropdown.jsx';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.div`
@@ -41,7 +40,6 @@ const Header = ({ city, userInterests, changeView }) => {
         <City onClick={() => changeView('cityHub')}>{city.name}</City>
       </HeaderSection>
       <HeaderSection>
-        <HeaderOption><InterestDropdown userInterests={userInterests} changeView={changeView}/></HeaderOption>
         <HeaderOption onClick={() => changeView('accountSettings')}>My Account</HeaderOption>
       </HeaderSection>
     </HeaderContainer>

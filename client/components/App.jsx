@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Header from './Header.jsx';
 import CityHub from './CityHub.jsx';
+import Nav from './Nav.jsx';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -23,6 +24,10 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+`;
+
+const DisplayContainer = styled.div`
+  display: flex;
 `;
 
 const App = () => {
@@ -65,7 +70,15 @@ const App = () => {
     <AppContainer>
       <GlobalStyle />
       <Header city={city} userInterests={userInterests} changeView={changeView}/>
-      {view === 'cityHub' && loaded === true ? <CityHub city={city} userInterests={userInterests}/> : null}
+      <DisplayContainer>
+        <Nav
+          city={city}
+          userInterests={userInterests}
+          changeView={changeView}
+          currentView={view}
+        />
+        {view === 'cityHub' && loaded === true ? <CityHub city={city} userInterests={userInterests}/> : null}
+      </DisplayContainer>
     </AppContainer>
   )
 }
