@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const DropdownContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
 const InterestDropdown = ({ userInterests, changeView }) => {
 
   const [selected, setSelected] = useState(false);
@@ -15,12 +10,14 @@ const InterestDropdown = ({ userInterests, changeView }) => {
   };
 
   return (
-    <DropdownContainer>
-      <div onClick={toggleSelected}>My Interests</div>
+    <table>
+      <tbody>
+      <tr onClick={toggleSelected}><td>My Interests</td></tr>
       { selected ? 
-        userInterests.map((interest, i) => <div key={i} onClick={() => changeView(interest.name)}>{interest.name}</div>)
+        userInterests.map((interest, i) => <tr key={i} onClick={() => changeView(interest.name)}><td>{interest.name}</td></tr>)
       : null }
-    </DropdownContainer>
+      </tbody>
+    </table>
   )
 }
 

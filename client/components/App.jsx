@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Krub', sans-serif;
     font-weight: 400;
-    background-color: #2d4059;
+    background-color: #f5f5f5;
   }
   button {
     font-family: 'Open Sans', sans-serif;
