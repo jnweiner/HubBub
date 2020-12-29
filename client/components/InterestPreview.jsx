@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+
+import ToggleInterest from './ToggleInterest.jsx';
 
 const StyledInterestPreview = styled.div`
   display: flex;
@@ -23,12 +25,19 @@ const Icon = styled.span`
   font-size: 30px;
 `;
 
-const InterestPreview = ({ interest, isUserInterest }) => (
-  <StyledInterestPreview isUserInterest={isUserInterest}>
-    <Icon><i className={interest.icon}></i></Icon>
-    <strong>{interest.name}</strong>
-    <span><em>{interest.userCount} following</em></span>
-  </StyledInterestPreview>
+const InterestPreview = ({ interest, isUserInterest, setHoveredInterest, isHoveredInterest }) => (
+  <div>
+    <StyledInterestPreview
+      isUserInterest={isUserInterest}
+      onMouseOver={() => setHoveredInterest(interest.id)}
+      onMouseLeave={() => setHoveredInterest(null)}
+    >
+      {isHoveredInterest ? <ToggleInterest isUserInterest={isUserInterest}/> : null}
+      <Icon><i className={interest.icon}></i></Icon>
+      <strong>{interest.name}</strong>
+      <span><em>{interest.userCount} following</em></span>
+    </StyledInterestPreview>
+  </div>
 );
 
 export default InterestPreview;

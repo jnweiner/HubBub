@@ -27,6 +27,7 @@ const CityHub = ({ city, userInterests }) => {
 
   const [cityUsers, setCityUsers] = useState(null);
   const [cityInterests, setCityInterests] = useState([]);
+  const [hoveredInterest, setHoveredInterest] = useState(null);
 
   const fetchCityUsers = (cityId) => {
     return axios.get(`/api/cities/${cityId}/users`)
@@ -60,8 +61,24 @@ const CityHub = ({ city, userInterests }) => {
   return (
     <CityHubContainer>
       <CityTitle><i className="fas fa-map-pin"></i> Connect with {cityUsers} neighbors in the {city.name} area</CityTitle>
-      <Row>{cityInterests.slice(0, 5).map(interest => <InterestPreview key={interest.id} interest={interest} isUserInterest={isUserInterest(interest.id)}/>)}</Row>
-      <Row>{cityInterests.slice(5).map(interest => <InterestPreview key={interest.id} interest={interest} isUserInterest={isUserInterest(interest.id)}/>)}</Row>
+      <Row>{cityInterests.slice(0, 5).map(interest =>
+        <InterestPreview
+          key={interest.id}
+          interest={interest}
+          isUserInterest={isUserInterest(interest.id)}
+          setHoveredInterest={setHoveredInterest}
+          isHoveredInterest={hoveredInterest === interest.id}
+        />)}
+      </Row>
+      <Row>{cityInterests.slice(5).map(interest =>
+        <InterestPreview
+          key={interest.id}
+          interest={interest}
+          isUserInterest={isUserInterest(interest.id)}
+          setHoveredInterest={setHoveredInterest}
+          isHoveredInterest={hoveredInterest === interest.id}
+        />)}
+      </Row>
     </CityHubContainer>
   )
 };
