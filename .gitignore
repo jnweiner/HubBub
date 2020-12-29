@@ -1,5 +1,7 @@
 node_modules
 
+public/bundle.js
+
 ## passwords
 
 yelp_config.js
