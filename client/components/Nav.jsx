@@ -16,6 +16,7 @@ const NavContainer = styled.div`
 const NavOption = styled.span`
   margin: 5px;
   cursor: pointer;
+  font-weight: ${props => props.isCurrentView ? '700' : '400'};
 `;
 
 const StyledList = styled.ul`
@@ -31,11 +32,17 @@ const Interest = styled.li`
 
 const Nav = ({ city, userInterests, changeView, currentView }) => (
   <NavContainer>
-    <NavOption onClick={() => changeView('cityHub')}>{city.name} Hub</NavOption>
+    <NavOption 
+      isCurrentView={currentView === 'cityHub'}
+      onClick={() => changeView('cityHub')}>{city.name} Hub
+    </NavOption>
     <NavOption>
       <span>My Interests</span>
       <StyledList>
-        {userInterests.map((interest, i) => <Interest key={i} onClick={() => changeView(interest.name)}>{interest.name}</Interest>)}
+        {userInterests.map((interest, i) =>
+          <Interest key={i} onClick={() => changeView(interest.interest_id)}>
+          <NavOption isCurrentView={currentView === interest.interest_id}>{interest.name}</NavOption>
+          </Interest>)}
       </StyledList>
     </NavOption>
   </NavContainer>

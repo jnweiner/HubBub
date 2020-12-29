@@ -14,18 +14,24 @@ const StyledInterestPreview = styled.div`
   color: ${props => props.isUserInterest ? '#f5f5f5' : '#2d4059'};
   padding: 10px;
   margin: 10px;
-  cursor: pointer;
   border: 1px solid #2d4059;
   border-radius: 5px;
+  position: relative;
 `;
 
 const Icon = styled.span`
   color: #e1ad01;
-  font-weight: 600;
   font-size: 30px;
+  font-weight: 600;
+  cursor: pointer;
 `;
 
-const InterestPreview = ({ interest, isUserInterest, setHoveredInterest, isHoveredInterest, addUserInterest, deleteUserInterest }) => (
+const InterestName = styled.span`
+  cursor: pointer;
+  font-weight: 600;
+`;
+
+const InterestPreview = ({ interest, isUserInterest, setHoveredInterest, isHoveredInterest, addUserInterest, deleteUserInterest, changeView }) => (
   <div>
     <StyledInterestPreview
       isUserInterest={isUserInterest}
@@ -40,8 +46,8 @@ const InterestPreview = ({ interest, isUserInterest, setHoveredInterest, isHover
           deleteUserInterest={deleteUserInterest}
         />
         : null}
-      <Icon><i className={interest.icon}></i></Icon>
-      <strong>{interest.name}</strong>
+      <Icon onClick={() => changeView(interest.id)}><i className={interest.icon}></i></Icon>
+      <InterestName onClick={() => changeView(interest.id)}>{interest.name}</InterestName>
       <span><em>{interest.userCount} following</em></span>
     </StyledInterestPreview>
   </div>

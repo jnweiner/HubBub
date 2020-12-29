@@ -23,7 +23,7 @@ const Row = styled.div`
   justify-content: space-around;
 `;
 
-const CityHub = ({ city, userInterests, cityInterests, fetchCityInterests, addUserInterest, deleteUserInterest }) => {
+const CityHub = ({ city, userInterests, cityInterests, fetchCityInterests, addUserInterest, deleteUserInterest, changeView }) => {
 
   const [cityUsers, setCityUsers] = useState(null);
   // const [cityInterests, setCityInterests] = useState([]);
@@ -60,6 +60,7 @@ const CityHub = ({ city, userInterests, cityInterests, fetchCityInterests, addUs
           isHoveredInterest={hoveredInterest === interest.id}
           addUserInterest={addUserInterest}
           deleteUserInterest={deleteUserInterest}
+          changeView={changeView}
         />)}
       </Row>
       <Row>{cityInterests.slice(5).map(interest =>
@@ -71,6 +72,7 @@ const CityHub = ({ city, userInterests, cityInterests, fetchCityInterests, addUs
           isHoveredInterest={hoveredInterest === interest.id}
           addUserInterest={addUserInterest}
           deleteUserInterest={deleteUserInterest}
+          changeView={changeView}
         />)}
       </Row>
     </CityHubContainer>

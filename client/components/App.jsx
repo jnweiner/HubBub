@@ -122,6 +122,7 @@ const App = () => {
           fetchCityInterests={fetchCityInterests}
           addUserInterest={addUserInterest}
           deleteUserInterest={deleteUserInterest}
+          changeView={changeView}
         />
         : null}
       </DisplayContainer>

@@ -24,6 +24,7 @@ const HeaderSection = styled.div`
 const HeaderOption = styled.span`
   margin: 10px;
   cursor: pointer;
+  font-size: 20px;
 `;
 
 const City = styled.div`
@@ -40,7 +41,7 @@ const Header = ({ city, userInterests, changeView }) => {
         <City onClick={() => changeView('cityHub')}>{city.name}</City>
       </HeaderSection>
       <HeaderSection>
-        <HeaderOption onClick={() => changeView('accountSettings')}>My Account</HeaderOption>
+        <HeaderOption onClick={() => changeView('accountSettings')}><i class="fas fa-cog"></i></HeaderOption>
       </HeaderSection>
     </HeaderContainer>
   )
