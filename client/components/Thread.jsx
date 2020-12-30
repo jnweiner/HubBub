@@ -32,9 +32,11 @@ const ReplyIcon = styled.span`
   border-radius: 5px;
 `;
 
-const Thread = ({ thread, changeView }) => {
+const Thread = ({ thread, changeView, fetchReplies, replies }) => {
 
-  // useEffect to retrieve all replies for thread
+  useEffect(() => {
+    fetchReplies(thread.city_id, thread.interest_id, thread.id);
+  }, []);
 
   return (
     <ThreadContainer>
@@ -46,7 +48,8 @@ const Thread = ({ thread, changeView }) => {
         </span>
         <ReplyIcon><i className="fas fa-reply"></i></ReplyIcon>
       </ThreadHeader>
-      <Post post={thread} firstPost={true} />
+      <Post key={thread.id} post={thread} firstPost={true} />
+      {replies.map(reply => <Post key={reply.id} post={reply} firstPost={false}/>)}
     </ThreadContainer>
   );
 };

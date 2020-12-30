@@ -138,7 +138,7 @@ app.post('/api/cities/:cityId/interests/:interestId/threads', (req, res) => {
 // stretch goal: patch/delete handlers for threads
 // q: is this endpoint correct, when I only need the threadId?
 app.get('/api/cities/:cityId/interests/:interestId/threads/:threadId', (req, res) => {
-  const sql = 'SELECT replies.*, users.id AS user_id, users.username, users.month_moved, users.year_moved, users.avatar, users.neighborhood FROM replies, users WHERE replies.user_id = users.id AND replies.thread_id = $1 ORDER BY date DESC';
+  const sql = 'SELECT replies.*, users.id AS user_id, users.username, users.month_moved, users.year_moved, users.avatar, users.neighborhood FROM replies, users WHERE replies.user_id = users.id AND replies.thread_id = $1 ORDER BY date ASC';
   const values = [req.params.threadId];
   pool
     .query(sql, values)

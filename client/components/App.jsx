@@ -42,6 +42,7 @@ const App = () => {
   const [view, setView] = useState({type: 'cityHub'});
   const [loaded, setLoaded] = useState(false);
   const [threads, setThreads] = useState([]);
+  const [replies, setReplies] = useState([]);
 
   const fetchUserInfo = (username) => {
     return axios.get(`/api/users/${username}`)
@@ -72,6 +73,14 @@ const App = () => {
     return axios.get(`/api/cities/${cityId}/interests/${interestId}/threads`)
       .then(({ data }) => {
         setThreads(data);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const fetchReplies = (cityId, interestId, threadId) => {
+    return axios.get(`/api/cities/${cityId}/interests/${interestId}/threads/${threadId}`)
+      .then(({ data }) => {
+        setReplies(data);
       })
       .catch(err => console.log(err));
   };
@@ -114,6 +123,8 @@ const App = () => {
         <Thread
           changeView={changeView}
           thread={view}
+          fetchReplies={fetchReplies}
+          replies={replies}
         />
       )
     }

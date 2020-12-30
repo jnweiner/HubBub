@@ -20,6 +20,7 @@ const UserCell = styled.div`
 const UserAvatar = styled.img`
   height: 50px;
   width: 50px;
+  border: 1px solid black;
   border-radius: 50%;
 `;
 
