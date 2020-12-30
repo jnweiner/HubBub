@@ -84,7 +84,7 @@ app.get('/api/cities/:cityId/interests', (req, res) => {
 // get all threads for an interest in a city, in order of most recent
 // can't seem to get a count of all replies associated with that thread as part of single sql query
 app.get('/api/cities/:cityId/interests/:interestId/threads', (req, res) => {
-  const sql = 'SELECT threads.*, users.id AS user_id, users.username, users.month_moved, users.year_moved, users.avatar, users.neighborhood FROM threads, users WHERE users.id = threads.user_id AND threads.city_id = $1 AND threads.interest_id = $2 ORDER BY threads.date DESC';
+  const sql = 'SELECT threads.*, interests.interest, interests.id AS interest_id, users.id AS user_id, users.username, users.month_moved, users.year_moved, users.avatar, users.neighborhood FROM threads, users, interests WHERE interests.id = threads.interest_id AND users.id = threads.user_id AND threads.city_id = $1 AND threads.interest_id = $2 ORDER BY threads.date DESC';
   const values = [req.params.cityId, req.params.interestId];
   pool
     .query(sql, values)

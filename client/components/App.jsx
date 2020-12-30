@@ -112,6 +112,7 @@ const App = () => {
     } else if (view.type === 'thread') {
       return (
         <Thread
+          changeView={changeView}
           thread={view}
         />
       )

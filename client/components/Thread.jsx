@@ -1,81 +1,48 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import Post from './Post.jsx';
 
 const ThreadContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const ThreadTable = styled.table`
-  width: 80vw;
-  border-collapse: collapse;
-  border: 1px solid black;
-`;
-
-const ThreadTitle = styled.span`
+const ThreadHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
   background-color: rgba(41, 64, 89, .3);
   padding: 10px;
-  font-size: 25px;
-  font-weight: 600;
+  font-size: 20px;
   margin: 20px 0;
   width: 80vw;
 `;
 
-// abstract out post styling 
-// add background color for just the first post
-// change away from table to just flexbox for greater flexibility (pun intended)
-
-const UserCell = styled.td`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-right: 1px solid #2d4059;
-  width: 180px;
-  padding: 5px;
-  background-color: rgba(41, 64, 89, .1);
+const InterestName = styled.span`
+  cursor: pointer;
+  font-weight: 600;
 `;
 
-const UserAvatar = styled.img`
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
+const ReplyIcon = styled.span`
+  cursor: pointer;
+  margin-right: 10px;
 `;
 
-const TextCell = styled.td`
-  padding: 5px;
-  background-color: rgba(41, 64, 89, .1);
-`;
-
-const Timestamp = styled.div`
-  text-align: right;
-`;
-
-const Thread = ({ thread }) => {
+const Thread = ({ thread, changeView }) => {
 
   // useEffect to retrieve all replies for thread
 
   return (
     <ThreadContainer>
-      <ThreadTitle>{thread.title}</ThreadTitle>
-    <ThreadTable>
-      <tbody>
-        <tr>
-          <UserCell>
-            <UserAvatar src={thread.avatar} alt="User Avatar"/>
-            <strong>{thread.username}</strong>
-            <span><i className="fas fa-map-pin"></i> {thread.neighborhood}</span>
-            <span>Local Since: {thread.month_moved}/{thread.year_moved}</span>
-          </UserCell>
-          <TextCell>
-            <Timestamp><em>{thread.date}</em></Timestamp>
-            <br />
-            <span>{thread.text}</span>
-          </TextCell>
-        </tr>
-      </tbody>
-    </ThreadTable>
+      <ThreadHeader>
+        <span>
+          <InterestName onClick={() => changeView({type: 'interestHub', name: thread.interest, id: thread.interest_id})}>{thread.interest} </InterestName>
+          <i className="fas fa-long-arrow-alt-right"></i>
+          <em> {thread.title}</em>
+        </span>
+        <ReplyIcon><i className="fas fa-reply"></i></ReplyIcon>
+      </ThreadHeader>
+      <Post post={thread} firstPost={true} />
     </ThreadContainer>
-
   );
 };
 
