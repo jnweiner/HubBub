@@ -18,19 +18,25 @@ const LabelRow = styled.tr`
   font-weight: 600;
 `;
 
-const TopicCell = styled.td`
+const NewTopicContainer = styled.span`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  margin-bottom: 5px;
 `;
 
-const NewThreadIcon = styled.span`
-  margin-right: 5px;
-  cursor: pointer;
+const NewTopicButton = styled.button`
+  font-weight: 600;
+  font-size: 15px;
+  background-color: #294059;
+  color: #f5f5f5;
+  border: 1px solid #294059;
+  border-radius: 5px;
 `;
 
 const ArrowContainer = styled.span`
   text-align: right;
-  margin: 5px;
+  margin: 5px 0;
+  font-weight: 600;
 `;
 
 const Arrow = styled.span`
@@ -46,13 +52,13 @@ const ForumPreview = ({ city, interest, threads, fetchThreads, changeView }) => 
 
   return (
     <ForumPreviewContainer>
+      <NewTopicContainer>
+        <NewTopicButton>New Topic <i className="fas fa-plus"></i></NewTopicButton>
+      </NewTopicContainer>
       <ForumTable>
         <tbody>
           <LabelRow>
-            <TopicCell>
-              Topic
-              <NewThreadIcon><i className="fas fa-pencil-alt"></i></NewThreadIcon>
-            </TopicCell>
+            <td>Topic</td>
             <td>Started By</td>
             <td>Replies</td>
             <td>Last Updated</td>
@@ -61,7 +67,7 @@ const ForumPreview = ({ city, interest, threads, fetchThreads, changeView }) => 
         </tbody>
       </ForumTable>
       <ArrowContainer>
-        <Arrow><i className="fas fa-arrow-left"></i></Arrow> <Arrow><i className="fas fa-arrow-right"></i></Arrow>
+        <Arrow><i className="fas fa-arrow-left"></i></Arrow> {threads.length} / {threads.length} topics <Arrow><i className="fas fa-arrow-right"></i></Arrow>
       </ArrowContainer>
     </ForumPreviewContainer>
   );
