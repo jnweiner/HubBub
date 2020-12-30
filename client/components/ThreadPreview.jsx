@@ -5,9 +5,9 @@ const TitleCell = styled.td`
   cursor: pointer;
 `;
 
-const ThreadPreview = ({ thread }) => (
+const ThreadPreview = ({ thread, changeView }) => (
   <tr>
-    <TitleCell>{thread.title}</TitleCell>
+    <TitleCell onClick={() => changeView({ ...thread, type: 'thread'})}>{thread.title}</TitleCell>
     <td>{thread.username}</td>
     <td>{thread.replyCount}</td>
     <td>{thread.date}</td>

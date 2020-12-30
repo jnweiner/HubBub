@@ -38,7 +38,7 @@ const Arrow = styled.span`
   cursor: pointer;
 `;
 
-const ForumPreview = ({ city, interest, threads, fetchThreads }) => {
+const ForumPreview = ({ city, interest, threads, fetchThreads, changeView }) => {
 
   useEffect(() => {
     fetchThreads(city.id, interest.id)
@@ -57,7 +57,7 @@ const ForumPreview = ({ city, interest, threads, fetchThreads }) => {
             <td>Replies</td>
             <td>Last Updated</td>
           </LabelRow>
-          {threads.map(thread => <ThreadPreview key={thread.id} thread={thread}/>)}
+          {threads.map(thread => <ThreadPreview key={thread.id} thread={thread} changeView={changeView}/>)}
         </tbody>
       </ForumTable>
       <ArrowContainer>

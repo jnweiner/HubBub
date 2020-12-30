@@ -8,6 +8,7 @@ import CityHub from './CityHub.jsx';
 import Nav from './Nav.jsx';
 import AccountSettings from './AccountSettings.jsx';
 import InterestHub from './InterestHub.jsx';
+import Thread from './Thread.jsx';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -105,6 +106,13 @@ const App = () => {
           city={city}
           fetchThreads={fetchThreads}
           threads={threads}
+          changeView={changeView}
+        />
+      )
+    } else if (view.type === 'thread') {
+      return (
+        <Thread
+          thread={view}
         />
       )
     }
