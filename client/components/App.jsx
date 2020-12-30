@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: #f5f5f5;
   }
   button {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Krub', sans-serif;
     cursor: pointer;
   }
 `;

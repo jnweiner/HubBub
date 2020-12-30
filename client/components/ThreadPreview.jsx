@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const TitleCell = styled.td`
+  cursor: pointer;
+`;
 
 const ThreadPreview = ({ thread }) => (
   <tr>
-    <td>{thread.title}</td>
+    <TitleCell>{thread.title}</TitleCell>
     <td>{thread.username}</td>
     <td>{thread.replyCount}</td>
     <td>{thread.date}</td>
