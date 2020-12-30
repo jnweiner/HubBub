@@ -1,6 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import ForumPreview from './ForumPreview.jsx';
+
+const InterestHubContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const InterestTitle = styled.div`
   border-top: 1px solid #2d4059;
   border-bottom: 1px solid #2d4059;
@@ -11,12 +18,18 @@ const InterestTitle = styled.div`
   width: 80vw;
 `;
 
-const InterestHub = ({ interest }) => {
+const InterestHub = ({ interest, city, threads, fetchThreads }) => {
 
   return (
-    <div>
+    <InterestHubContainer>
       <InterestTitle>{interest.name}</InterestTitle>
-    </div>
+      <ForumPreview
+        interest={interest}
+        city={city}
+        threads={threads}
+        fetchThreads={fetchThreads}
+      />
+    </InterestHubContainer>
   );
 };
 

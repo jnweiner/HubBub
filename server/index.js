@@ -218,7 +218,7 @@ app.get('/api/users/:username', (req, res) => {
 
 // get all interests for a specific user
 app.get('/api/users/:username/interests', (req, res) => {
-  const sql = 'SELECT users.username, users.id AS user_id, users_interests.*, interests.id AS interest_id, interests.interest AS name from users_interests, users, interests WHERE users.username = $1 AND users_interests.user_id = users.id AND users_interests.interest_id = interests.id';
+  const sql = 'SELECT users.username, users.id AS user_id, users_interests.*, interests.id, interests.interest AS name from users_interests, users, interests WHERE users.username = $1 AND users_interests.user_id = users.id AND users_interests.interest_id = interests.id';
   const values = [req.params.username];
   pool
     .query(sql, values)

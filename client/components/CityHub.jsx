@@ -38,7 +38,7 @@ const CityHub = ({ city, userInterests, cityInterests, fetchCityInterests, addUs
   };
 
   const isUserInterest = (interestId) => {
-    const userInterestIds = userInterests.map(interest => interest.interest_id);
+    const userInterestIds = userInterests.map(interest => interest.id);
     return userInterestIds.includes(interestId);
   };
 
