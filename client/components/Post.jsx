@@ -27,8 +27,7 @@ const UserAvatar = styled.img`
 const TextCell = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  padding: 5px;
+  padding: 10px;
   width: 85%;
 `;
 
@@ -47,6 +46,7 @@ const Post = ({ post, firstPost }) => (
     </UserCell>
     <TextCell>
       <Timestamp><em>{post.date}</em></Timestamp>
+      <br />
       <span>{post.text}</span>
     </TextCell>
   </PostContainer>
