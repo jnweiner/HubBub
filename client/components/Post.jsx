@@ -5,7 +5,7 @@ const PostContainer = styled.div`
   display: flex;
   border: 1px solid #2d4059;
   background-color: ${props => props.firstPost ? 'rgba(41, 64, 89, .1)' : '#f5f5f5'};
-  width: 80vw;
+  width: 99%;
 `;
 
 const UserCell = styled.div`

@@ -5,17 +5,16 @@ import Post from './Post.jsx';
 const ThreadContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
-const ThreadHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
+const ThreadHeader = styled.span`
   border-top: 1px solid #2d4059;
   border-bottom: 1px solid #2d4059;
-  padding: 10px;
+  padding: 10px 0;
   font-size: 20px;
   margin: 20px 0;
-  width: 80vw;
+  width: 99%;
 `;
 
 const InterestName = styled.span`
@@ -24,12 +23,21 @@ const InterestName = styled.span`
   font-size: 25px;
 `;
 
-const ReplyIcon = styled.span`
-  cursor: pointer;
-  background-color: #2d4059;
-  color: #e1ad01;
-  padding: 5px;
+const OptionsContainer = styled.span`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+  width: 99%;
+`;
+
+const OptionsButton = styled.button`
+  font-weight: 600;
+  font-size: 15px;
+  background-color: #294059;
+  color: #f5f5f5;
+  border: 1px solid #294059;
   border-radius: 5px;
+  margin-left: 5px;
 `;
 
 const Thread = ({ thread, changeView, fetchReplies, replies }) => {
@@ -41,13 +49,14 @@ const Thread = ({ thread, changeView, fetchReplies, replies }) => {
   return (
     <ThreadContainer>
       <ThreadHeader>
-        <span>
-          <InterestName onClick={() => changeView({type: 'interestHub', name: thread.interest, id: thread.interest_id})}>{thread.interest} </InterestName>
-          <i className="fas fa-long-arrow-alt-right"></i>
-          <em> {thread.title}</em>
-        </span>
-        <ReplyIcon><i className="fas fa-reply"></i></ReplyIcon>
+        <InterestName onClick={() => changeView({type: 'interestHub', name: thread.interest, id: thread.interest_id})}>{thread.interest} </InterestName>
+        <i className="fas fa-long-arrow-alt-right"></i>
+        <em> {thread.title}</em>
       </ThreadHeader>
+      <OptionsContainer>
+        <OptionsButton>Watch <i className="fas fa-eye"></i></OptionsButton>
+        <OptionsButton>Reply <i className="fas fa-reply"></i></OptionsButton>
+      </OptionsContainer>
       <Post key={thread.id} post={thread} firstPost={true} />
       {replies.map(reply => <Post key={reply.id} post={reply} firstPost={false}/>)}
     </ThreadContainer>

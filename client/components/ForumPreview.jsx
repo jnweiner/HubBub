@@ -6,6 +6,7 @@ import ThreadPreview from './ThreadPreview.jsx';
 const ForumPreviewContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 99%;
 `;
 
 const ForumTable = styled.table`

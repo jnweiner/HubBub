@@ -7,21 +7,23 @@ import InterestPreview from './InterestPreview.jsx';
 const CityHubContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const CityTitle = styled.div`
   border-top: 1px solid #2d4059;
   border-bottom: 1px solid #2d4059;
-  padding: 10px;
+  padding: 10px 0;
   font-size: 25px;
   font-weight: 600;
   margin: 20px 0;
-  width: 80vw;
+  width: 99%;
 `;
 
 const Row = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 99%;
 `;
 
 const CityHub = ({ city, userInterests, cityInterests, fetchCityInterests, addUserInterest, deleteUserInterest, changeView }) => {
