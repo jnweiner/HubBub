@@ -10,7 +10,8 @@ const ThreadContainer = styled.div`
 const ThreadHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(41, 64, 89, .3);
+  border-top: 1px solid #2d4059;
+  border-bottom: 1px solid #2d4059;
   padding: 10px;
   font-size: 20px;
   margin: 20px 0;
@@ -20,11 +21,15 @@ const ThreadHeader = styled.div`
 const InterestName = styled.span`
   cursor: pointer;
   font-weight: 600;
+  font-size: 25px;
 `;
 
 const ReplyIcon = styled.span`
   cursor: pointer;
-  margin-right: 10px;
+  background-color: #2d4059;
+  color: #e1ad01;
+  padding: 5px;
+  border-radius: 5px;
 `;
 
 const Thread = ({ thread, changeView }) => {
