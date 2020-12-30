@@ -46,8 +46,8 @@ const InterestPreview = ({ interest, isUserInterest, setHoveredInterest, isHover
           deleteUserInterest={deleteUserInterest}
         />
         : null}
-      <Icon onClick={() => changeView(interest)}><i className={interest.icon}></i></Icon>
-      <InterestName onClick={() => changeView(interest)}>{interest.name}</InterestName>
+      <Icon onClick={() => changeView({ ...interest, type: 'interestHub'})}><i className={interest.icon}></i></Icon>
+      <InterestName onClick={() => changeView({ ...interest, type: 'interestHub'})}>{interest.name}</InterestName>
       <span><em>{interest.userCount} following</em></span>
     </StyledInterestPreview>
   </div>

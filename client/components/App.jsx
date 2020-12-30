@@ -38,7 +38,7 @@ const App = () => {
   const [city, setCity] = useState({});
   const [cityInterests, setCityInterests] = useState([]);
   const [userInterests, setUserInterests] = useState([]);
-  const [view, setView] = useState({name: 'cityHub'});
+  const [view, setView] = useState({type: 'cityHub'});
   const [loaded, setLoaded] = useState(false);
   const [threads, setThreads] = useState([]);
 
@@ -80,7 +80,7 @@ const App = () => {
   };
 
   const renderView = () => {
-    if (view.name === 'cityHub') {
+    if (view.type === 'cityHub') {
       return (
         <CityHub
         city={city}
@@ -92,13 +92,13 @@ const App = () => {
         changeView={changeView}
       />
       )
-    } else if (view.name === 'accountSettings') {
+    } else if (view.type === 'accountSettings') {
       return (
         <AccountSettings
           userInfo={userInfo}
         />
       )
-    } else {
+    } else if (view.type === 'interestHub') {
       return (
         <InterestHub
           interest={view}
