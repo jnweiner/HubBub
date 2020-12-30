@@ -21,13 +21,12 @@ const CityTitle = styled.div`
 
 const Row = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const CityHub = ({ city, userInterests, cityInterests, fetchCityInterests, addUserInterest, deleteUserInterest, changeView }) => {
 
   const [cityUsers, setCityUsers] = useState(null);
-  // const [cityInterests, setCityInterests] = useState([]);
   const [hoveredInterest, setHoveredInterest] = useState(null);
 
   const fetchCityUsers = (cityId) => {
@@ -51,7 +50,7 @@ const CityHub = ({ city, userInterests, cityInterests, fetchCityInterests, addUs
 
   return (
     <CityHubContainer>
-      <CityTitle><i className="fas fa-map-pin"></i> Connect with {cityUsers} neighbors in the {city.name} area</CityTitle>
+      <CityTitle>Connect with {cityUsers} neighbors in the {city.name} area</CityTitle>
       <Row>{cityInterests.slice(0, 5).map(interest =>
         <InterestPreview
           key={interest.id}

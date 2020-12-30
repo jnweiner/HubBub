@@ -8,7 +8,7 @@ const StyledInterestPreview = styled.div`
   flex-direction: column;
   background-color: ${props => props.isUserInterest ? '#2d4059' : '#f5f5f5'};
   height: 100px;
-  width: 200px;
+  width: 180px;
   justify-content: center;
   align-items: center;
   color: ${props => props.isUserInterest ? '#f5f5f5' : '#2d4059'};
