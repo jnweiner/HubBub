@@ -9,6 +9,7 @@ import Nav from './Nav.jsx';
 import AccountSettings from './AccountSettings.jsx';
 import InterestHub from './InterestHub.jsx';
 import Thread from './Thread.jsx';
+import NewTopicModal from './NewTopicModal.jsx';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -33,6 +34,26 @@ const DisplayContainer = styled.div`
   display: flex;
 `;
 
+const ContentContainer = styled.div`
+  width: 85%;
+  diplay: flex;
+  flex-direction: column;
+`;
+
+const ModalOverlay = styled.div`
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-color: rgba(220, 220, 220, .2);
+  z-index: 5;
+`;
+
+const ModalFooter = styled.div`
+  height: 50vh;
+`;
+
 const App = () => {
   const [username, setUsername] = useState('Julie78');
   const [userInfo, setUserInfo] = useState({});
@@ -43,6 +64,7 @@ const App = () => {
   const [loaded, setLoaded] = useState(false);
   const [threads, setThreads] = useState([]);
   const [replies, setReplies] = useState([]);
+  const [modalStatus, setModalStatus] = useState(null);
 
   const fetchUserInfo = (username) => {
     return axios.get(`/api/users/${username}`)
@@ -89,6 +111,24 @@ const App = () => {
     setView(newView);
   };
 
+  const toggleModal = (modalName) => {
+    setModalStatus(modalName || null);
+  };
+
+  const renderModal = () => {
+    if (modalStatus === 'newTopic') {
+      return (
+        <NewTopicModal
+          toggleModal={toggleModal}
+        />
+      )
+    } else if (modalStatus === 'newReply') {
+      return (
+        <NewReplyModal />
+      )
+    }
+  };
+
   const renderView = () => {
     if (view.type === 'cityHub') {
       return (
@@ -116,6 +156,7 @@ const App = () => {
           fetchThreads={fetchThreads}
           threads={threads}
           changeView={changeView}
+          toggleModal={toggleModal}
         />
       )
     } else if (view.type === 'thread') {
@@ -176,7 +217,12 @@ const App = () => {
           changeView={changeView}
           currentView={view}
         />
-        {loaded === true ? renderView() : null}
+        <ContentContainer>
+          {modalStatus ? renderModal() : null}
+          {modalStatus ? <ModalOverlay onClick={() => toggleModal(null)}/> : null}
+          {loaded === true ? renderView() : null}
+          {modalStatus ? <ModalFooter /> : null}
+        </ContentContainer>
       </DisplayContainer>
     </AppContainer>
   )

@@ -19,7 +19,7 @@ const InterestTitle = styled.div`
   width: 99%;
 `;
 
-const InterestHub = ({ interest, city, threads, fetchThreads, changeView }) => {
+const InterestHub = ({ interest, city, threads, fetchThreads, changeView, toggleModal }) => {
 
   return (
     <InterestHubContainer>
@@ -30,6 +30,7 @@ const InterestHub = ({ interest, city, threads, fetchThreads, changeView }) => {
         threads={threads}
         fetchThreads={fetchThreads}
         changeView={changeView}
+        toggleModal={toggleModal}
       />
     </InterestHubContainer>
   );

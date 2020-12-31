@@ -9,7 +9,7 @@ const NavContainer = styled.div`
   margin-right: 20px;
   font-size: 18px;
   min-height: 100vh;
-  width: 16%;
+  width: 15%;
 `;
 
 const NavOption = styled.span`

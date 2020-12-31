@@ -45,7 +45,7 @@ const Arrow = styled.span`
   cursor: pointer;
 `;
 
-const ForumPreview = ({ city, interest, threads, fetchThreads, changeView }) => {
+const ForumPreview = ({ city, interest, threads, fetchThreads, changeView, toggleModal }) => {
 
   useEffect(() => {
     fetchThreads(city.id, interest.id)
@@ -54,7 +54,7 @@ const ForumPreview = ({ city, interest, threads, fetchThreads, changeView }) => 
   return (
     <ForumPreviewContainer>
       <NewTopicContainer>
-        <NewTopicButton>New Topic <i className="fas fa-plus"></i></NewTopicButton>
+        <NewTopicButton onClick={() => toggleModal('newTopic')}>New Topic <i className="fas fa-plus"></i></NewTopicButton>
       </NewTopicContainer>
       <ForumTable>
         <tbody>
