@@ -40,7 +40,7 @@ const OptionsButton = styled.button`
   margin-left: 5px;
 `;
 
-const Thread = ({ thread, changeView, fetchReplies, replies }) => {
+const Thread = ({ thread, changeView, fetchReplies, replies, toggleModal }) => {
 
   useEffect(() => {
     fetchReplies(thread.city_id, thread.interest_id, thread.id);
@@ -55,7 +55,7 @@ const Thread = ({ thread, changeView, fetchReplies, replies }) => {
       </ThreadHeader>
       <OptionsContainer>
         <OptionsButton>Watch <i className="fas fa-eye"></i></OptionsButton>
-        <OptionsButton>Reply <i className="fas fa-reply"></i></OptionsButton>
+        <OptionsButton onClick={() => toggleModal('newReply')}>Reply <i className="fas fa-reply"></i></OptionsButton>
       </OptionsContainer>
       <Post key={thread.id} post={thread} firstPost={true} />
       {replies.map(reply => <Post key={reply.id} post={reply} firstPost={false}/>)}

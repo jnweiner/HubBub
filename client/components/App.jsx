@@ -10,6 +10,7 @@ import AccountSettings from './AccountSettings.jsx';
 import InterestHub from './InterestHub.jsx';
 import Thread from './Thread.jsx';
 import NewTopicModal from './NewTopicModal.jsx';
+import NewReplyModal from './NewReplyModal.jsx';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -127,6 +128,17 @@ const App = () => {
     .catch(err => console.log(err));
   };
 
+  const postNewReply = (text) => {
+    axios.post(`/api/cities/${city.id}/interests/${view.interest_id}/threads/${view.id}`, {
+      text: text,
+      userId: userInfo.id
+    })
+    .then(() => {
+      fetchReplies(city.id, view.interest_id, view.id)
+    })
+    .catch(err => console.log(err));
+  };
+
   const renderModal = () => {
     if (modalStatus === 'newTopic') {
       return (
@@ -137,7 +149,10 @@ const App = () => {
       )
     } else if (modalStatus === 'newReply') {
       return (
-        <NewReplyModal />
+        <NewReplyModal
+          toggleModal={toggleModal}
+          postNewReply={postNewReply}
+        />
       )
     }
   };
@@ -179,6 +194,7 @@ const App = () => {
           thread={view}
           fetchReplies={fetchReplies}
           replies={replies}
+          toggleModal={toggleModal}
         />
       )
     }
