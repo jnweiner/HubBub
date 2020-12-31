@@ -17,6 +17,7 @@ const StyledInterestPreview = styled.div`
   border: 1px solid #2d4059;
   border-radius: 5px;
   position: relative;
+  box-shadow: ${props => props.isHoveredInterest ? '0 0 10px gray': 'none'};
 `;
 
 const Icon = styled.span`
@@ -35,6 +36,7 @@ const InterestPreview = ({ interest, isUserInterest, setHoveredInterest, isHover
   <div>
     <StyledInterestPreview
       isUserInterest={isUserInterest}
+      isHoveredInterest={isHoveredInterest}
       onMouseOver={() => setHoveredInterest(interest.id)}
       onMouseLeave={() => setHoveredInterest(null)}
     >

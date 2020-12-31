@@ -51,6 +51,7 @@ const SubmitButton = styled.button`
   border-radius: 5px;
   padding: 5px;
   font-weight: 600;
+  cursor: pointer;
 `;
 
 const StyledInput = styled.input`

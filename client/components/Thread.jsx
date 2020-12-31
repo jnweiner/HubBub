@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Post from './Post.jsx';
+import ForumButton from './ForumButton.jsx';
 
 const ThreadContainer = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ const InterestName = styled.span`
   cursor: pointer;
   font-weight: 600;
   font-size: 25px;
+  color: ${props => props.isHovered ? '#e1ad01' : '#2d4059'};
 `;
 
 const OptionsContainer = styled.span`
@@ -28,16 +30,6 @@ const OptionsContainer = styled.span`
   justify-content: flex-end;
   margin-bottom: 5px;
   width: 99%;
-`;
-
-const OptionsButton = styled.button`
-  font-weight: 600;
-  font-size: 15px;
-  background-color: #294059;
-  color: #f5f5f5;
-  border: 1px solid #294059;
-  border-radius: 5px;
-  margin-left: 5px;
 `;
 
 const Thread = ({ thread, changeView, fetchReplies, replies, toggleModal }) => {
@@ -49,13 +41,17 @@ const Thread = ({ thread, changeView, fetchReplies, replies, toggleModal }) => {
   return (
     <ThreadContainer>
       <ThreadHeader>
-        <InterestName onClick={() => changeView({type: 'interestHub', name: thread.interest, id: thread.interest_id})}>{thread.interest} </InterestName>
+        <InterestName onClick={() => changeView({type: 'interestHub', name: thread.interest, id: thread.interest_id})}>
+          {thread.interest} </InterestName>
         <i className="fas fa-long-arrow-alt-right"></i>
         <em> {thread.title}</em>
       </ThreadHeader>
       <OptionsContainer>
-        <OptionsButton>Watch <i className="fas fa-eye"></i></OptionsButton>
-        <OptionsButton onClick={() => toggleModal('newReply')}>Reply <i className="fas fa-reply"></i></OptionsButton>
+        <ForumButton content={<span>Watch <i className="fas fa-eye"></i></span>} />
+        <ForumButton
+          onClickFunction={() => toggleModal('newReply')}
+          content={<span>Reply <i className="fas fa-reply"></i></span>}
+        />
       </OptionsContainer>
       <Post key={thread.id} post={thread} firstPost={true} />
       {replies.map(reply => <Post key={reply.id} post={reply} firstPost={false}/>)}

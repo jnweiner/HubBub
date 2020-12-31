@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const NavContainer = styled.div`
@@ -14,8 +14,10 @@ const NavContainer = styled.div`
 
 const NavOption = styled.span`
   margin: 5px;
-  cursor: pointer;
   font-weight: ${props => props.isCurrentView ? '700' : '400'};
+  border-radius: 5px;
+  background-color: ${props => props.isHovered ? 'rgba(41, 64, 89, .2)' : '#f5f5f5'};
+  cursor: ${props => props.isHovered ? 'pointer' : 'default'};
 `;
 
 const StyledList = styled.ul`
@@ -29,30 +31,49 @@ const Interest = styled.li`
   font-size: 15px;
 `;
 
-const Nav = ({ city, userInterests, changeView, currentView }) => (
-  <NavContainer>
-    <NavOption 
-      isCurrentView={currentView.type === 'cityHub'}
-      onClick={() => changeView({type: 'cityHub'})}
-    >
-    {city.name} Hub
-    </NavOption>
-    <NavOption>
-      <span>My Interests</span>
-      <StyledList>
-        {userInterests.map((interest, i) =>
-          <Interest key={i} onClick={() => changeView({ ...interest, type: 'interestHub'})}>
-          <NavOption isCurrentView={currentView.name === interest.name}>{interest.name}</NavOption>
+const Nav = ({ city, userInterests, changeView, currentView }) => {
+
+  const [hoveredOption, setHoveredOption] = useState(null);
+
+  return (
+    <NavContainer>
+      <NavOption
+        isCurrentView={currentView.type === 'cityHub'}
+        onClick={() => changeView({type: 'cityHub'})}
+        isHovered={hoveredOption === 'cityHub'}
+        onMouseOver={() => setHoveredOption('cityHub')}
+        onMouseLeave={() => setHoveredOption(null)}
+      >
+      {city.name} Hub
+      </NavOption>
+      <NavOption>
+        <span>My Interests</span>
+        <StyledList>
+          {userInterests.map((interest, i) =>
+          <Interest key={i}>
+            <NavOption
+              isCurrentView={currentView.name === interest.name}
+              onClick={() => changeView({ ...interest, type: 'interestHub'})}
+              isHovered={hoveredOption === interest.name}
+              onMouseOver={() => setHoveredOption(interest.name)}
+              onMouseLeave={() => setHoveredOption(null)}
+            >
+            {interest.name}
+            </NavOption>
           </Interest>)}
-      </StyledList>
-    </NavOption>
-    <NavOption 
-      isCurrentView={currentView.type === 'accountSettings'}
-      onClick={() => changeView({type: 'accountSettings'})}
-    >
-    My Account
-    </NavOption>
-  </NavContainer>
-);
+        </StyledList>
+      </NavOption>
+      <NavOption 
+        isCurrentView={currentView.type === 'accountSettings'}
+        onClick={() => changeView({type: 'accountSettings'})}
+        isHovered={hoveredOption === 'accountSettings'}
+        onMouseOver={() => setHoveredOption('accountSettings')}
+        onMouseLeave={() => setHoveredOption(null)}
+      >
+      My Account
+      </NavOption>
+    </NavContainer>
+  );
+};
 
 export default Nav;

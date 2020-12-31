@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import ThreadPreview from './ThreadPreview.jsx';
+import ForumButton from './ForumButton.jsx';
 
 const ForumPreviewContainer = styled.div`
   display: flex;
@@ -23,15 +24,6 @@ const NewTopicContainer = styled.span`
   display: flex;
   justify-content: flex-end;
   margin-bottom: 5px;
-`;
-
-const NewTopicButton = styled.button`
-  font-weight: 600;
-  font-size: 15px;
-  background-color: #294059;
-  color: #f5f5f5;
-  border: 1px solid #294059;
-  border-radius: 5px;
 `;
 
 const ArrowContainer = styled.span`
@@ -56,7 +48,10 @@ const ForumPreview = ({ city, interest, threads, fetchThreads, changeView, toggl
   return (
     <ForumPreviewContainer>
       <NewTopicContainer>
-        <NewTopicButton onClick={() => toggleModal('newTopic')}>New Topic <i className="fas fa-plus"></i></NewTopicButton>
+        <ForumButton
+          onClickFunction={() => toggleModal('newTopic')}
+          content={(<span>New Topic <i className="fas fa-plus"></i></span>)}
+        />
       </NewTopicContainer>
       <ForumTable>
         <tbody>
