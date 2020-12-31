@@ -43,7 +43,7 @@ const ModalOverlay = styled.div`
   height: 100%;
   width: 100%;
   position: fixed;
-  background-color: rgba(220, 220, 220, .2);
+  background-color: rgba(220, 220, 220, .3);
   z-index: 5;
 `;
 

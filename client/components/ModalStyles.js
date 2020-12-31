@@ -15,6 +15,7 @@ const ModalContainer = styled.div`
   bottom: 0;
   left: 65%;
   transform: translate(-60%);
+  box-shadow: 0 0 10px gray;
 `;
 
 const ModalHeader = styled.span`
