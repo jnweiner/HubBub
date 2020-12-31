@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import ThreadPreview from './ThreadPreview.jsx';
@@ -47,6 +47,8 @@ const Arrow = styled.span`
 
 const ForumPreview = ({ city, interest, threads, fetchThreads, changeView, toggleModal }) => {
 
+  const [hoveredThread, setHoveredThread] = useState(null);
+
   useEffect(() => {
     fetchThreads(city.id, interest.id)
   }, [interest.id]);
@@ -64,7 +66,14 @@ const ForumPreview = ({ city, interest, threads, fetchThreads, changeView, toggl
             <td>Replies</td>
             <td>Created On</td>
           </LabelRow>
-          {threads.map(thread => <ThreadPreview key={thread.id} thread={thread} changeView={changeView}/>)}
+          {threads.map(thread =>
+            <ThreadPreview
+              key={thread.id}
+              thread={thread}
+              changeView={changeView}
+              isHoveredThread={thread.id === hoveredThread}
+              setHoveredThread={setHoveredThread}
+            />)}
         </tbody>
       </ForumTable>
       <ArrowContainer>
