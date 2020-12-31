@@ -62,7 +62,7 @@ const ForumPreview = ({ city, interest, threads, fetchThreads, changeView, toggl
             <td>Topic</td>
             <td>Started By</td>
             <td>Replies</td>
-            <td>Last Updated</td>
+            <td>Created On</td>
           </LabelRow>
           {threads.map(thread => <ThreadPreview key={thread.id} thread={thread} changeView={changeView}/>)}
         </tbody>

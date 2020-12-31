@@ -10,7 +10,7 @@ const ThreadPreview = ({ thread, changeView }) => (
     <TitleCell onClick={() => changeView({ ...thread, type: 'thread'})}>{thread.title}</TitleCell>
     <td>{thread.username}</td>
     <td>{thread.replyCount}</td>
-    <td>{thread.date}</td>
+    <td>{thread.date.slice(0, 10)}</td>
   </tr>
 
 );
