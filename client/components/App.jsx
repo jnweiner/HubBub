@@ -115,11 +115,24 @@ const App = () => {
     setModalStatus(modalName || null);
   };
 
+  const postNewThread = (title, text) => {
+    axios.post(`/api/cities/${city.id}/interests/${view.id}/threads`, {
+      title: title,
+      text: text,
+      userId: userInfo.id
+    })
+    .then(() => {
+      fetchThreads(city.id, view.id)
+    })
+    .catch(err => console.log(err));
+  };
+
   const renderModal = () => {
     if (modalStatus === 'newTopic') {
       return (
         <NewTopicModal
           toggleModal={toggleModal}
+          postNewThread={postNewThread}
         />
       )
     } else if (modalStatus === 'newReply') {
