@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  font-family: 'Krub', sans-serif;
   cursor: pointer;
   background-color: #294059;
   color: ${props => props.isHovered ? '#e1ad01' : '#f5f5f5'};

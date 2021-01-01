@@ -19,6 +19,9 @@ const GlobalStyle = createGlobalStyle`
     color: #294059;
     background-color: #f5f5f5;
   }
+  button {
+    font-family: 'Krub', sans-serif;
+  }
 `;
 
 const AppContainer = styled.div`
@@ -191,6 +194,7 @@ const App = () => {
           fetchReplies={fetchReplies}
           replies={replies}
           toggleModal={toggleModal}
+          userId={userInfo.id}
         />
       )
     }

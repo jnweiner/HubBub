@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ForumButton from './ForumButton.jsx';
 
 const PostContainer = styled.div`
   display: flex;
@@ -31,12 +32,23 @@ const TextCell = styled.div`
   width: 85%;
 `;
 
-const Timestamp = styled.div`
-  text-align: right;
+const Timestamp = styled.span`
+  display: flex;
+  justify-content: flex-end;
   font-weight: 600;
+  margin-bottom: 10px;
 `;
 
-const Post = ({ post, firstPost }) => (
+const Text = styled.span`
+  height: 80%;
+`;
+
+const OptionsContainer = styled.span`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const Post = ({ post, firstPost, userId }) => (
   <PostContainer firstPost={firstPost}>
     <UserCell>
       <UserAvatar src={post.avatar} alt="User Avatar"/>
@@ -45,9 +57,14 @@ const Post = ({ post, firstPost }) => (
       <span>Local Since: {post.month_moved}/{post.year_moved}</span>
     </UserCell>
     <TextCell>
-      <Timestamp><em>{post.date}</em></Timestamp>
-      <br />
-      <span>{post.text}</span>
+      <Timestamp><em>{post.date.slice(0, 10)}</em></Timestamp>
+      <Text>{post.text}</Text>
+      {post.user_id === userId ?
+        <OptionsContainer>
+          <ForumButton content={(<i className="fas fa-pencil-alt"></i>)}/>
+          <ForumButton content={( <i className="fas fa-trash-alt"></i>)}/>
+        </OptionsContainer>
+      : null}
     </TextCell>
   </PostContainer>
 );
