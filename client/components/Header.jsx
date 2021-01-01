@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import HoverText from './HoverText.jsx';
+
 const HeaderContainer = styled.div`
   display: flex;
   background-color: #294059;
@@ -23,13 +25,11 @@ const HeaderSection = styled.div`
 
 const HeaderOption = styled.span`
   margin: 10px;
-  cursor: pointer;
   font-size: 20px;
 `;
 
 const City = styled.div`
   font-size: 30px;
-  cursor: pointer;
 `;
 
 const Header = ({ city, userInterests, changeView }) => {
@@ -38,10 +38,22 @@ const Header = ({ city, userInterests, changeView }) => {
     <HeaderContainer>
       <HeaderSection>
         <Logo><i className="fas fa-city"></i>HubBub</Logo>
-        <City onClick={() => changeView({type: 'cityHub'})}>{city.name}</City>
+        <City onClick={() => changeView({type: 'cityHub'})}>
+        <HoverText
+          text={city.name}
+          regColor="#f5f5f5"
+          hoveredColor="gray"
+        />
+        </City>
       </HeaderSection>
       <HeaderSection>
-        <HeaderOption onClick={() => changeView({type: 'accountSettings'})}><i className="fas fa-cog"></i></HeaderOption>
+        <HeaderOption onClick={() => changeView({type: 'accountSettings'})}>
+          <HoverText
+            text={(<i className="fas fa-cog"></i>)}
+            regColor="#f5f5f5"
+            hoveredColor="#e1ad01"
+          />
+        </HeaderOption>
       </HeaderSection>
     </HeaderContainer>
   )

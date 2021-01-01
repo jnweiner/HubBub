@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Post from './Post.jsx';
 import ForumButton from './ForumButton.jsx';
+import HoverText from './HoverText.jsx';
 
 const ThreadContainer = styled.div`
   display: flex;
@@ -19,10 +20,8 @@ const ThreadHeader = styled.span`
 `;
 
 const InterestName = styled.span`
-  cursor: pointer;
   font-weight: 600;
   font-size: 25px;
-  color: ${props => props.isHovered ? '#e1ad01' : '#2d4059'};
 `;
 
 const OptionsContainer = styled.span`
@@ -31,6 +30,9 @@ const OptionsContainer = styled.span`
   margin-bottom: 5px;
   width: 99%;
 `;
+
+{/* <InterestName onClick={() => changeView({type: 'interestHub', name: thread.interest, id: thread.interest_id})}>
+{thread.interest} </InterestName> */}
 
 const Thread = ({ thread, changeView, fetchReplies, replies, toggleModal, userId }) => {
 
@@ -42,7 +44,12 @@ const Thread = ({ thread, changeView, fetchReplies, replies, toggleModal, userId
     <ThreadContainer>
       <ThreadHeader>
         <InterestName onClick={() => changeView({type: 'interestHub', name: thread.interest, id: thread.interest_id})}>
-          {thread.interest} </InterestName>
+          <HoverText
+            text={`${thread.interest} `}
+            regColor="#2d4059"
+            hoveredColor="#e1ad01"
+          />
+        </InterestName>
         <i className="fas fa-long-arrow-alt-right"></i>
         <em> {thread.title}</em>
       </ThreadHeader>
