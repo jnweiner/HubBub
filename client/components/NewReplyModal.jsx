@@ -9,6 +9,7 @@ import {
   SubmitButton,
   StyledTextarea,
 } from './ModalStyles.js';
+import HoverText from './HoverText.jsx';
 
 const NewReplyModal = ({ toggleModal, postNewReply }) => {
 
@@ -34,7 +35,13 @@ const NewReplyModal = ({ toggleModal, postNewReply }) => {
           <span>Text:</span>
           <StyledTextarea value={text} onChange={handleTextChange} />
         <SubmitContainer>
-          <SubmitButton onClick={handleSubmit}>Reply <i className="fas fa-reply"></i></SubmitButton>
+          <SubmitButton onClick={handleSubmit}>
+            <HoverText
+              text={(<span>Reply <i className="fas fa-reply"></i></span>)}
+              regColor="#294059"
+              hoveredColor="#f5f5f5"
+            />
+          </SubmitButton>
         </SubmitContainer>
       </StyledForm>
     </ModalContainer>

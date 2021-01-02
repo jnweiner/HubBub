@@ -10,6 +10,7 @@ import {
   StyledTextarea,
   StyledInput,
 } from './ModalStyles.js';
+import HoverText from './HoverText.jsx';
 
 const NewTopicModal = ({ toggleModal, postNewThread }) => {
 
@@ -43,7 +44,13 @@ const NewTopicModal = ({ toggleModal, postNewThread }) => {
         <span>Text:</span>
         <StyledTextarea value={text} onChange={handleTextChange} />
         <SubmitContainer>
-          <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+        <SubmitButton onClick={handleSubmit}>
+            <HoverText
+              text="Submit"
+              regColor="#294059"
+              hoveredColor="#f5f5f5"
+            />
+          </SubmitButton>
         </SubmitContainer>
       </StyledForm>
     </ModalContainer>
