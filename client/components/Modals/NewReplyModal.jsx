@@ -29,7 +29,13 @@ const NewReplyModal = ({ toggleModal, postNewReply }) => {
     <ModalContainer>
       <ModalHeader>
         <span>Post a reply</span>
-        <CloseArrow onClick={() => toggleModal(null)}><i className="fas fa-chevron-down"></i></CloseArrow>
+        <CloseArrow onClick={() => toggleModal(null)}>
+          <HoverText
+            text={(<i className="fas fa-chevron-down"></i>)}
+            regColor="#f5f5f5"
+            hoveredColor="#e1ad01"
+          />
+        </CloseArrow>
       </ModalHeader>
       <StyledForm>
           <span>Text:</span>

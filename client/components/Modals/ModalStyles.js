@@ -29,8 +29,8 @@ const ModalHeader = styled.span`
 `;
 
 const CloseArrow = styled.span`
-  font-size: 18px;
-  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 const StyledForm = styled.form`
