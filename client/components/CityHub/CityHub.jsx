@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { PageTitle } from '../CommonStyles.js';
 import InterestPreview from './InterestPreview.jsx';
@@ -10,7 +10,7 @@ const CityHubContainer = styled.div`
   height: 100%;
 `;
 
-const InterestPreviewContainer = styled.div`
+const InterestsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -18,9 +18,7 @@ const InterestPreviewContainer = styled.div`
   height: 25%;
 `;
 
-const CityHub = ({ city, cityUsers, cityInterests, userInterests, addUserInterest, deleteUserInterest, changeView }) => {
-
-  const [hoveredInterest, setHoveredInterest] = useState(null);
+const CityHub = ({ cityName, cityUsers, cityInterests, userInterests, addUserInterest, deleteUserInterest, changeView }) => {
 
   const isUserInterest = (interestId) => {
     const userInterestIds = userInterests.map(interest => interest.id);
@@ -29,19 +27,17 @@ const CityHub = ({ city, cityUsers, cityInterests, userInterests, addUserInteres
 
   return (
     <CityHubContainer>
-      <PageTitle>Connect with {cityUsers} neighbors in the {city.name} area</PageTitle>
-      <InterestPreviewContainer>{cityInterests.map(interest =>
+      <PageTitle>Connect with {cityUsers} neighbors in the {cityName} area</PageTitle>
+      <InterestsContainer>{cityInterests.map(interest =>
         <InterestPreview
           key={interest.id}
           interest={interest}
           isUserInterest={isUserInterest(interest.id)}
-          setHoveredInterest={setHoveredInterest}
-          isHoveredInterest={hoveredInterest === interest.id}
           addUserInterest={addUserInterest}
           deleteUserInterest={deleteUserInterest}
           changeView={changeView}
         />)}
-      </InterestPreviewContainer>
+      </InterestsContainer>
     </CityHubContainer>
   )
 };

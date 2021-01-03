@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ToggleInterestIcon from './ToggleInterestIcon.jsx';
 
@@ -7,11 +7,11 @@ const InterestPreviewContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 60%;
-  width: 15%;
+  height: 65%;
+  width: 17%;
+  overflow: auto;
   background-color: ${props => props.isUserInterest ? '#2d4059' : '#f5f5f5'};
   color: ${props => props.isUserInterest ? '#f5f5f5' : '#2d4059'};
-  padding: 10px;
   margin: 10px;
   border: 1px solid #2d4059;
   border-radius: 5px;
@@ -19,13 +19,21 @@ const InterestPreviewContainer = styled.div`
   box-shadow: ${props => props.isHoveredInterest ? '0 0 10px gray': 'none'};
 `;
 
-const InterestName = styled.div`
+const InterestInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   font-weight: 600;
   cursor: pointer;
+  width: 100%;
+  height: 100%;
+`;
+
+const Followers = styled.span`
+  font-style: italic;
+  font-weight: 400;
 `;
 
 const Icon = styled.span`
@@ -33,14 +41,18 @@ const Icon = styled.span`
   font-size: 30px;
 `;
 
-const InterestPreview = ({ interest, isUserInterest, setHoveredInterest, isHoveredInterest, addUserInterest, deleteUserInterest, changeView }) => (
+const InterestPreview = ({ interest, isUserInterest, addUserInterest, deleteUserInterest, changeView }) => {
+
+  const [hoveredInterest, setHoveredInterest] = useState(false);
+
+  return (
     <InterestPreviewContainer
       isUserInterest={isUserInterest}
-      isHoveredInterest={isHoveredInterest}
-      onMouseOver={() => setHoveredInterest(interest.id)}
-      onMouseLeave={() => setHoveredInterest(null)}
+      isHoveredInterest={hoveredInterest}
+      onMouseOver={() => setHoveredInterest(true)}
+      onMouseLeave={() => setHoveredInterest(false)}
     >
-      {isHoveredInterest ?
+      {hoveredInterest ?
         <ToggleInterestIcon
           id={interest.id}
           isUserInterest={isUserInterest}
@@ -48,12 +60,13 @@ const InterestPreview = ({ interest, isUserInterest, setHoveredInterest, isHover
           deleteUserInterest={deleteUserInterest}
         />
         : null}
-      <InterestName onClick={() => changeView({ ...interest, type: 'interestHub'})}>
+      <InterestInfo onClick={() => changeView({ ...interest, type: 'interestHub'})}>
         <Icon><i className={interest.icon}></i></Icon>
         <span>{interest.name}</span>
-      </InterestName>
-      <span><em>{interest.userCount} following</em></span>
+        <Followers>{interest.userCount} following</Followers>
+      </InterestInfo>
     </InterestPreviewContainer>
-);
+  )
+};
 
 export default InterestPreview;

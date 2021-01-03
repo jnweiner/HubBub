@@ -11,6 +11,7 @@ const NavContainer = styled.div`
   font-size: 18px;
   min-height: 100vh;
   width: 15%;
+  overflow: auto;
   padding: 5px;
 `;
 

@@ -15,6 +15,7 @@ const UserCell = styled.div`
   align-items: center;
   border-right: 1px solid #2d4059;
   width: 15%;
+  overflow: auto;
   padding: 5px;
 `;
 
@@ -30,6 +31,7 @@ const TextCell = styled.div`
   flex-direction: column;
   padding: 10px;
   width: 85%;
+  overflow: auto;
 `;
 
 const Timestamp = styled.span`

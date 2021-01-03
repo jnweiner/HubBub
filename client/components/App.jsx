@@ -88,11 +88,9 @@ const App = () => {
       if (view.type === 'cityHub') {
         return (
           <CityHub
-            city={city}
+            cityName={city.name}
             cityUsers={cityUsers}
             cityInterests={cityInterests}
-            fetchCityUsers={fetchCityUsers}
-            fetchCityInterests={fetchCityInterests}
             userInterests={userInterests}
             addUserInterest={addUserInterest}
             deleteUserInterest={deleteUserInterest}
