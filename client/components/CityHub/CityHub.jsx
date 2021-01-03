@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import { PageTitle } from '../CommonStyles.js';
-
 import InterestPreview from './InterestPreview.jsx';
 
 const CityHubContainer = styled.div`

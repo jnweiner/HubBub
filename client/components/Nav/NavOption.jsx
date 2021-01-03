@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import HoverText from '../HoverText.jsx';
 
 const StyledNavOption = styled.div`
@@ -16,10 +15,10 @@ const NavOption = ({ isCurrentView, isInterest = false, onClickFunction, text })
       isInterest={isInterest}
   >
     <HoverText
-      effect='background'
+      effect="background"
       text={text}
-      regColor='#f5f5f5'
-      hoveredColor='rgba(41, 64, 89, .2)'
+      regColor="#f5f5f5"
+      hoveredColor="rgba(41, 64, 89, .2)"
     />
   </StyledNavOption>
 );

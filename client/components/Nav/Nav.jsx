@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import NavOption from './NavOption.jsx';
 
 const NavContainer = styled.div`

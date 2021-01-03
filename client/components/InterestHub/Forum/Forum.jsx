@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
 import ThreadPreview from './ThreadPreview.jsx';
 import ForumButton from './ForumButton.jsx';
 

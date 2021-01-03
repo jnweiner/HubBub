@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { PageTitle } from '../CommonStyles.js';
-
 import Forum from './Forum/Forum.jsx';
 
 const InterestHubContainer = styled.div`

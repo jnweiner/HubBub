@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import HoverText from './HoverText.jsx';
 
 const HeaderContainer = styled.div`
