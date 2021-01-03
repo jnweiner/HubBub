@@ -9,7 +9,6 @@ const StyledContent = styled.span`
 const StyledBackground = styled.span`
   background-color: ${props => props.isHovered ? props.hoveredColor : props.regColor };
   border-radius: 5px;
-  padding: 2px;
   cursor: pointer;
 `;
 
