@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import HoverText from '../../HoverText.jsx';
+import HoverText from '../HoverText.jsx';
 
 const StyledButton = styled.button`
   background-color: #294059;

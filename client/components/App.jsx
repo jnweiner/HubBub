@@ -10,7 +10,7 @@ import Nav from './Nav/Nav.jsx';
 import AccountSettings from './AccountSettings/AccountSettings.jsx';
 import CityHub from './CityHub/CityHub.jsx';
 import InterestHub from './InterestHub/InterestHub.jsx';
-import Thread from './InterestHub/Forum/Thread.jsx';
+import Thread from './Forum/Thread.jsx';
 
 // modal assets
 import NewThreadModal from './Modals/NewThreadModal.jsx';

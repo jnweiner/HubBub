@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Post from './Post.jsx';
 import ForumButton from './ForumButton.jsx';
-import HoverText from '../../HoverText.jsx';
+import HoverText from '../HoverText.jsx';
 
 const ThreadContainer = styled.div`
   display: flex;
