@@ -69,7 +69,9 @@ const App = () => {
 
   useEffect(() => {
     fetchUserInfo(username)
-      .then(() => {
+      .then(cityId => {
+        fetchCityUsers(cityId);
+        fetchCityInterests(cityId);
         fetchUserInterests(username);
       })
       .then(() => setLoaded(true))
@@ -157,6 +159,7 @@ const App = () => {
       .then(({ data }) => {
         setUserInfo(data);
         setCity({name: data.city, id: data.city_id});
+        return data.city_id;
       })
       .catch(err => console.log(err));
   };

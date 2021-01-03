@@ -18,7 +18,7 @@ const InterestPreviewContainer = styled.div`
   height: 25%;
 `;
 
-const CityHub = ({ city, cityUsers, cityInterests, fetchCityUsers, fetchCityInterests, userInterests, addUserInterest, deleteUserInterest, changeView }) => {
+const CityHub = ({ city, cityUsers, cityInterests, userInterests, addUserInterest, deleteUserInterest, changeView }) => {
 
   const [hoveredInterest, setHoveredInterest] = useState(null);
 
@@ -26,12 +26,6 @@ const CityHub = ({ city, cityUsers, cityInterests, fetchCityUsers, fetchCityInte
     const userInterestIds = userInterests.map(interest => interest.id);
     return userInterestIds.includes(interestId);
   };
-
-  useEffect(() => {
-    fetchCityUsers(city.id)
-      .then(() => fetchCityInterests(city.id))
-      .catch(err => console.log(err));
-  }, []);
 
   return (
     <CityHubContainer>
