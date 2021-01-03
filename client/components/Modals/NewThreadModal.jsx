@@ -10,9 +10,9 @@ import {
   StyledTextarea,
   StyledInput,
 } from './ModalStyles.js';
-import HoverText from './HoverText.jsx';
+import HoverText from '../HoverText.jsx';
 
-const NewTopicModal = ({ toggleModal, postNewThread }) => {
+const NewThreadModal = ({ toggleModal, postNewThread }) => {
 
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
@@ -57,4 +57,4 @@ const NewTopicModal = ({ toggleModal, postNewThread }) => {
   );
 };
 
-export default NewTopicModal;
+export default NewThreadModal;

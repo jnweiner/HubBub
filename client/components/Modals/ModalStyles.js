@@ -41,20 +41,6 @@ const StyledForm = styled.form`
   margin-right: 10px;
 `;
 
-const SubmitContainer = styled.span`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const SubmitButton = styled.button`
-  background-color: #e1ad01;
-  border: 1px solid #e1ad01;
-  border-radius: 5px;
-  padding: 5px;
-  font-weight: 600;
-  font-size: 15px;
-`;
-
 const StyledInput = styled.input`
   font-family: 'Krub', sans-serif;
   margin: 10px 0;
@@ -71,6 +57,34 @@ const StyledTextarea = styled.textarea`
   margin: 10px 0;
 `;
 
+const SubmitContainer = styled.span`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const SubmitButton = styled.button`
+  background-color: #e1ad01;
+  border: 1px solid #e1ad01;
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: 600;
+  font-size: 15px;
+`;
+
+const ModalActivatedOverlay = styled.div`
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-color: rgba(220, 220, 220, .3);
+  z-index: 5;
+`;
+
+const ModalActivatedFooter = styled.div`
+  height: 50vh;
+`;
+
 export {
   ModalContainer,
   ModalHeader,
@@ -79,5 +93,7 @@ export {
   SubmitContainer,
   SubmitButton,
   StyledInput,
-  StyledTextarea
+  StyledTextarea,
+  ModalActivatedOverlay,
+  ModalActivatedFooter
 };

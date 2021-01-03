@@ -22,7 +22,6 @@ const ThreadPreview = ({ thread, changeView, isHoveredThread, setHoveredThread }
     <td>{thread.replyCount}</td>
     <td>{thread.date.slice(0, 10)}</td>
   </ThreadRow>
-
 );
 
 export default ThreadPreview;

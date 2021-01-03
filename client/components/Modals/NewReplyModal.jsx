@@ -9,7 +9,7 @@ import {
   SubmitButton,
   StyledTextarea,
 } from './ModalStyles.js';
-import HoverText from './HoverText.jsx';
+import HoverText from '../HoverText.jsx';
 
 const NewReplyModal = ({ toggleModal, postNewReply }) => {
 

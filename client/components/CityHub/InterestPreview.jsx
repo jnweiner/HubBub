@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import ToggleInterest from './ToggleInterest.jsx';
+import ToggleInterestIcon from './ToggleInterestIcon.jsx';
 
 const StyledInterestPreview = styled.div`
   display: flex;
@@ -41,7 +41,7 @@ const InterestPreview = ({ interest, isUserInterest, setHoveredInterest, isHover
       onMouseLeave={() => setHoveredInterest(null)}
     >
       {isHoveredInterest ?
-        <ToggleInterest
+        <ToggleInterestIcon
           id={interest.id}
           isUserInterest={isUserInterest}
           addUserInterest={addUserInterest}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { PageTitle } from '../CommonStyles.js';
 
 import InterestPreview from './InterestPreview.jsx';
 
@@ -10,34 +11,15 @@ const CityHubContainer = styled.div`
   width: 100%;
 `;
 
-const CityTitle = styled.div`
-  border-top: 1px solid #2d4059;
-  border-bottom: 1px solid #2d4059;
-  padding: 10px 0;
-  font-size: 25px;
-  font-weight: 600;
-  margin: 20px 0;
-  width: 99%;
-`;
-
 const Row = styled.div`
   display: flex;
   justify-content: space-between;
   width: 99%;
 `;
 
-const CityHub = ({ city, userInterests, cityInterests, fetchCityInterests, addUserInterest, deleteUserInterest, changeView }) => {
+const CityHub = ({ city, cityUsers, cityInterests, fetchCityUsers, fetchCityInterests, userInterests, addUserInterest, deleteUserInterest, changeView }) => {
 
-  const [cityUsers, setCityUsers] = useState(null);
   const [hoveredInterest, setHoveredInterest] = useState(null);
-
-  const fetchCityUsers = (cityId) => {
-    return axios.get(`/api/cities/${cityId}/users`)
-      .then(({ data }) => {
-        setCityUsers(data.count);
-      })
-      .catch(err => console.log(err));
-  };
 
   const isUserInterest = (interestId) => {
     const userInterestIds = userInterests.map(interest => interest.id);
@@ -52,7 +34,7 @@ const CityHub = ({ city, userInterests, cityInterests, fetchCityInterests, addUs
 
   return (
     <CityHubContainer>
-      <CityTitle>Connect with {cityUsers} neighbors in the {city.name} area</CityTitle>
+      <PageTitle>Connect with {cityUsers} neighbors in the {city.name} area</PageTitle>
       <Row>{cityInterests.slice(0, 5).map(interest =>
         <InterestPreview
           key={interest.id}

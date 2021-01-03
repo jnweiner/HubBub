@@ -13,11 +13,6 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Logo = styled.span`
-  color: #e1ad01;
-  font-size: 30px;
-`;
-
 const HeaderSection = styled.div`
   display: flex;
   align-items: center;
@@ -28,36 +23,37 @@ const HeaderOption = styled.span`
   font-size: 20px;
 `;
 
+const Logo = styled.span`
+  color: #e1ad01;
+  font-size: 30px;
+`;
+
 const City = styled.div`
   font-size: 30px;
 `;
 
-const Header = ({ city, userInterests, changeView }) => {
-
-  return (
-    <HeaderContainer>
-      <HeaderSection>
-        <Logo><i className="fas fa-city"></i>HubBub</Logo>
-        <City onClick={() => changeView({type: 'cityHub'})}>
+const Header = ({ city, userInterests, changeView }) => (
+  <HeaderContainer>
+    <HeaderSection>
+      <Logo><i className="fas fa-city"></i>HubBub</Logo>
+      <City onClick={() => changeView({type: 'cityHub'})}>
         <HoverText
           text={city.name}
           regColor="#f5f5f5"
           hoveredColor="gray"
         />
-        </City>
-      </HeaderSection>
-      <HeaderSection>
-        <HeaderOption onClick={() => changeView({type: 'accountSettings'})}>
-          <HoverText
-            text={(<i className="fas fa-cog"></i>)}
-            regColor="#f5f5f5"
-            hoveredColor="#e1ad01"
-          />
-        </HeaderOption>
-      </HeaderSection>
-    </HeaderContainer>
-  )
-
-};
+      </City>
+    </HeaderSection>
+    <HeaderSection>
+      <HeaderOption onClick={() => changeView({type: 'accountSettings'})}>
+        <HoverText
+          text={(<i className="fas fa-cog"></i>)}
+          regColor="#f5f5f5"
+          hoveredColor="#e1ad01"
+        />
+      </HeaderOption>
+    </HeaderSection>
+  </HeaderContainer>
+);
 
 export default Header;

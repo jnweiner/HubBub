@@ -20,7 +20,7 @@ const HoverText = ({ text, hoveredColor, regColor }) => {
     >
     {text}
     </StyledText>
-  )
+  );
 };
 
 export default HoverText;

@@ -13,7 +13,7 @@ const ToggleIcon = styled.span`
   font-size: 18px;
 `;
 
-const ToggleInterest = ({ id, isUserInterest, addUserInterest, deleteUserInterest }) => (
+const ToggleInterestIcon = ({ id, isUserInterest, addUserInterest, deleteUserInterest }) => (
   <ToggleInterestContainer>
     <ToggleIcon onClick={isUserInterest ? () => deleteUserInterest(id) : () => addUserInterest(id)}>
       <i className={isUserInterest ? "fas fa-minus-circle" : "fas fa-plus-circle"}></i>
@@ -22,4 +22,4 @@ const ToggleInterest = ({ id, isUserInterest, addUserInterest, deleteUserInteres
 );
 
 
-export default ToggleInterest;
+export default ToggleInterestIcon;
