@@ -4,7 +4,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 // constant assets
 import Header from './Header.jsx';
-import Nav from './Nav.jsx';
+import Nav from './Nav/Nav.jsx';
 
 // view options
 import AccountSettings from './AccountSettings/AccountSettings.jsx';
