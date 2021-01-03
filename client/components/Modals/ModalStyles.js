@@ -41,11 +41,17 @@ const StyledForm = styled.form`
   margin-right: 10px;
 `;
 
+const RequiredSpan = styled.span`
+  font-weight: 600;
+  color: #ea5455;
+`;
+
 const StyledInput = styled.input`
   font-family: 'Krub', sans-serif;
   margin: 10px 0;
   height: 10%;
   width: 100%;
+  border: ${props => props.showRequired ? '1px solid #ea5455' : null}
 `;
 
 const StyledTextarea = styled.textarea`
@@ -55,6 +61,7 @@ const StyledTextarea = styled.textarea`
   min-width: 100%;
   max-width: 100%;
   margin: 10px 0;
+  border: ${props => props.showRequired ? '1px solid #ea5455' : null}
 `;
 
 const SubmitContainer = styled.span`
@@ -89,6 +96,7 @@ export {
   ModalContainer,
   ModalHeader,
   CloseArrow,
+  RequiredSpan,
   StyledForm,
   SubmitContainer,
   SubmitButton,

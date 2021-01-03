@@ -4,6 +4,7 @@ import {
   ModalContainer,
   ModalHeader,
   CloseArrow,
+  RequiredSpan,
   StyledForm,
   SubmitContainer,
   SubmitButton,
@@ -16,6 +17,7 @@ const NewThreadModal = ({ toggleModal, postNewThread }) => {
 
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
+  const [showRequired, setShowRequired] = useState(false);
 
   const handleTitleChange = ({ target }) => {
     setTitle(target.value);
@@ -25,11 +27,16 @@ const NewThreadModal = ({ toggleModal, postNewThread }) => {
     setText(target.value);
   };
 
-  const handleSubmit = () => {
-    postNewThread(title, text);
-    setTitle('');
-    setText('');
-    toggleModal(null);
+  const handleSubmit = (e) => {
+    if (title.length && text.length) {
+      postNewThread(title, text);
+      setTitle('');
+      setText('');
+      toggleModal(null);
+    } else {
+      e.preventDefault();
+      setShowRequired(true);
+    }
   };
 
   return (
@@ -45,10 +52,10 @@ const NewThreadModal = ({ toggleModal, postNewThread }) => {
         </CloseArrow>
       </ModalHeader>
       <StyledForm>
-        <span>Title:</span>
-        <StyledInput type="text" value={title} onChange={handleTitleChange} />
-        <span>Text:</span>
-        <StyledTextarea value={text} onChange={handleTextChange} />
+        <span>Title: {showRequired && !title.length ? <RequiredSpan>(Required)</RequiredSpan> : null}</span>
+        <StyledInput type="text" value={title} onChange={handleTitleChange} showRequired={showRequired && !title.length}/>
+        <span>Text: {showRequired && !text.length ? <RequiredSpan>(Required)</RequiredSpan> : null}</span>
+        <StyledTextarea value={text} onChange={handleTextChange} showRequired={showRequired && !text.length}/>
         <SubmitContainer>
         <SubmitButton onClick={handleSubmit}>
             <HoverText
