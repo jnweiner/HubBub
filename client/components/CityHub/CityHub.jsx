@@ -9,12 +9,15 @@ const CityHubContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
 `;
 
-const Row = styled.div`
+const InterestPreviewContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 99%;
+  height: 25%;
 `;
 
 const CityHub = ({ city, cityUsers, cityInterests, fetchCityUsers, fetchCityInterests, userInterests, addUserInterest, deleteUserInterest, changeView }) => {
@@ -35,7 +38,7 @@ const CityHub = ({ city, cityUsers, cityInterests, fetchCityUsers, fetchCityInte
   return (
     <CityHubContainer>
       <PageTitle>Connect with {cityUsers} neighbors in the {city.name} area</PageTitle>
-      <Row>{cityInterests.slice(0, 5).map(interest =>
+      <InterestPreviewContainer>{cityInterests.map(interest =>
         <InterestPreview
           key={interest.id}
           interest={interest}
@@ -46,19 +49,7 @@ const CityHub = ({ city, cityUsers, cityInterests, fetchCityUsers, fetchCityInte
           deleteUserInterest={deleteUserInterest}
           changeView={changeView}
         />)}
-      </Row>
-      <Row>{cityInterests.slice(5).map(interest =>
-        <InterestPreview
-          key={interest.id}
-          interest={interest}
-          isUserInterest={isUserInterest(interest.id)}
-          setHoveredInterest={setHoveredInterest}
-          isHoveredInterest={hoveredInterest === interest.id}
-          addUserInterest={addUserInterest}
-          deleteUserInterest={deleteUserInterest}
-          changeView={changeView}
-        />)}
-      </Row>
+      </InterestPreviewContainer>
     </CityHubContainer>
   )
 };

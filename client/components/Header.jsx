@@ -11,6 +11,7 @@ const HeaderContainer = styled.div`
   padding: 10px;
   align-items: center;
   justify-content: space-between;
+  border-radius: 5px;
 `;
 
 const HeaderSection = styled.div`
