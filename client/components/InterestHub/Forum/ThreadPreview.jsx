@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const ThreadRow = styled.tr`
@@ -9,19 +9,24 @@ const TitleCell = styled.td`
   cursor: pointer;
 `;
 
-const ThreadPreview = ({ thread, changeView, isHoveredThread, setHoveredThread }) => (
-  <ThreadRow isHoveredThread={isHoveredThread}>
-    <TitleCell
-      onClick={() => changeView({ ...thread, type: 'thread'})}
-      onMouseOver={() => setHoveredThread(thread.id)}
-      onMouseLeave={() => setHoveredThread(null)}
-    >
-    {thread.title}
-    </TitleCell>
-    <td>{thread.username}</td>
-    <td>{thread.replyCount}</td>
-    <td>{thread.date.slice(0, 10)}</td>
-  </ThreadRow>
-);
+const ThreadPreview = ({ thread, changeView }) => {
+
+  const [hoveredThread, setHoveredThread] = useState(false);
+
+  return (
+      <ThreadRow isHoveredThread={hoveredThread}>
+      <TitleCell
+        onClick={() => changeView({ ...thread, type: 'thread'})}
+        onMouseOver={() => setHoveredThread(true)}
+        onMouseLeave={() => setHoveredThread(false)}
+      >
+      {thread.title}
+      </TitleCell>
+      <td>{thread.username}</td>
+      <td>{thread.replyCount}</td>
+      <td>{thread.date.slice(0, 10)}</td>
+    </ThreadRow>
+  )
+};
 
 export default ThreadPreview;

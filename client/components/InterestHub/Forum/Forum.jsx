@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ThreadPreview from './ThreadPreview.jsx';
 import ForumButton from './ForumButton.jsx';
@@ -38,8 +38,6 @@ const Arrow = styled.span`
 
 const Forum = ({ cityId, interestId, threads, fetchThreads, changeView, toggleModal }) => {
 
-  const [hoveredThread, setHoveredThread] = useState(null);
-
   useEffect(() => {
     fetchThreads(cityId, interestId)
   }, [interestId]);
@@ -65,8 +63,6 @@ const Forum = ({ cityId, interestId, threads, fetchThreads, changeView, toggleMo
               key={thread.id}
               thread={thread}
               changeView={changeView}
-              isHoveredThread={thread.id === hoveredThread}
-              setHoveredThread={setHoveredThread}
             />)}
         </tbody>
       </ForumTable>
