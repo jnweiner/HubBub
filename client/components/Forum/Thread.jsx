@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Post from './Post.jsx';
 import ForumButton from './ForumButton.jsx';
-import HoverText from './HoverText.jsx';
+import HoverText from '../HoverText.jsx';
 
 const ThreadContainer = styled.div`
   display: flex;
@@ -30,9 +30,6 @@ const OptionsContainer = styled.span`
   margin-bottom: 5px;
   width: 99%;
 `;
-
-{/* <InterestName onClick={() => changeView({type: 'interestHub', name: thread.interest, id: thread.interest_id})}>
-{thread.interest} </InterestName> */}
 
 const Thread = ({ thread, changeView, fetchReplies, replies, toggleModal, userId }) => {
 

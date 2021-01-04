@@ -14,6 +14,8 @@ app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
 
+// city-related
+
 // get all cities supported by app
 app.get('/api/cities', (req, res) => {
   const sql = 'SELECT * from cities';
@@ -44,7 +46,7 @@ app.get('/api/cities/:cityId/users', (req, res) => {
 });
 
 // get all interests for city, along with follower counts
-// should there be a cities_interests table, to account for diff cities having diff interests (stretch goal)
+// should there be a cities_interests table, to account for diff cities having diff interests? (stretch goal)
 app.get('/api/cities/:cityId/interests', (req, res) => {
   const sql = 'SELECT id, interest AS name, icon from interests ORDER BY interest ASC';
   pool
@@ -75,14 +77,16 @@ app.get('/api/cities/:cityId/interests', (req, res) => {
     })
 });
 
-// app.get('/api/cities/:cityId/interests/:interestId/meetup')
-//   // get top 4 related meetups (by most recently active?)
+// stretch goal: get top 4 related meetups (by most recently active?)
+// app.get('/api/cities/:cityId/interests/:interestId/meetup') ...
 
-// app.get('/api/cities/:cityId/interests/:interestId/yelp')
-//   // get top 4 related yelp attractions (by rating)
+// stretch goal: get top 4 related yelp attractions (by rating)
+// app.get('/api/cities/:cityId/interests/:interestId/yelp') ...
+
+
+// forum-related
 
 // get all threads for an interest in a city, in order of most recent
-// can't seem to get a count of all replies associated with that thread as part of single sql query
 app.get('/api/cities/:cityId/interests/:interestId/threads', (req, res) => {
   const sql = 'SELECT threads.*, interests.interest, interests.id AS interest_id, users.id AS user_id, users.username, users.month_moved, users.year_moved, users.avatar, users.neighborhood FROM threads, users, interests WHERE interests.id = threads.interest_id AND users.id = threads.user_id AND threads.city_id = $1 AND threads.interest_id = $2 ORDER BY threads.date DESC';
   const values = [req.params.cityId, req.params.interestId];
@@ -170,7 +174,10 @@ app.post('/api/cities/:cityId/interests/:interestId/threads/:threadId', (req, re
     })
 });
 
-// post new user information 
+
+// user-related
+
+// stretch goal: post new user information 
 app.post('/api/users', (req, res) => {
   const first_name = req.body.firstName;
   const last_name = req.body.lastName;
@@ -213,6 +220,7 @@ app.get('/api/users/:username', (req, res) => {
     })
 });
 
+// authentication stretch goals
 // path to validate username/password combo?
 // path to validate that username is not already taken?
 
@@ -266,7 +274,7 @@ app.delete('/api/users/:username/interests', (req, res) => {
 })
 
 
-// stretch goal: building out watching/unwatching threads functionality
+// stretch goal: watching/unwatching threads functionality
 // all posts users make will automatically be 'watched'
 
 // app.get('/api/users/:userId/watched')

@@ -1,26 +1,51 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const StyledText = styled.span`
+const StyledContent = styled.span`
   color: ${props => props.isHovered ? props.hoveredColor : props.regColor };
   cursor: pointer;
 `;
 
-const HoverText = ({ text, hoveredColor, regColor }) => {
+const StyledBackground = styled.span`
+  background-color: ${props => props.isHovered ? props.hoveredColor : props.regColor };
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
+const HoverText = ({ effect = 'content', text, hoveredColor, regColor }) => {
 
   const [hoveredText, setHoveredText] = useState(false);
 
-  return (
-    <StyledText
-      isHovered={hoveredText}
-      onMouseOver={() => setHoveredText(true)}
-      onMouseLeave={() => setHoveredText(false)}
-      hoveredColor={hoveredColor}
-      regColor={regColor}
-    >
-    {text}
-    </StyledText>
-  )
+  const renderHoverText = (effect) => {
+    if (effect === 'content') {
+      return (
+        <StyledContent
+          isHovered={hoveredText}
+          onMouseOver={() => setHoveredText(true)}
+          onMouseLeave={() => setHoveredText(false)}
+          hoveredColor={hoveredColor}
+          regColor={regColor}
+        >
+        {text}
+        </StyledContent>
+      );
+    } else if (effect === 'background') {
+      return (
+        <StyledBackground
+          isHovered={hoveredText}
+          onMouseOver={() => setHoveredText(true)}
+          onMouseLeave={() => setHoveredText(false)}
+          hoveredColor={hoveredColor}
+          regColor={regColor}
+        >
+        {text}
+        </StyledBackground>
+      );
+    }
+  }
+
+  return renderHoverText(effect);
+
 };
 
 export default HoverText;

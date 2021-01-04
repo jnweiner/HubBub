@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import HoverText from '../HoverText.jsx';
 
 const ToggleInterestContainer = styled.div`
   padding: 10px;
@@ -9,17 +10,20 @@ const ToggleInterestContainer = styled.div`
 `;
 
 const ToggleIcon = styled.span`
-  cursor: pointer;
   font-size: 18px;
 `;
 
-const ToggleInterest = ({ id, isUserInterest, addUserInterest, deleteUserInterest }) => (
+const ToggleInterestIcon = ({ id, isUserInterest, addUserInterest, deleteUserInterest }) => (
   <ToggleInterestContainer>
     <ToggleIcon onClick={isUserInterest ? () => deleteUserInterest(id) : () => addUserInterest(id)}>
-      <i className={isUserInterest ? "fas fa-minus-circle" : "fas fa-plus-circle"}></i>
+      <HoverText
+        text={(<i className={isUserInterest ? "fas fa-minus-circle" : "fas fa-plus-circle"}></i>)}
+        regColor={isUserInterest ? "#f5f5f5" : "#294059"}
+        hoveredColor="#e1ad01"
+      />
     </ToggleIcon>
   </ToggleInterestContainer>
 );
 
 
-export default ToggleInterest;
+export default ToggleInterestIcon;

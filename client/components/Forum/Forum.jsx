@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-
 import ThreadPreview from './ThreadPreview.jsx';
 import ForumButton from './ForumButton.jsx';
 
-const ForumPreviewContainer = styled.div`
+const ForumContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 99%;
@@ -20,7 +19,7 @@ const LabelRow = styled.tr`
   font-weight: 600;
 `;
 
-const NewTopicContainer = styled.span`
+const NewThreadContainer = styled.span`
   display: flex;
   justify-content: flex-end;
   margin-bottom: 5px;
@@ -37,22 +36,20 @@ const Arrow = styled.span`
   cursor: pointer;
 `;
 
-const ForumPreview = ({ city, interest, threads, fetchThreads, changeView, toggleModal }) => {
-
-  const [hoveredThread, setHoveredThread] = useState(null);
+const Forum = ({ cityId, interestId, threads, fetchThreads, changeView, toggleModal }) => {
 
   useEffect(() => {
-    fetchThreads(city.id, interest.id)
-  }, [interest.id]);
+    fetchThreads(cityId, interestId)
+  }, [interestId]);
 
   return (
-    <ForumPreviewContainer>
-      <NewTopicContainer>
+    <ForumContainer>
+      <NewThreadContainer>
         <ForumButton
-          onClickFunction={() => toggleModal('newTopic')}
+          onClickFunction={() => toggleModal('newThread')}
           content={(<span>New Topic <i className="fas fa-plus"></i></span>)}
         />
-      </NewTopicContainer>
+      </NewThreadContainer>
       <ForumTable>
         <tbody>
           <LabelRow>
@@ -66,16 +63,14 @@ const ForumPreview = ({ city, interest, threads, fetchThreads, changeView, toggl
               key={thread.id}
               thread={thread}
               changeView={changeView}
-              isHoveredThread={thread.id === hoveredThread}
-              setHoveredThread={setHoveredThread}
             />)}
         </tbody>
       </ForumTable>
       <ArrowContainer>
         <Arrow><i className="fas fa-arrow-left"></i></Arrow> {threads.length} / {threads.length} topics <Arrow><i className="fas fa-arrow-right"></i></Arrow>
       </ArrowContainer>
-    </ForumPreviewContainer>
+    </ForumContainer>
   );
 };
 
-export default ForumPreview;
+export default Forum;
