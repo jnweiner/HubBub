@@ -17,6 +17,7 @@ const ModalNewReplyForm = ({ toggleModal, postNewReply }) => {
 
   const handleSubmit = (e) => {
     if (text.length) {
+      e.preventDefault();
       postNewReply(text);
       setText('');
       toggleModal(null);

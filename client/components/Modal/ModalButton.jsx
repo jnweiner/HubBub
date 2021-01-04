@@ -30,3 +30,5 @@ const ModalButton = ({ content, onClickFunction }) => (
 
 export default ModalButton;
 
+// getting error 'Form submission canceled because the form is not connected' - investigate
+

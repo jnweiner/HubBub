@@ -23,6 +23,7 @@ const ModalNewThreadForm = ({ toggleModal, postNewThread }) => {
 
   const handleSubmit = (e) => {
     if (title.length && text.length) {
+      e.preventDefault();
       postNewThread(title, text);
       setTitle('');
       setText('');
