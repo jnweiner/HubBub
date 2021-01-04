@@ -1,12 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ThreadPreview from './ThreadPreview.jsx';
 import ForumButton from './ForumButton.jsx';
+import HoverText from '../HoverText.jsx';
 
 const ForumContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 99%;
+`;
+
+const ForumTableHeader = styled.span`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
 `;
 
 const ForumTable = styled.table`
@@ -19,37 +26,30 @@ const LabelRow = styled.tr`
   font-weight: 600;
 `;
 
-const NewThreadContainer = styled.span`
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 5px;
-`;
-
 const ArrowContainer = styled.span`
+  margin-top: 5px;
   text-align: right;
-  margin: 5px 0;
   font-weight: 600;
 `;
 
-const Arrow = styled.span`
-  font-size: 18px;
-  cursor: pointer;
-`;
+const Forum = ({ cityId, interestId, threads, paginatedThreads, fetchThreads, changeView, toggleModal }) => {
 
-const Forum = ({ cityId, interestId, threads, fetchThreads, changeView, toggleModal }) => {
+  const [loaded, setLoaded] = useState(false);
+  const [threadsPage, setThreadsPage] = useState(0);
 
   useEffect(() => {
     fetchThreads(cityId, interestId)
+      .then(() => setLoaded(true))
   }, [interestId]);
 
   return (
     <ForumContainer>
-      <NewThreadContainer>
+      <ForumTableHeader>
         <ForumButton
           onClickFunction={() => toggleModal('newThread')}
           content={(<span>New Topic <i className="fas fa-plus"></i></span>)}
         />
-      </NewThreadContainer>
+      </ForumTableHeader>
       <ForumTable>
         <tbody>
           <LabelRow>
@@ -58,16 +58,34 @@ const Forum = ({ cityId, interestId, threads, fetchThreads, changeView, toggleMo
             <td>Replies</td>
             <td>Created On</td>
           </LabelRow>
-          {threads.map(thread =>
+          {loaded ? paginatedThreads[threadsPage].map(thread =>
             <ThreadPreview
               key={thread.id}
               thread={thread}
               changeView={changeView}
-            />)}
+            />) : null}
         </tbody>
       </ForumTable>
       <ArrowContainer>
-        <Arrow><i className="fas fa-arrow-left"></i></Arrow> {threads.length} / {threads.length} topics <Arrow><i className="fas fa-arrow-right"></i></Arrow>
+        {threadsPage > 0 ?
+          <span onClick={() => setThreadsPage(prevPage => prevPage - 1)}>
+            <HoverText
+              text={(<i className="fas fa-arrow-left"></i>)}
+              regColor="#294059"
+              hoveredColor="#e1ad01"
+            />
+          </span>
+        : null}
+        {loaded ? <span>{` ${paginatedThreads[threadsPage].length + (threadsPage * 10)} / ${threads.length} topics `}</span> : null}
+        {threadsPage + 1 < paginatedThreads.length ?
+          <span onClick={() => setThreadsPage(prevPage => prevPage + 1)}>
+            <HoverText
+              text={(<i className="fas fa-arrow-right"></i>)}
+              regColor="#294059"
+              hoveredColor="#e1ad01"
+            />
+          </span>
+        : null}
       </ArrowContainer>
     </ForumContainer>
   );

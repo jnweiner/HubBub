@@ -13,6 +13,7 @@ const UserCell = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   border-right: 1px solid #2d4059;
   width: 15%;
   overflow: auto;

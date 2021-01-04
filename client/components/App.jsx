@@ -64,6 +64,7 @@ const App = () => {
 
   // state related to forum
   const [threads, setThreads] = useState([]);
+  const [paginatedThreads, setPaginatedThreads] = useState([]);
   const [replies, setReplies] = useState([]);
 
   useEffect(() => {
@@ -109,6 +110,7 @@ const App = () => {
             cityId={city.id}
             fetchThreads={fetchThreads}
             threads={threads}
+            paginatedThreads={paginatedThreads}
             changeView={changeView}
             toggleModal={toggleModal}
           />
@@ -201,8 +203,29 @@ const App = () => {
     return axios.get(`/api/cities/${cityId}/interests/${interestId}/threads`)
       .then(({ data }) => {
         setThreads(data);
+        return data;
+      })
+      .then(data => {
+        const paginated = paginateThreads(data, 10);
+        setPaginatedThreads(paginated);
       })
       .catch(err => console.log(err));
+  };
+
+  const paginateThreads = (threads, numAtATime) => {
+    const paginated = [];
+    let start = 0;
+    let end = numAtATime;
+  
+    while (threads[start]) {
+      let sliced = threads.slice(start, end);
+      paginated.push(sliced);
+  
+      start += numAtATime;
+      end += numAtATime;
+    }
+  
+    return paginated;
   };
 
   const postNewThread = (title, text) => {

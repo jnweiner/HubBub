@@ -9,13 +9,14 @@ const InterestHubContainer = styled.div`
   width: 100%;
 `;
 
-const InterestHub = ({ interest, cityId, threads, fetchThreads, changeView, toggleModal }) => (
+const InterestHub = ({ interest, cityId, threads, paginatedThreads, fetchThreads, changeView, toggleModal }) => (
   <InterestHubContainer>
     <PageTitle>{interest.name}</PageTitle>
     <Forum
       interestId={interest.id}
       cityId={cityId}
       threads={threads}
+      paginatedThreads={paginatedThreads}
       fetchThreads={fetchThreads}
       changeView={changeView}
       toggleModal={toggleModal}
