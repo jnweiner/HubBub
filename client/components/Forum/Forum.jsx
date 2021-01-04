@@ -13,7 +13,7 @@ const ForumContainer = styled.div`
 const ForumTableHeader = styled.span`
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 5px;
+  padding-bottom: 5px;
 `;
 
 const ForumTable = styled.table`

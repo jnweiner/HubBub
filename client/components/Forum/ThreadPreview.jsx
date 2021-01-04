@@ -9,10 +9,24 @@ const ThreadRow = styled.tr`
 const TitleCell = styled.td`
   width: 65%;
   cursor: pointer;
+  padding: 2px 0;
 `;
 
 const StartedByCell = styled.td`
   width: 20%;
+  padding: 2px 0;
+`;
+
+const UserAvatar = styled.img`
+  vertical-align: top;
+  height: 20px;
+  width: 20px;
+  border: 1px solid black;
+  border-radius: 50%;
+`;
+
+const InfoCell = styled.td`
+  padding: 2px 0;
 `;
 
 const ThreadPreview = ({ thread, changeView }) => {
@@ -28,9 +42,11 @@ const ThreadPreview = ({ thread, changeView }) => {
       >
       {thread.title}
       </TitleCell>
-      <StartedByCell>{thread.username}</StartedByCell>
-      <td>{thread.replyCount}</td>
-      <td>{thread.date.slice(0, 10)}</td>
+      <StartedByCell>
+        <UserAvatar src={thread.avatar} alt="User Avatar"/> {thread.username}
+      </StartedByCell>
+      <InfoCell>{thread.replyCount}</InfoCell>
+      <InfoCell>{thread.date.slice(0, 10)}</InfoCell>
     </ThreadRow>
   )
 };
