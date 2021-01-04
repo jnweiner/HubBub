@@ -60,7 +60,7 @@ const InterestPreview = ({ interest, isUserInterest, addUserInterest, deleteUser
           deleteUserInterest={deleteUserInterest}
         />
         : null}
-      <InterestInfo onClick={() => changeView({ ...interest, type: 'interestHub'})}>
+      <InterestInfo onClick={() => changeView({ id: interest.id, name: interest.name, type: 'interestHub'})}>
         <Icon><i className={interest.icon}></i></Icon>
         <span>{interest.name}</span>
         <Followers>{interest.userCount} following</Followers>

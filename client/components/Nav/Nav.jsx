@@ -28,7 +28,7 @@ const Nav = ({ city, userInterests, changeView, currentView }) => (
         key={i}
         isInterest={true}
         isCurrentView={currentView.name === interest.name}
-        onClickFunction={() => changeView({ ...interest, type: 'interestHub'})}
+        onClickFunction={() => changeView({ id: interest.id, name: interest.name, type: 'interestHub'})}
         text={interest.name} 
       />)}
     <NavOption 
