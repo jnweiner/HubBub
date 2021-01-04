@@ -13,9 +13,8 @@ import InterestHub from './InterestHub/InterestHub.jsx';
 import Thread from './Forum/Thread.jsx';
 
 // modal assets
-import NewThreadModal from './Modals/NewThreadModal.jsx';
-import NewReplyModal from './Modals/NewReplyModal.jsx';
-import { ModalActivatedOverlay, ModalActivatedFooter } from './Modals/ModalStyles.js';
+import Modal from './Modal/Modal.jsx';
+import { ModalActivatedOverlay, ModalActivatedFooter } from './Modal/ModalStyles.js';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -130,24 +129,6 @@ const App = () => {
   
     const toggleModal = (modalName) => {
       setModalStatus(modalName || null);
-    };
-  
-    const renderModal = () => {
-      if (modalStatus === 'newThread') {
-        return (
-          <NewThreadModal
-            toggleModal={toggleModal}
-            postNewThread={postNewThread}
-          />
-        )
-      } else if (modalStatus === 'newReply') {
-        return (
-          <NewReplyModal
-            toggleModal={toggleModal}
-            postNewReply={postNewReply}
-          />
-        )
-      }
     };
 
   // user-related
@@ -271,7 +252,13 @@ const App = () => {
           currentView={view}
         />
         <ViewContainer>
-          {modalStatus ? renderModal() : null}
+          {modalStatus ? 
+            <Modal
+              modalStatus={modalStatus}
+              toggleModal={toggleModal}
+              postToForum={modalStatus === 'newThread' ? postNewThread : postNewReply}
+            />
+          : null}
           {modalStatus ? <ModalActivatedOverlay onClick={() => toggleModal(null)}/> : null}
           {loaded === true ? renderView() : null}
           {modalStatus ? <ModalActivatedFooter /> : null}
