@@ -42,6 +42,11 @@ const Forum = ({ cityId, interestId, threads, paginatedThreads, fetchThreads, ch
       .then(() => setLoaded(true))
   }, [interestId]);
 
+  // if the number of threads changes (ex. user adds a new thread, we want to go back to the first page of threads to see their new thread appear)
+  useEffect(() => {
+    setThreadsPage(0);
+  }, [threads.length])
+
   return (
     <ForumContainer>
       <ForumTableHeader>
