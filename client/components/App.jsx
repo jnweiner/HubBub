@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled, { createGlobalStyle } from 'styled-components';
 
+import LandingPage from './LandingPage.jsx';
+
 // constant assets
 import Header from './Header/Header.jsx';
 import Nav from './Nav/Nav.jsx';
@@ -34,6 +36,20 @@ const AppContainer = styled.div`
   justify-content: space-between;
 `;
 
+const LoggedInContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
+
+const LoggedOutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95vw;
+  height: 95vh;
+`;
+
 // Display refers to the Nav + View areas 
 const DisplayContainer = styled.div`
   display: flex;
@@ -53,7 +69,7 @@ const App = () => {
   const [modalStatus, setModalStatus] = useState(null);
 
   // state related to current user
-  const [username, setUsername] = useState('Julie78');
+  const [currentUser, setCurrentUser] = useState(null);
   const [userInfo, setUserInfo] = useState({});
   const [userInterests, setUserInterests] = useState([]);
 
@@ -68,15 +84,17 @@ const App = () => {
   const [replies, setReplies] = useState([]);
 
   useEffect(() => {
-    fetchUserInfo(username)
-      .then(cityId => {
-        fetchCityUsers(cityId);
-        fetchCityInterests(cityId);
-        fetchUserInterests(username);
-      })
-      .then(() => setLoaded(true))
-      .catch(err => console.log(err));
-  }, []);
+    if (currentUser) {
+      fetchUserInfo(currentUser)
+        .then(cityId => {
+          fetchCityUsers(cityId);
+          fetchCityInterests(cityId);
+          fetchUserInterests(currentUser);
+        })
+        .then(() => setLoaded(true))
+        .catch(err => console.log(err));
+    }
+  }, [currentUser]);
 
     // content being displayed to user
 
@@ -135,8 +153,8 @@ const App = () => {
 
   // user-related
 
-  const fetchUserInfo = (username) => {
-    return axios.get(`/api/users/${username}`)
+  const fetchUserInfo = (currentUser) => {
+    return axios.get(`/api/users/${currentUser}`)
       .then(({ data }) => {
         setUserInfo(data);
         setCity({name: data.city, id: data.city_id});
@@ -145,8 +163,8 @@ const App = () => {
       .catch(err => console.log(err));
   };
 
-  const fetchUserInterests = (username) => {
-    return axios.get(`api/users/${username}/interests`)
+  const fetchUserInterests = (currentUser) => {
+    return axios.get(`api/users/${currentUser}/interests`)
       .then(({ data }) => {
         setUserInterests(data)
       })
@@ -154,26 +172,26 @@ const App = () => {
   };
 
   const addUserInterest = (interestId) => {
-    axios.post(`/api/users/${username}/interests`, {
+    axios.post(`/api/users/${currentUser}/interests`, {
       userId: userInfo.id,
       interestId: interestId
     })
       .then(() => {
-        fetchUserInterests(username);
+        fetchUserInterests(currentUser);
         fetchCityInterests(city.id);
       })
       .catch(err => console.log(err));
   };
 
   const deleteUserInterest = (interestId) => {
-    axios.delete(`/api/users/${username}/interests`, {
+    axios.delete(`/api/users/${currentUser}/interests`, {
       data: {
         userId: userInfo.id,
         interestId: interestId
       }
     })
       .then(() => {
-        fetchUserInterests(username);
+        fetchUserInterests(currentUser);
         fetchCityInterests(city.id);
       })
       .catch(err => console.log(err));
@@ -262,33 +280,44 @@ const App = () => {
   return (
     <AppContainer>
       <GlobalStyle />
-      <Header
-        city={city}
-        userAvatar={userInfo.avatar}
-        userInterests={userInterests}
-        view={view}
-        changeView={changeView}
-      />
-      <DisplayContainer>
-        <Nav
+      { currentUser ? 
+      <LoggedInContainer>
+        <Header
           city={city}
+          userAvatar={userInfo.avatar}
           userInterests={userInterests}
+          view={view}
           changeView={changeView}
-          currentView={view}
+          setCurrentUser={setCurrentUser}
         />
-        <ViewContainer>
-          {modalStatus ? 
-            <Modal
-              modalStatus={modalStatus}
-              toggleModal={toggleModal}
-              postToForum={modalStatus === 'newThread' ? postNewThread : postNewReply}
-            />
-          : null}
-          {modalStatus ? <ModalActivatedOverlay onClick={() => toggleModal(null)}/> : null}
-          {loaded === true ? renderView() : null}
-          {modalStatus ? <ModalActivatedFooter /> : null}
-        </ViewContainer>
-      </DisplayContainer>
+        <DisplayContainer>
+          <Nav
+            city={city}
+            userInterests={userInterests}
+            changeView={changeView}
+            currentView={view}
+          />
+          <ViewContainer>
+            {modalStatus ? 
+              <Modal
+                modalStatus={modalStatus}
+                toggleModal={toggleModal}
+                postToForum={modalStatus === 'newThread' ? postNewThread : postNewReply}
+              />
+            : null}
+            {modalStatus ? <ModalActivatedOverlay onClick={() => toggleModal(null)}/> : null}
+            {loaded === true ? renderView() : null}
+            {modalStatus ? <ModalActivatedFooter /> : null}
+          </ViewContainer>
+        </DisplayContainer>
+      </LoggedInContainer>
+      : 
+      <LoggedOutContainer>
+        <LandingPage
+          setCurrentUser={setCurrentUser}
+        />
+      </LoggedOutContainer>
+      }
     </AppContainer>
   )
 }
