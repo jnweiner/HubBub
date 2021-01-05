@@ -16,7 +16,7 @@ const ThreadHeader = styled.span`
   padding: 10px 0;
   font-size: 20px;
   margin: 20px 0;
-  width: 99%;
+  width: 100%;
 `;
 
 const InterestName = styled.span`

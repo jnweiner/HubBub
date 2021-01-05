@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const UserIcon = styled.img`
   height: 35px;
   width: 35px;
-  border: ${props => (props.dropdown && !props.hovered) || (!props.dropdown && props.hovered) ? '2px solid #e1ad01' : '2px solid #f5f5f5'};
+  border: ${props => props.hovered || props.dropdown ? '2px solid #e1ad01' : '2px solid #f5f5f5'};
   border-radius: 50%;
   cursor: pointer;
 `;
@@ -17,8 +17,8 @@ const UserMenuIcon = ({ userAvatar, dropdown, setDropdown }) => {
     <UserIcon
       src={userAvatar}
       alt="User Avatar"
-      dropdown={dropdown}
       hovered={hovered}
+      dropdown={dropdown}
       onClick={() => setDropdown(prevStatus => !prevStatus)}
       onMouseOver={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

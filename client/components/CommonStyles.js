@@ -7,7 +7,7 @@ const PageTitle = styled.div`
   font-size: 25px;
   font-weight: 600;
   margin: 20px 0;
-  width: 99%;
+  width: 100%;
 `;
 
 export {
