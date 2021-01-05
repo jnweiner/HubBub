@@ -4,12 +4,14 @@ import styled from 'styled-components';
 const StyledContent = styled.span`
   color: ${props => props.isHovered ? props.hoveredColor : props.regColor };
   cursor: pointer;
+  position: relative;
 `;
 
 const StyledBackground = styled.span`
   background-color: ${props => props.isHovered ? props.hoveredColor : props.regColor };
   border-radius: 5px;
   cursor: pointer;
+  position: relative;
 `;
 
 const HoverText = ({ effect = 'content', text, hoveredColor, regColor }) => {

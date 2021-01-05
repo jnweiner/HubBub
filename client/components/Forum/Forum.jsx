@@ -22,7 +22,7 @@ const ForumTable = styled.table`
 
 const LabelRow = styled.tr`
   border: 1px solid #294059;
-  background-color: rgba(41, 64, 89, .3);
+  background-color: rgba(41, 64, 89, .2);
   font-weight: 600;
 `;
 

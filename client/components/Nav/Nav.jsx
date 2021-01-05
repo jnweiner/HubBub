@@ -31,11 +31,6 @@ const Nav = ({ city, userInterests, changeView, currentView }) => (
         onClickFunction={() => changeView({ id: interest.id, name: interest.name, type: 'interestHub'})}
         text={interest.name} 
       />)}
-    <NavOption 
-      isCurrentView={currentView.type === 'accountSettings'}
-      onClickFunction={() => changeView({type: 'accountSettings'})}
-      text='Account Settings'
-    />
   </NavContainer>
 );
 

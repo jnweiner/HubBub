@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled, { createGlobalStyle } from 'styled-components';
 
 // constant assets
-import Header from './Header.jsx';
+import Header from './Header/Header.jsx';
 import Nav from './Nav/Nav.jsx';
 
 // view options
@@ -264,7 +264,9 @@ const App = () => {
       <GlobalStyle />
       <Header
         city={city}
+        userAvatar={userInfo.avatar}
         userInterests={userInterests}
+        view={view}
         changeView={changeView}
       />
       <DisplayContainer>
