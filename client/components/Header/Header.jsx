@@ -34,16 +34,8 @@ const Logo = styled.span`
   font-size: 30px;
 `;
 
-const City = styled.div`
+const City = styled.span`
   font-size: 30px;
-`;
-
-const DropdownActivatedOverlay = styled.div`
-  top: 0;
-  left: 0;
-  min-height: 100vh;
-  min-width: 100vw;
-  position: absolute;
 `;
 
 const Header = ({ city, userAvatar, userInterests, view, changeView }) => {
@@ -51,12 +43,20 @@ const Header = ({ city, userAvatar, userInterests, view, changeView }) => {
   const [dropdown, setDropdown] = useState(false);
 
   useEffect(() => {
-    setDropdown(false)
-  }, [view.type, view.id])
+
+    const dropdownHandler = () => {
+      setDropdown(false);
+      document.body.removeEventListener('click', dropdownHandler)
+    }
+
+    if (dropdown) {
+      document.body.addEventListener('click', dropdownHandler);
+    }
+
+  }, [dropdown])
 
   return (
     <HeaderContainer>
-      {dropdown ? <DropdownActivatedOverlay onClick={() => setDropdown(false)}/> : null}
       <TitleSection>
         <Logo><i className="fas fa-city"></i>HubBub</Logo>
         <City onClick={() => changeView({type: 'cityHub'})}>
@@ -76,7 +76,6 @@ const Header = ({ city, userAvatar, userInterests, view, changeView }) => {
         {dropdown ?
           <HeaderDropdown
             changeView={changeView}
-            setDropdown={setDropdown}
           />
         : null}
       </UserSection>
