@@ -17,7 +17,7 @@ const DropdownContainer = styled.div`
   font-weight: 600;
 `;
 
-const HeaderDropdown = ({ changeView, setDropdown }) => (
+const HeaderDropdown = ({ changeView }) => (
   <DropdownContainer>
     <span>
       <HoverText
