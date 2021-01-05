@@ -10,7 +10,7 @@ const LoginFormContainer = styled.div`
   align-items: center;
   margin: auto;
   width: 35%;
-  height: 40%;
+  height: 45%;
   background-color: #294059;
   color: #f5f5f5;
   border-radius: 5px;
@@ -29,9 +29,12 @@ const StyledForm = styled.form`
   padding: 10px 0;
 `;
 
-const RequiredSpan = styled.span`
+const InvalidSpan = styled.span`
+  font-size: 18px;
   font-weight: 600;
   color: #ea5455;
+  padding: 10px;
+  align-self: center;
 `;
 
 const StyledInput = styled.input`
@@ -67,15 +70,23 @@ const NewAccountButton = styled.button`
   width: 50%;
 `;
 
+const LogoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 20%;
+  margin-bottom: 10px;
+`;
+
 const LargeLogo = styled.span`
   font-size: 50px;
   color: #e1ad01;
 `;
 
-const LandingPage = ({ setCurrentUser}) => {
+const LandingPage = ({ validateUser }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [invalid, setInvalid] = useState(false);
 
   const handleUsernameChange = ({ target }) => {
     setUsername(target.value);
@@ -87,14 +98,19 @@ const LandingPage = ({ setCurrentUser}) => {
 
   const handleSubmit = (e) => {
       e.preventDefault();
-      setCurrentUser(username);
+      validateUser(username, () => {
+        setInvalid(true);
+      });
       setUsername('');
       setPassword('');
   };
 
   return (
     <LoginFormContainer>
-      <LargeLogo><i className="fas fa-city"></i>HubBub</LargeLogo>
+      <LogoContainer>
+        <LargeLogo><i className="fas fa-city"></i>HubBub</LargeLogo>
+        {invalid ? <InvalidSpan>Invalid Username</InvalidSpan> : null}
+      </LogoContainer>
       <StyledForm>
         <span>Username:
           <StyledInput

@@ -153,6 +153,19 @@ const App = () => {
 
   // user-related
 
+  const validateUser = (username, callback) => {
+    return axios.get(`/api/users/${username}`)
+      .then(({ data }) => {
+        if (data) {
+          // will need to check against password, but for now, just confirming user exists
+          setCurrentUser(username);
+        } else {
+          callback();
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
   const fetchUserInfo = (currentUser) => {
     return axios.get(`/api/users/${currentUser}`)
       .then(({ data }) => {
@@ -314,7 +327,7 @@ const App = () => {
       : 
       <LoggedOutContainer>
         <LandingPage
-          setCurrentUser={setCurrentUser}
+          validateUser={validateUser}
         />
       </LoggedOutContainer>
       }

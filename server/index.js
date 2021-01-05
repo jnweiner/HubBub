@@ -222,6 +222,20 @@ app.get('/api/users/:username', (req, res) => {
 
 // authentication stretch goals
 // path to validate username/password combo?
+app.get('/api/users/:username/login', (req, res) => {
+  const sql = 'SELECT username, password from users where username = $1';
+  const values = [req.params.username]
+  pool
+   .query(sql, values)
+   .then(data => {
+     res.send(data.rows[0])
+   })
+   .catch(err => {
+     console.log(err);
+     res.sendStatus(500);
+   })
+});
+
 // path to validate that username is not already taken?
 
 // get all interests for a specific user
