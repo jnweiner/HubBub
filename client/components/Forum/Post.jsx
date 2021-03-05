@@ -54,7 +54,7 @@ const OptionsContainer = styled.span`
 
 // will need to make it so timestamp adjusts if post is edited
 
-const Post = ({ post, firstPost, userId, editReply }) => {
+const Post = ({ post, firstPost, userId, editReply, deleteReply }) => {
 
   const [editMode, setEditMode] = useState(false);
 
@@ -76,7 +76,7 @@ const Post = ({ post, firstPost, userId, editReply }) => {
         {post.user_id === userId ?
           <OptionsContainer>
             <ForumButton content={(<i className="fas fa-pencil-alt"></i>)} onClickFunction={toggleEditMode}/>
-            <ForumButton content={( <i className="fas fa-trash-alt"></i>)}/>
+            <ForumButton content={( <i className="fas fa-trash-alt"></i>)} onClickFunction={() => deleteReply(post.id)}/>
           </OptionsContainer>
         : null}
       </TextCell>

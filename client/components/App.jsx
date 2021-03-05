@@ -140,6 +140,7 @@ const App = () => {
             thread={view}
             fetchReplies={fetchReplies}
             editReply={editReply}
+            deleteReply={deleteReply}
             replies={replies}
             toggleModal={toggleModal}
             userId={userInfo.id}
@@ -294,6 +295,14 @@ const App = () => {
       })
       .catch(err => console.log(err));
   };
+
+  const deleteReply = (replyId) => {
+    axios.delete(`/api/replies/${replyId}`)
+      .then(() => {
+        fetchReplies(city.id, view.interest_id, view.id)
+      })
+      .catch(err => console.log(err));
+  }
 
   return (
     <AppContainer>
