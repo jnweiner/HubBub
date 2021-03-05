@@ -174,6 +174,22 @@ app.post('/api/cities/:cityId/interests/:interestId/threads/:threadId', (req, re
     })
 });
 
+app.patch('/api/replies/:replyId', (req, res) => {
+  const text = req.body.text;
+  const replyId = req.params.replyId;
+  const sql = 'UPDATE replies SET text = $1 WHERE id = $2';
+  const values = [text, replyId];
+  pool
+    .query(sql, values)
+    .then(data => {
+      res.sendStatus(200);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
+})
+
 
 // user-related
 
