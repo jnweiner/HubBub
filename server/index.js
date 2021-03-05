@@ -222,13 +222,17 @@ app.get('/api/users/:username', (req, res) => {
 
 // authentication stretch goals
 // path to validate username/password combo?
-app.get('/api/users/:username/login', (req, res) => {
+app.get('/api/login', (req, res) => {
   const sql = 'SELECT username, password from users where username = $1';
-  const values = [req.params.username]
+  const values = [req.query.username]
   pool
    .query(sql, values)
    .then(data => {
-     res.send(data.rows[0])
+     if (data.rows[0].password === req.query.password) {
+      res.sendStatus(200);
+     } else {
+       res.sendStatus(401);
+     }
    })
    .catch(err => {
      console.log(err);

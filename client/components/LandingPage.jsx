@@ -98,7 +98,7 @@ const LandingPage = ({ validateUser }) => {
 
   const handleSubmit = (e) => {
       e.preventDefault();
-      validateUser(username, () => {
+      validateUser({ username, password }, () => {
         setInvalid(true);
       });
       setUsername('');
@@ -109,7 +109,7 @@ const LandingPage = ({ validateUser }) => {
     <LoginFormContainer>
       <LogoContainer>
         <LargeLogo><i className="fas fa-city"></i>HubBub</LargeLogo>
-        {invalid ? <InvalidSpan>Invalid Username</InvalidSpan> : null}
+        {invalid ? <InvalidSpan>Invalid Login</InvalidSpan> : null}
       </LogoContainer>
       <StyledForm>
         <span>Username:
