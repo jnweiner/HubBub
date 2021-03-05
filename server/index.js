@@ -181,7 +181,22 @@ app.patch('/api/replies/:replyId', (req, res) => {
   const values = [text, replyId];
   pool
     .query(sql, values)
-    .then(data => {
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
+})
+
+app.delete('/api/replies/:replyId', (req, res) => {
+  const replyId = req.params.replyId;
+  const sql = 'DELETE FROM replies WHERE id = $1';
+  const values = [replyId];
+  pool
+    .query(sql, values)
+    .then(() => {
       res.sendStatus(200);
     })
     .catch(err => {
