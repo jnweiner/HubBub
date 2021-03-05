@@ -153,16 +153,9 @@ const App = () => {
 
   // user-related
 
-  const validateUser = (username, callback) => {
-    return axios.get(`/api/users/${username}`)
-      .then(({ data }) => {
-        if (data) {
-          // will need to check against password, but for now, just confirming user exists
-          setCurrentUser(username);
-        } else {
-          callback();
-        }
-      })
+  const validateUser = (userInfo, callback) => {
+    return axios.get(`/api/login`, { params: userInfo })
+      .then(() => setCurrentUser(userInfo.username))
       .catch(err => {
         console.log(err);
         callback();
