@@ -139,6 +139,7 @@ const App = () => {
             changeView={changeView}
             thread={view}
             fetchReplies={fetchReplies}
+            editReply={editReply}
             replies={replies}
             toggleModal={toggleModal}
             userId={userInfo.id}
@@ -284,6 +285,14 @@ const App = () => {
       fetchReplies(city.id, view.interest_id, view.id)
     })
     .catch(err => console.log(err));
+  };
+
+  const editReply = (replyId, text) => {
+    axios.patch(`/api/replies/${replyId}`, { text })
+      .then(() => {
+        fetchReplies(city.id, view.interest_id, view.id)
+      })
+      .catch(err => console.log(err));
   };
 
   return (
