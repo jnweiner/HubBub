@@ -12,7 +12,7 @@ Built with:
 # Demo
 
 Welcome to HubBub's landing page! :wave: <br />
-:soon: Full authorization, and user onboarding flow for new accounts.
+:soon: Full authentication, and user onboarding flow for new accounts.
 
 ![Demo of Login](https://hubbub-demo.s3-us-west-2.amazonaws.com/2021-01-20+15.17.32.gif)
 
@@ -35,7 +35,7 @@ The message board features automatic pagination. :tada: <br />
 
 And here's a user adding their very thoughtful reply to a topic. <br />
 This modal behaves just like the 'new topic' modal. <br />
-:soon: Functionality for 'watching' topics, and for users to edit and delete their posts.
+:soon: Functionality for 'watching' topics.
 
 ![Demo of Adding a Reply to a Topic](https://hubbub-demo.s3-us-west-2.amazonaws.com/2021-01-20+15.35.02.gif)
 
