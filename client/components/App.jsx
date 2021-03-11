@@ -50,7 +50,7 @@ const LoggedOutContainer = styled.div`
   height: 95vh;
 `;
 
-// Display refers to the Nav + View areas 
+// Display refers to the Nav + View areas
 const DisplayContainer = styled.div`
   display: flex;
 `;
@@ -62,10 +62,9 @@ const ViewContainer = styled.div`
 `;
 
 const App = () => {
-
   // state for which content is being displayed to user
   const [loaded, setLoaded] = useState(false);
-  const [view, setView] = useState({type: 'cityHub'});
+  const [view, setView] = useState({ type: 'cityHub' });
   const [modalStatus, setModalStatus] = useState(null);
 
   // state related to current user
@@ -86,7 +85,7 @@ const App = () => {
   useEffect(() => {
     if (currentUser) {
       fetchUserInfo(currentUser)
-        .then(cityId => {
+        .then((cityId) => {
           fetchCityUsers(cityId);
           fetchCityInterests(cityId);
           fetchUserInterests(currentUser);
@@ -96,69 +95,72 @@ const App = () => {
     }
   }, [currentUser]);
 
-    // content being displayed to user
+  // content being displayed to user
 
-    const changeView = (newView) => {
-      setView(newView);
-    };
-  
-    const renderView = () => {
-      if (view.type === 'cityHub') {
-        return (
-          <CityHub
-            cityName={city.name}
-            cityUsers={cityUsers}
-            cityInterests={cityInterests}
-            userInterests={userInterests}
-            addUserInterest={addUserInterest}
-            deleteUserInterest={deleteUserInterest}
-            changeView={changeView}
-          />
-        )
-      } else if (view.type === 'accountSettings') {
-        return (
-          <AccountSettings
-            userInfo={userInfo}
-          />
-        )
-      } else if (view.type === 'interestHub') {
-        return (
-          <InterestHub
-            interest={view}
-            cityId={city.id}
-            fetchThreads={fetchThreads}
-            threads={threads}
-            paginatedThreads={paginatedThreads}
-            changeView={changeView}
-            toggleModal={toggleModal}
-          />
-        )
-      } else if (view.type === 'thread') {
-        return (
-          <Thread
-            changeView={changeView}
-            thread={view}
-            fetchReplies={fetchReplies}
-            editReply={editReply}
-            deleteReply={deleteReply}
-            replies={replies}
-            toggleModal={toggleModal}
-            userId={userInfo.id}
-          />
-        )
-      }
-    };
-  
-    const toggleModal = (modalName) => {
-      setModalStatus(modalName || null);
-    };
+  const changeView = (newView) => {
+    setView(newView);
+  };
+
+  const renderView = () => {
+    if (view.type === 'cityHub') {
+      return (
+        <CityHub
+          cityName={city.name}
+          cityUsers={cityUsers}
+          cityInterests={cityInterests}
+          userInterests={userInterests}
+          addUserInterest={addUserInterest}
+          deleteUserInterest={deleteUserInterest}
+          changeView={changeView}
+        />
+      );
+    }
+    if (view.type === 'accountSettings') {
+      return (
+        <AccountSettings
+          userInfo={userInfo}
+        />
+      );
+    }
+    if (view.type === 'interestHub') {
+      return (
+        <InterestHub
+          interest={view}
+          cityId={city.id}
+          fetchThreads={fetchThreads}
+          threads={threads}
+          paginatedThreads={paginatedThreads}
+          changeView={changeView}
+          toggleModal={toggleModal}
+        />
+      );
+    }
+    if (view.type === 'thread') {
+      return (
+        <Thread
+          changeView={changeView}
+          thread={view}
+          fetchReplies={fetchReplies}
+          editReply={editReply}
+          deleteReply={deleteReply}
+          replies={replies}
+          toggleModal={toggleModal}
+          userId={userInfo.id}
+        />
+      );
+    }
+  };
+
+  const toggleModal = (modalName) => {
+    setModalStatus(modalName || null);
+  };
 
   // user-related
 
   const validateUser = (userInfo, callback) => {
-    return axios.get(`/api/login`, { params: userInfo })
+    return axios.get('/api/login', { params: userInfo })
       .then(() => setCurrentUser(userInfo.username))
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         callback();
       });
@@ -171,7 +173,7 @@ const App = () => {
         setCity({name: data.city, id: data.city_id});
         return data.city_id;
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const fetchUserInterests = (currentUser) => {
@@ -179,33 +181,33 @@ const App = () => {
       .then(({ data }) => {
         setUserInterests(data)
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const addUserInterest = (interestId) => {
     axios.post(`/api/users/${currentUser}/interests`, {
       userId: userInfo.id,
-      interestId: interestId
+      interestId,
     })
       .then(() => {
         fetchUserInterests(currentUser);
         fetchCityInterests(city.id);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const deleteUserInterest = (interestId) => {
     axios.delete(`/api/users/${currentUser}/interests`, {
       data: {
         userId: userInfo.id,
-        interestId: interestId
-      }
+        interestId,
+      },
     })
       .then(() => {
         fetchUserInterests(currentUser);
         fetchCityInterests(city.id);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   // city-related
@@ -215,7 +217,7 @@ const App = () => {
       .then(({ data }) => {
         setCityUsers(data.count);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
   
   const fetchCityInterests = (cityId) => {
@@ -223,7 +225,7 @@ const App = () => {
     .then(({ data }) => {
       setCityInterests(data);
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
   };
 
   // forum-related
@@ -238,22 +240,19 @@ const App = () => {
         const paginated = paginateThreads(data, 10);
         setPaginatedThreads(paginated);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const paginateThreads = (threads, numAtATime) => {
     const paginated = [];
     let start = 0;
     let end = numAtATime;
-  
     while (threads[start]) {
-      let sliced = threads.slice(start, end);
+      const sliced = threads.slice(start, end);
       paginated.push(sliced);
-  
       start += numAtATime;
       end += numAtATime;
     }
-  
     return paginated;
   };
 
@@ -261,14 +260,14 @@ const App = () => {
     axios.post('/api/threads', {
       cityId: city.id,
       interestId: view.id,
-      title: title,
-      text: text,
-      userId: userInfo.id
+      title,
+      text,
+      userId: userInfo.id,
     })
-    .then(() => {
-      fetchThreads(city.id, view.id)
-    })
-    .catch(err => console.log(err));
+      .then(() => {
+        fetchThreads(city.id, view.id);
+      })
+      .catch((err) => console.log(err));
   };
 
   const fetchReplies = (threadId) => {
@@ -276,80 +275,84 @@ const App = () => {
       .then(({ data }) => {
         setReplies(data);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const postNewReply = (text) => {
     axios.post('/api/replies', {
       threadId: view.id,
-      text: text,
-      userId: userInfo.id
+      text,
+      userId: userInfo.id,
     })
-    .then(() => {
-      fetchReplies(view.id)
-    })
-    .catch(err => console.log(err));
+      .then(() => {
+        fetchReplies(view.id);
+      })
+      .catch((err) => console.log(err));
   };
 
   const editReply = (replyId, text) => {
     axios.patch(`/api/replies/${replyId}`, { text })
       .then(() => {
-        fetchReplies(view.id)
+        fetchReplies(view.id);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const deleteReply = (replyId) => {
     axios.delete(`/api/replies/${replyId}`)
       .then(() => {
-        fetchReplies(view.id)
+        fetchReplies(view.id);
       })
-      .catch(err => console.log(err));
-  }
+      .catch((err) => console.log(err));
+  };
 
   return (
     <AppContainer>
       <GlobalStyle />
-      { currentUser ? 
-      <LoggedInContainer>
-        <Header
-          city={city}
-          userAvatar={userInfo.avatar}
-          userInterests={userInterests}
-          view={view}
-          changeView={changeView}
-          setCurrentUser={setCurrentUser}
-        />
-        <DisplayContainer>
-          <Nav
-            city={city}
-            userInterests={userInterests}
-            changeView={changeView}
-            currentView={view}
-          />
-          <ViewContainer>
-            {modalStatus ? 
-              <Modal
-                modalStatus={modalStatus}
-                toggleModal={toggleModal}
-                postToForum={modalStatus === 'newThread' ? postNewThread : postNewReply}
+      { currentUser
+        ? (
+          <LoggedInContainer>
+            <Header
+              city={city}
+              userAvatar={userInfo.avatar}
+              userInterests={userInterests}
+              view={view}
+              changeView={changeView}
+              setCurrentUser={setCurrentUser}
+            />
+            <DisplayContainer>
+              <Nav
+                city={city}
+                userInterests={userInterests}
+                changeView={changeView}
+                currentView={view}
               />
-            : null}
-            {modalStatus ? <ModalActivatedOverlay onClick={() => toggleModal(null)}/> : null}
-            {loaded === true ? renderView() : null}
-            {modalStatus ? <ModalActivatedFooter /> : null}
-          </ViewContainer>
-        </DisplayContainer>
-      </LoggedInContainer>
-      : 
-      <LoggedOutContainer>
-        <LandingPage
-          validateUser={validateUser}
-        />
-      </LoggedOutContainer>
-      }
+              <ViewContainer>
+                {modalStatus
+                  ? (
+                    <Modal
+                      modalStatus={modalStatus}
+                      toggleModal={toggleModal}
+                      postToForum={modalStatus === 'newThread' ? postNewThread : postNewReply}
+                    />
+                  )
+                  : null}
+                {modalStatus ? <ModalActivatedOverlay onClick={() => toggleModal(null)}/> : null}
+                {loaded === true ? renderView() : null}
+                {modalStatus ? <ModalActivatedFooter /> : null}
+              </ViewContainer>
+            </DisplayContainer>
+          </LoggedInContainer>
+        )
+        : (
+          <LoggedOutContainer>
+            <LandingPage
+              validateUser={validateUser}
+            />
+          </LoggedOutContainer>
+        )}
     </AppContainer>
-  )
-}
+  );
+};
 
 export default App;
