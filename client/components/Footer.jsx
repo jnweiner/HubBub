@@ -30,12 +30,18 @@ const FooterOption = ({ text }) => (
 const Footer = () => (
   <FooterContainer>
     <FooterOptionsContainer>
-      <FooterOption text="About"/>|
-      <FooterOption text="Contact"/>|
-      <FooterOption text="Terms of Use"/>|
-      <FooterOption text="Privacy"/>
+      <FooterOption text="About" />
+      |
+      <FooterOption text="Contact" />
+      |
+      <FooterOption text="Terms of Use" />
+      |
+      <FooterOption text="Privacy" />
     </FooterOptionsContainer>
-    <span><i className="far fa-copyright"></i> 2021 Jordan Weiner</span>
+    <span>
+      <i className="far fa-copyright" />
+      2021 Jordan Weiner
+    </span>
   </FooterContainer>
 );
 
