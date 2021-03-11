@@ -1,19 +1,5 @@
 const pool = require('../../database/index.js');
 
-const fetchCount = (req, res) => {
-  const sql = 'SELECT COUNT(*) FROM users WHERE city_id = $1';
-  const values = [req.query.cityId];
-  pool
-    .query(sql, values)
-    .then(data => {
-      res.send(data.rows[0])
-    })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500);
-    })
-};
-
 const addUser = (req, res) => {
   const first_name = req.body.firstName;
   const last_name = req.body.lastName;
@@ -100,7 +86,6 @@ const deleteUserInterest = (req, res) => {
 };
 
 module.exports = {
-  fetchCount,
   addUser,
   getSingleUser,
   getUserInterests,

@@ -34,7 +34,7 @@ const OptionsContainer = styled.span`
 const Thread = ({ thread, changeView, fetchReplies, editReply, deleteReply, replies, toggleModal, userId }) => {
 
   useEffect(() => {
-    fetchReplies(thread.city_id, thread.interest_id, thread.id);
+    fetchReplies(thread.id);
   }, []);
 
   return (

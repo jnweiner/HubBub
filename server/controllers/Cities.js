@@ -13,6 +13,20 @@ const getAllCities = (req, res) => {
     })
 };
 
+const getCityUserCount = (req, res) => {
+  const sql = 'SELECT COUNT(*) FROM users WHERE city_id = $1';
+  const values = [req.params.cityId];
+  pool
+    .query(sql, values)
+    .then(data => {
+      res.send(data.rows[0])
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
+};
+
 // need to update to be for specific city
 const getCityInterests = (req, res) => {
   const sql = 'SELECT id, interest AS name, icon from interests ORDER BY interest ASC';
@@ -23,7 +37,7 @@ const getCityInterests = (req, res) => {
       const interests = data.rows;
       const interestsWithUserCount = interests.map(interest => {
         const sqlUsers = 'SELECT COUNT(users.id) FROM users, users_interests WHERE users.city_id = $1 AND users.id = users_interests.user_id AND users_interests.interest_id = $2';
-        const values = [req.query.cityId, interest.id];
+        const values = [req.params.cityId, interest.id];
         return new Promise((resolve, reject) => {
           pool.query(sqlUsers, values, (err, data) => {
             if (err) {
@@ -46,5 +60,6 @@ const getCityInterests = (req, res) => {
 
 module.exports = {
   getAllCities,
+  getCityUserCount,
   getCityInterests
 }

@@ -34,8 +34,8 @@ const getAllThreads = (req, res) => {
 const addThread = (req, res) => {
   const title = req.body.title;
   const text = req.body.text;
-  const interest_id = req.params.interestId;
-  const city_id = req.params.cityId;
+  const interest_id = req.body.interestId;
+  const city_id = req.body.cityId;
   const user_id = req.body.userId;
   const sql = 'INSERT INTO threads(title, text, interest_id, city_id, user_id) VALUES($1, $2, $3, $4, $5)';
   const values = [title, text, interest_id, city_id, user_id];

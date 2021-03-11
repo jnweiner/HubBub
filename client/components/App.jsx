@@ -229,7 +229,7 @@ const App = () => {
   // forum-related
 
   const fetchThreads = (cityId, interestId) => {
-    return axios.get(`/api/cities/${cityId}/interests/${interestId}/threads`)
+    return axios.get(`/api/threads`, { params: { cityId, interestId }})
       .then(({ data }) => {
         setThreads(data);
         return data;
@@ -258,7 +258,9 @@ const App = () => {
   };
 
   const postNewThread = (title, text) => {
-    axios.post(`/api/cities/${city.id}/interests/${view.id}/threads`, {
+    axios.post('/api/threads', {
+      cityId: city.id,
+      interestId: view.id,
       title: title,
       text: text,
       userId: userInfo.id
@@ -269,8 +271,8 @@ const App = () => {
     .catch(err => console.log(err));
   };
 
-  const fetchReplies = (cityId, interestId, threadId) => {
-    return axios.get(`/api/cities/${cityId}/interests/${interestId}/threads/${threadId}`)
+  const fetchReplies = (threadId) => {
+    return axios.get('/api/replies', { params: { threadId }} )
       .then(({ data }) => {
         setReplies(data);
       })
@@ -278,12 +280,13 @@ const App = () => {
   };
 
   const postNewReply = (text) => {
-    axios.post(`/api/cities/${city.id}/interests/${view.interest_id}/threads/${view.id}`, {
+    axios.post('/api/replies', {
+      threadId: view.id,
       text: text,
       userId: userInfo.id
     })
     .then(() => {
-      fetchReplies(city.id, view.interest_id, view.id)
+      fetchReplies(view.id)
     })
     .catch(err => console.log(err));
   };
@@ -291,7 +294,7 @@ const App = () => {
   const editReply = (replyId, text) => {
     axios.patch(`/api/replies/${replyId}`, { text })
       .then(() => {
-        fetchReplies(city.id, view.interest_id, view.id)
+        fetchReplies(view.id)
       })
       .catch(err => console.log(err));
   };
@@ -299,7 +302,7 @@ const App = () => {
   const deleteReply = (replyId) => {
     axios.delete(`/api/replies/${replyId}`)
       .then(() => {
-        fetchReplies(city.id, view.interest_id, view.id)
+        fetchReplies(view.id)
       })
       .catch(err => console.log(err));
   }

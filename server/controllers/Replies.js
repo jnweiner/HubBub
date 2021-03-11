@@ -17,7 +17,7 @@ const getAllReplies = (req, res) => {
 const addReply = (req, res) => {
   const text = req.body.text;
   const user_id = req.body.userId;
-  const thread_id = req.params.threadId;
+  const thread_id = req.body.threadId;
   const sql = 'INSERT INTO replies(text, user_id, thread_id) VALUES($1, $2, $3)';
   const values = [text, user_id, thread_id];
   pool

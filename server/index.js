@@ -38,6 +38,7 @@ app.get('/api/login', (req, res) => {
 
 // should there be a cities_interests table, to account for diff cities having diff interests? (stretch goal)
 app.get('/api/cities', Cities.getAllCities);
+app.get('/api/cities/:cityId/users', Cities.getCityUserCount)
 app.get('/api/cities/:cityId/interests', Cities.getCityInterests);
 
 app.get('/api/threads', Threads.getAllThreads)
@@ -48,7 +49,6 @@ app.post('/api/replies', Replies.addReply);
 app.patch('/api/replies/:replyId', Replies.updateReply);
 app.delete('/api/replies/:replyId', Replies.deleteReply);
 
-app.get('/api/users', Users.fetchCount)
 app.post('/api/users', Users.addUser);
 app.get('/api/users/:username', Users.getSingleUser);
 
