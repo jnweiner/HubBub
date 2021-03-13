@@ -7,7 +7,7 @@ const TextBox = styled.textarea`
   font-family: 'Krub', sans-serif;
 `;
 
-const TextInput = ({ postId, editReply, initialValue, toggleEditMode }) => {
+const TextInput = ({ postId, edit, initialValue, toggleEditMode }) => {
   const [value, setValue] = useState('');
   const [hasBeenUpdated, setHasBeenUpdated] = useState(false);
 
@@ -18,7 +18,7 @@ const TextInput = ({ postId, editReply, initialValue, toggleEditMode }) => {
 
   const handleSave = () => {
     let textToSave = hasBeenUpdated ? value : initialValue;
-    editReply(postId, textToSave);
+    edit(postId, textToSave);
     toggleEditMode();
   }
 

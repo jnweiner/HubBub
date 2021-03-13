@@ -140,6 +140,7 @@ const App = () => {
         <Thread
           changeView={changeView}
           thread={view}
+          editThread={editThread}
           fetchReplies={fetchReplies}
           editReply={editReply}
           deleteReply={deleteReply}
@@ -305,6 +306,17 @@ const App = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  const editThread = (threadId, text) => {
+    axios.patch(`/api/threads/${threadId}`, { text })
+    .then(() => {
+      return axios.get(`/api/threads/${threadId}`)
+    })
+    .then(({ data }) => {
+      setView({ ...data, type: 'thread'});
+    })
+    .catch((err) => console.log(err));
+  }
 
   return (
     <AppContainer>

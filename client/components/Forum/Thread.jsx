@@ -31,7 +31,7 @@ const OptionsContainer = styled.span`
   width: 99%;
 `;
 
-const Thread = ({ thread, changeView, fetchReplies, editReply, deleteReply, replies, toggleModal, userId }) => {
+const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, deleteReply, replies, toggleModal, userId }) => {
 
   useEffect(() => {
     fetchReplies(thread.id);
@@ -57,8 +57,8 @@ const Thread = ({ thread, changeView, fetchReplies, editReply, deleteReply, repl
           content={<span>Reply <i className="fas fa-reply"></i></span>}
         />
       </OptionsContainer>
-      <Post key={thread.id} post={thread} firstPost={true} userId={userId} editReply={editReply} deleteReply={deleteReply}/>
-      {replies.map(reply => <Post key={reply.id} post={reply} firstPost={false} userId={userId} editReply={editReply} deleteReply={deleteReply}/>)}
+      <Post key={thread.id} post={thread} firstPost={true} userId={userId} edit={editThread} deleteReply={deleteReply}/>
+      {replies.map(reply => <Post key={reply.id} post={reply} firstPost={false} userId={userId} edit={editReply} deleteReply={deleteReply}/>)}
     </ThreadContainer>
   );
 };

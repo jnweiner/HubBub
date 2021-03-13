@@ -31,6 +31,20 @@ const getAllThreads = (req, res) => {
     })
 };
 
+const getSingleThread = (req, res) => {
+  const sql = 'SELECT threads.*, interests.interest, interests.id AS interest_id, users.id AS user_id, users.username, users.month_moved, users.year_moved, users.avatar, users.neighborhood FROM threads, users, interests WHERE interests.id = threads.interest_id AND users.id = threads.user_id AND threads.id = $1';
+  const values = [req.params.threadId];
+  pool
+    .query(sql, values)
+    .then(data => {
+      res.send(data.rows[0]);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
+}
+
 const addThread = (req, res) => {
   const title = req.body.title;
   const text = req.body.text;
@@ -50,7 +64,25 @@ const addThread = (req, res) => {
     })
 };
 
+const updateThread = (req, res) => {
+  const text = req.body.text;
+  const threadId = req.params.threadId;
+  const sql = 'UPDATE threads SET text = $1 WHERE id = $2';
+  const values = [text, threadId];
+  pool
+    .query(sql, values)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
+};
+
 module.exports = {
   getAllThreads,
-  addThread
+  getSingleThread,
+  addThread,
+  updateThread
 }

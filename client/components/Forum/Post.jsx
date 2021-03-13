@@ -54,7 +54,7 @@ const OptionsContainer = styled.span`
 
 // will need to make it so timestamp adjusts if post is edited
 
-const Post = ({ post, firstPost, userId, editReply, deleteReply }) => {
+const Post = ({ post, firstPost, userId, edit, deleteReply }) => {
 
   const [editMode, setEditMode] = useState(false);
 
@@ -72,7 +72,7 @@ const Post = ({ post, firstPost, userId, editReply, deleteReply }) => {
       </UserCell>
       <TextCell>
         <Timestamp><em>{post.date.slice(0, 10)}</em></Timestamp>
-        <Text>{editMode ? <TextInput initialValue={post.text} postId={post.id} editReply={editReply} toggleEditMode={toggleEditMode}/> : post.text}</Text>
+        <Text>{editMode ? <TextInput initialValue={post.text} postId={post.id} edit={edit} toggleEditMode={toggleEditMode}/> : post.text}</Text>
         {post.user_id === userId ?
           <OptionsContainer>
             <ForumButton content={(<i className="fas fa-pencil-alt"></i>)} onClickFunction={toggleEditMode}/>
