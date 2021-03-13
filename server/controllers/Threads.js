@@ -80,9 +80,26 @@ const updateThread = (req, res) => {
     })
 };
 
+const updateThreadTitle = (req, res) => {
+  const title = req.body.title;
+  const threadId = req.params.threadId;
+  const sql = 'UPDATE threads SET title = $1 WHERE id = $2';
+  const values = [title, threadId];
+  pool
+    .query(sql, values)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
+}
+
 module.exports = {
   getAllThreads,
   getSingleThread,
   addThread,
-  updateThread
+  updateThread,
+  updateThreadTitle
 }

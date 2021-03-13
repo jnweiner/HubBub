@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Post from './Post.jsx';
 import ForumButton from './ForumButton.jsx';
 import HoverText from '../HoverText.jsx';
+import TextInput from './TextInput.jsx';
 
 const ThreadContainer = styled.div`
   display: flex;
@@ -31,11 +32,17 @@ const OptionsContainer = styled.span`
   width: 99%;
 `;
 
-const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, deleteReply, replies, toggleModal, userId }) => {
+const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, editThreadTitle, deleteReply, replies, toggleModal, userId }) => {
+
+  const [editTitle, setEditTitle] = useState(false);
 
   useEffect(() => {
     fetchReplies(thread.id);
   }, []);
+
+  const toggleEditTitle = () => {
+    setEditTitle(!editTitle)
+  }
 
   return (
     <ThreadContainer>
@@ -48,10 +55,10 @@ const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, delet
           />
         </InterestName>
         <i className="fas fa-long-arrow-alt-right"></i>
-        <em> {thread.title} </em>
+        {editTitle ? <TextInput postId={thread.id} edit={editThreadTitle} initialValue={thread.title} toggleEditMode={toggleEditTitle}/> : <em> {thread.title} </em>}
         {thread.user_id === userId ?
           <span>
-            <ForumButton content={(<i className="fas fa-pencil-alt"></i>)} onClickFunction={() => {}}/>
+            <ForumButton content={(<i className="fas fa-pencil-alt"></i>)} onClickFunction={toggleEditTitle}/>
             <ForumButton content={( <i className="fas fa-trash-alt"></i>)} onClickFunction={() => {}}/>
           </span>
         : null}

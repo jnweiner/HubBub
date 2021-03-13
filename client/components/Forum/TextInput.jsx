@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ForumButton from './ForumButton.jsx';
 
 const TextBox = styled.textarea`
-  width: 80%;
+  width: 60%;
   font-family: 'Krub', sans-serif;
 `;
 
