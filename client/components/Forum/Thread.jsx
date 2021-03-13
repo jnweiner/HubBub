@@ -48,7 +48,13 @@ const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, delet
           />
         </InterestName>
         <i className="fas fa-long-arrow-alt-right"></i>
-        <em> {thread.title}</em>
+        <em> {thread.title} </em>
+        {thread.user_id === userId ?
+          <span>
+            <ForumButton content={(<i className="fas fa-pencil-alt"></i>)} onClickFunction={() => {}}/>
+            <ForumButton content={( <i className="fas fa-trash-alt"></i>)} onClickFunction={() => {}}/>
+          </span>
+        : null}
       </ThreadHeader>
       <OptionsContainer>
         <ForumButton content={<span>Watch <i className="fas fa-eye"></i></span>} />
@@ -57,8 +63,8 @@ const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, delet
           content={<span>Reply <i className="fas fa-reply"></i></span>}
         />
       </OptionsContainer>
-      <Post key={thread.id} post={thread} firstPost={true} userId={userId} edit={editThread} deleteReply={deleteReply}/>
-      {replies.map(reply => <Post key={reply.id} post={reply} firstPost={false} userId={userId} edit={editReply} deleteReply={deleteReply}/>)}
+      <Post key={thread.id} post={thread} firstPost={true} userId={userId} edit={editThread} deleteBehavior={editThread}/>
+      {replies.map(reply => <Post key={reply.id} post={reply} firstPost={false} userId={userId} edit={editReply} deleteBehavior={deleteReply}/>)}
     </ThreadContainer>
   );
 };

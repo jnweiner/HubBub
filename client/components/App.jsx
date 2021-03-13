@@ -307,7 +307,7 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  const editThread = (threadId, text) => {
+  const editThread = (threadId, text = '<< This post has been deleted by user. >>') => {
     axios.patch(`/api/threads/${threadId}`, { text })
     .then(() => {
       return axios.get(`/api/threads/${threadId}`)
