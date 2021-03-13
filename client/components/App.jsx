@@ -330,6 +330,15 @@ const App = () => {
     .catch((err) => console.log(err));
   };
 
+  const deleteThread = (threadId = view.id) => {
+    toggleModal(null);
+    axios.delete(`/api/threads/${threadId}`)
+      .then(() => {
+         setView({ id: view.interest_id, name: view.interest, type: 'interestHub'})
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <AppContainer>
       <GlobalStyle />
@@ -357,6 +366,7 @@ const App = () => {
                     <Modal
                       modalStatus={modalStatus}
                       toggleModal={toggleModal}
+                      deleteThread={deleteThread}
                       postToForum={modalStatus === 'newThread' ? postNewThread : postNewReply}
                     />
                   )

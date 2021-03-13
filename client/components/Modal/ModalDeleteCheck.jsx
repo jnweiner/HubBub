@@ -8,14 +8,19 @@ const DeleteCheckContainer = styled.div`
   padding: 10px 0;
 `;
 
-const ModalDeleteCheck = ({ toggleModal }) => (
-  <DeleteCheckContainer>
+const ModalDeleteCheck = ({ toggleModal, deleteThread }) => {
+  const deleteBehavior = () => {
+    toggleModal(null);
+    deleteThread();
+  };
+  
+  return (<DeleteCheckContainer>
     <span>Are you sure you want to delete this thread, including all replies?</span>
     <br />
     <span>
       <ModalButton
         content="Yes, delete thread"
-        onClickFunction={() => {}}
+        onClickFunction={deleteBehavior}
       />
       <br />
       <ModalButton
@@ -23,7 +28,7 @@ const ModalDeleteCheck = ({ toggleModal }) => (
         onClickFunction={() => toggleModal(null)}
       />
     </span>
-  </DeleteCheckContainer>
-);
+  </DeleteCheckContainer>);
+};
 
 export default ModalDeleteCheck;

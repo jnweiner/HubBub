@@ -24,7 +24,7 @@ const ModalContainer = styled.div`
   box-shadow: 0 0 10px gray;
 `;
 
-const Modal = ({ modalStatus, toggleModal, postToForum }) => {
+const Modal = ({ modalStatus, toggleModal, postToForum, deleteThread }) => {
 
   const setHeaderText = () => {
     if (modalStatus === 'newThread') {
@@ -59,6 +59,7 @@ const Modal = ({ modalStatus, toggleModal, postToForum }) => {
       return (
         <ModalDeleteCheck
           toggleModal={toggleModal}
+          deleteThread={deleteThread}
         />
       );
     }

@@ -94,12 +94,29 @@ const updateThreadTitle = (req, res) => {
       console.log(err);
       res.sendStatus(500);
     })
-}
+};
+
+const deleteThread = (req, res) => {
+  const threadId = req.params.threadId;
+  const sql = 'DELETE from threads WHERE id = $1';
+  const values = [threadId];
+  // also need to delete replies corresponding to this threadId
+  pool
+    .query(sql, values)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
+};
 
 module.exports = {
   getAllThreads,
   getSingleThread,
   addThread,
   updateThread,
-  updateThreadTitle
+  updateThreadTitle,
+  deleteThread
 }
