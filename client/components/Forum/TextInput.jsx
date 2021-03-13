@@ -17,8 +17,9 @@ const TextInput = ({ postId, edit, initialValue, toggleEditMode }) => {
   }
 
   const handleSave = () => {
-    let textToSave = hasBeenUpdated ? value : initialValue;
-    edit(postId, textToSave);
+    if (hasBeenUpdated) {
+      edit(postId, value);
+    }
     toggleEditMode();
   }
 
