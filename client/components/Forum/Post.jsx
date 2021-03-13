@@ -73,7 +73,7 @@ const Post = ({ post, firstPost, userId, edit, deleteBehavior }) => {
       <TextCell>
         <Timestamp><em>{post.date.slice(0, 10)}</em></Timestamp>
         <Text>{editMode ? <TextInput initialValue={post.text} postId={post.id} edit={edit} toggleEditMode={toggleEditMode}/> : post.text === '<< This post has been deleted by user. >>' ? <em>{post.text}</em> : post.text}</Text>
-        {post.user_id === userId ?
+        {post.user_id === userId && post.text !== '<< This post has been deleted by user. >>' ?
           <OptionsContainer>
             <ForumButton content={(<i className="fas fa-pencil-alt"></i>)} onClickFunction={toggleEditMode}/>
             <ForumButton content={( <i className="fas fa-trash-alt"></i>)} onClickFunction={() => deleteBehavior(post.id)}/>
