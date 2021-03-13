@@ -98,11 +98,14 @@ const updateThreadTitle = (req, res) => {
 
 const deleteThread = (req, res) => {
   const threadId = req.params.threadId;
-  const sql = 'DELETE from threads WHERE id = $1';
+  const sqlDeleteThread = 'DELETE from threads WHERE id = $1';
+  const sqlDeleteReplies = 'DELETE from replies WHERE thread_id = $1';
   const values = [threadId];
-  // also need to delete replies corresponding to this threadId
   pool
-    .query(sql, values)
+    .query(sqlDeleteReplies, values)
+    .then(() => {
+      pool.query(sqlDeleteThread, values)
+    })
     .then(() => {
       res.sendStatus(200);
     })
