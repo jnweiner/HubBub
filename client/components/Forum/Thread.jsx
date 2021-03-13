@@ -59,7 +59,7 @@ const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, editT
         {thread.user_id === userId ?
           <span>
             <ForumButton content={(<i className="fas fa-pencil-alt"></i>)} onClickFunction={toggleEditTitle}/>
-            <ForumButton content={( <i className="fas fa-trash-alt"></i>)} onClickFunction={() => {}}/>
+            <ForumButton content={( <i className="fas fa-trash-alt"></i>)} onClickFunction={() => toggleModal('deleteCheck')}/>
           </span>
         : null}
       </ThreadHeader>
