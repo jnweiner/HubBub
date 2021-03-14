@@ -52,6 +52,8 @@ const LoginButton = styled.button`
   width: 100%;
 `;
 
+LoginButton.displayName = 'LoginButton';
+
 const NewAccountContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -97,12 +99,12 @@ const LandingPage = ({ validateUser }) => {
   };
 
   const handleSubmit = (e) => {
-      e.preventDefault();
-      validateUser({ username, password }, () => {
-        setInvalid(true);
-      });
-      setUsername('');
-      setPassword('');
+    e.preventDefault();
+    validateUser({ username, password }, () => {
+      setInvalid(true);
+    });
+    setUsername('');
+    setPassword('');
   };
 
   return (
