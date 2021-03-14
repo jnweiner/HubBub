@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Post from './Post.jsx';
 import ForumButton from './ForumButton.jsx';
 import HoverText from '../HoverText.jsx';
+import TextInput from './TextInput.jsx';
 
 const ThreadContainer = styled.div`
   display: flex;
@@ -31,11 +32,25 @@ const OptionsContainer = styled.span`
   width: 99%;
 `;
 
-const Thread = ({ thread, changeView, fetchReplies, editReply, deleteReply, replies, toggleModal, userId }) => {
+const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, editThreadTitle, deleteThread, deleteReply, replies, toggleModal, userId }) => {
+
+  const [editTitle, setEditTitle] = useState(false);
 
   useEffect(() => {
     fetchReplies(thread.id);
   }, []);
+
+  const toggleEditTitle = () => {
+    setEditTitle(!editTitle)
+  }
+
+  const deleteFirstPost = () => {
+    if (replies.length) {
+      editThread(thread.id, '<< This post has been deleted by user. >>');
+    } else {
+      deleteThread(thread.id);
+    }
+  }
 
   return (
     <ThreadContainer>
@@ -48,7 +63,13 @@ const Thread = ({ thread, changeView, fetchReplies, editReply, deleteReply, repl
           />
         </InterestName>
         <i className="fas fa-long-arrow-alt-right"></i>
-        <em> {thread.title}</em>
+        {editTitle ? <TextInput postId={thread.id} edit={editThreadTitle} initialValue={thread.title} toggleEditMode={toggleEditTitle}/> : <em> {thread.title} </em>}
+        {thread.user_id === userId ?
+          <span>
+            <ForumButton content={(<i className="fas fa-pencil-alt"></i>)} onClickFunction={toggleEditTitle}/>
+            <ForumButton content={( <i className="fas fa-trash-alt"></i>)} onClickFunction={() => toggleModal('deleteCheck')}/>
+          </span>
+        : null}
       </ThreadHeader>
       <OptionsContainer>
         <ForumButton content={<span>Watch <i className="fas fa-eye"></i></span>} />
@@ -57,8 +78,8 @@ const Thread = ({ thread, changeView, fetchReplies, editReply, deleteReply, repl
           content={<span>Reply <i className="fas fa-reply"></i></span>}
         />
       </OptionsContainer>
-      <Post key={thread.id} post={thread} firstPost={true} userId={userId} editReply={editReply} deleteReply={deleteReply}/>
-      {replies.map(reply => <Post key={reply.id} post={reply} firstPost={false} userId={userId} editReply={editReply} deleteReply={deleteReply}/>)}
+      <Post key={thread.id} post={thread} firstPost={true} userId={userId} edit={editThread} deleteBehavior={deleteFirstPost}/>
+      {replies.map(reply => <Post key={reply.id} post={reply} firstPost={false} userId={userId} edit={editReply} deleteBehavior={deleteReply}/>)}
     </ThreadContainer>
   );
 };

@@ -42,7 +42,11 @@ app.get('/api/cities/:cityId/users', Cities.getCityUserCount)
 app.get('/api/cities/:cityId/interests', Cities.getCityInterests);
 
 app.get('/api/threads', Threads.getAllThreads)
+app.get('/api/threads/:threadId', Threads.getSingleThread);
 app.post('/api/threads', Threads.addThread);
+app.patch('/api/threads/:threadId', Threads.updateThread);
+app.patch('/api/threads/:threadId/title', Threads.updateThreadTitle);
+app.delete('/api/threads/:threadId', Threads.deleteThread);
 
 app.get('/api/replies', Replies.getAllReplies);
 app.post('/api/replies', Replies.addReply);

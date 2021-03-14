@@ -4,6 +4,7 @@ import HoverText from '../HoverText.jsx';
 import ModalHeader from './ModalHeader.jsx';
 import ModalNewThreadForm from './ModalNewThreadForm.jsx';
 import ModalNewReplyForm from './ModalNewReplyForm.jsx';
+import ModalDeleteCheck from './ModalDeleteCheck.jsx';
 
 const ModalContainer = styled.div`
   display: flex;
@@ -15,32 +16,62 @@ const ModalContainer = styled.div`
   z-index: 10;
   position: fixed;
   padding: 10px;
-  height: 45vh;
-  width: 75%;
-  bottom: 0;
-  left: 65%;
+  height: ${props => props.deleteCheck ? "25vh" : "45vh" };
+  width: ${props => props.deleteCheck ? "35%" : "75%" };
+  bottom: ${props => props.deleteCheck ? "50%" : "0" };
+  left: ${props => props.deleteCheck ? "55%" : "65%" };
   transform: translate(-60%);
   box-shadow: 0 0 10px gray;
 `;
 
-const Modal = ({ modalStatus, toggleModal, postToForum }) => (
-  <ModalContainer>
+const Modal = ({ modalStatus, toggleModal, postToForum, deleteThread }) => {
+
+  const setHeaderText = () => {
+    if (modalStatus === 'newThread') {
+      return "Start a new topic";
+    }
+    if (modalStatus === 'newReply') {
+      return "Post a new reply";
+    }
+    if (modalStatus === 'deleteCheck') {
+      return "Just to confirm..."
+    }
+  }
+  
+  const setModalBody = () => {
+    if (modalStatus === 'newThread') {
+      return (
+        <ModalNewThreadForm
+          toggleModal={toggleModal}
+          postNewThread={postToForum}
+        />
+      );
+    }
+    if (modalStatus === 'newReply') {
+      return (
+        <ModalNewReplyForm
+          toggleModal={toggleModal}
+          postNewReply={postToForum}
+        />
+      );
+    }
+    if (modalStatus === 'deleteCheck') {
+      return (
+        <ModalDeleteCheck
+          toggleModal={toggleModal}
+          deleteThread={deleteThread}
+        />
+      );
+    }
+  }
+
+  return (<ModalContainer deleteCheck={modalStatus === 'deleteCheck'}>
     <ModalHeader
-      headerText={modalStatus === 'newThread' ? "Start a new topic" : "Post a new reply"}
+      headerText={setHeaderText()}
       toggleModal={toggleModal}
     />
-    {modalStatus === 'newThread' ? 
-      <ModalNewThreadForm
-        toggleModal={toggleModal}
-        postNewThread={postToForum}
-      />
-      :
-      <ModalNewReplyForm
-        toggleModal={toggleModal}
-        postNewReply={postToForum}
-      />
-    }
-  </ModalContainer>
-);
+    {setModalBody()}
+  </ModalContainer>)
+};
 
 export default Modal;

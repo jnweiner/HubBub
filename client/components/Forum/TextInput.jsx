@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import ForumButton from './ForumButton.jsx';
 
 const TextBox = styled.textarea`
-  width: 80%;
+  width: 60%;
   font-family: 'Krub', sans-serif;
 `;
 
-const TextInput = ({ postId, editReply, initialValue, toggleEditMode }) => {
+const TextInput = ({ postId, edit, initialValue, toggleEditMode }) => {
   const [value, setValue] = useState('');
   const [hasBeenUpdated, setHasBeenUpdated] = useState(false);
 
@@ -17,8 +17,9 @@ const TextInput = ({ postId, editReply, initialValue, toggleEditMode }) => {
   }
 
   const handleSave = () => {
-    let textToSave = hasBeenUpdated ? value : initialValue;
-    editReply(postId, textToSave);
+    if (hasBeenUpdated) {
+      edit(postId, value);
+    }
     toggleEditMode();
   }
 
