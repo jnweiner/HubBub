@@ -6,3 +6,7 @@ public/bundle.js
 
 yelp_config.js
 database/pg_config.js
+
+## test coverage
+
+coverage
