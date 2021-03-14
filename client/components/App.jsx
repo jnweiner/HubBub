@@ -142,6 +142,7 @@ const App = () => {
           thread={view}
           editThread={editThread}
           editThreadTitle={editThreadTitle}
+          deleteThread={deleteThread}
           fetchReplies={fetchReplies}
           editReply={editReply}
           deleteReply={deleteReply}
@@ -275,7 +276,11 @@ const App = () => {
   const fetchReplies = (threadId) => {
     return axios.get('/api/replies', { params: { threadId }} )
       .then(({ data }) => {
-        setReplies(data);
+          if (!data.length && view.text === '<< This post has been deleted by user. >>') {
+            deleteThread(view.id);
+          } else {
+            setReplies(data);
+          }
       })
       .catch((err) => console.log(err));
   };
@@ -308,7 +313,7 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  const editThread = (threadId, text = '<< This post has been deleted by user. >>') => {
+  const editThread = (threadId, text) => {
     axios.patch(`/api/threads/${threadId}`, { text })
     .then(() => {
       return axios.get(`/api/threads/${threadId}`)
@@ -331,7 +336,6 @@ const App = () => {
   };
 
   const deleteThread = (threadId = view.id) => {
-    toggleModal(null);
     axios.delete(`/api/threads/${threadId}`)
       .then(() => {
          setView({ id: view.interest_id, name: view.interest, type: 'interestHub'})

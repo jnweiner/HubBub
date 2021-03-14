@@ -32,7 +32,7 @@ const OptionsContainer = styled.span`
   width: 99%;
 `;
 
-const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, editThreadTitle, deleteReply, replies, toggleModal, userId }) => {
+const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, editThreadTitle, deleteThread, deleteReply, replies, toggleModal, userId }) => {
 
   const [editTitle, setEditTitle] = useState(false);
 
@@ -42,6 +42,14 @@ const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, editT
 
   const toggleEditTitle = () => {
     setEditTitle(!editTitle)
+  }
+
+  const deleteFirstPost = () => {
+    if (replies.length) {
+      editThread(thread.id, '<< This post has been deleted by user. >>');
+    } else {
+      deleteThread(thread.id);
+    }
   }
 
   return (
@@ -70,7 +78,7 @@ const Thread = ({ thread, changeView, fetchReplies, editReply, editThread, editT
           content={<span>Reply <i className="fas fa-reply"></i></span>}
         />
       </OptionsContainer>
-      <Post key={thread.id} post={thread} firstPost={true} userId={userId} edit={editThread} deleteBehavior={editThread}/>
+      <Post key={thread.id} post={thread} firstPost={true} userId={userId} edit={editThread} deleteBehavior={deleteFirstPost}/>
       {replies.map(reply => <Post key={reply.id} post={reply} firstPost={false} userId={userId} edit={editReply} deleteBehavior={deleteReply}/>)}
     </ThreadContainer>
   );
