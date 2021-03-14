@@ -31,6 +31,8 @@ const InterestInfo = styled.div`
   height: 100%;
 `;
 
+InterestInfo.displayName = 'InterestInfo';
+
 const Followers = styled.span`
   font-style: italic;
   font-weight: 400;

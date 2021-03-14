@@ -13,6 +13,8 @@ const ToggleIcon = styled.span`
   font-size: 18px;
 `;
 
+ToggleIcon.displayName = 'ToggleIcon';
+
 const ToggleInterestIcon = ({ id, isUserInterest, addUserInterest, deleteUserInterest }) => (
   <ToggleInterestContainer>
     <ToggleIcon onClick={isUserInterest ? () => deleteUserInterest(id) : () => addUserInterest(id)}>
