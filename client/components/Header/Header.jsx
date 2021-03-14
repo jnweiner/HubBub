@@ -53,6 +53,10 @@ const Header = ({ city, userAvatar, userInterests, view, changeView, logout }) =
       document.body.addEventListener('click', dropdownHandler);
     }
 
+    return function cleanup() {
+      document.body.removeEventListener('click', dropdownHandler);
+    }
+
   }, [dropdown])
 
   return (
