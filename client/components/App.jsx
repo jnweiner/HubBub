@@ -359,10 +359,9 @@ const App = () => {
         ? (
           <LoggedInContainer>
             <Header
-              city={city}
+              cityName={city.name}
               userAvatar={userInfo.avatar}
               userInterests={userInterests}
-              view={view}
               changeView={changeView}
               logout={logout}
             />

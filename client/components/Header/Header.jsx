@@ -38,7 +38,9 @@ const City = styled.span`
   font-size: 30px;
 `;
 
-const Header = ({ city, userAvatar, userInterests, view, changeView, logout }) => {
+City.displayName = 'City';
+
+const Header = ({ cityName, userAvatar, userInterests, changeView, logout }) => {
 
   const [dropdown, setDropdown] = useState(false);
 
@@ -65,7 +67,7 @@ const Header = ({ city, userAvatar, userInterests, view, changeView, logout }) =
         <Logo><i className="fas fa-city"></i>HubBub</Logo>
         <City onClick={() => changeView({type: 'cityHub'})}>
           <HoverText
-            text={city.name}
+            text={cityName}
             regColor="#f5f5f5"
             hoveredColor="gray"
           />
