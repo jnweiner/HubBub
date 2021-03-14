@@ -38,7 +38,7 @@ const City = styled.span`
   font-size: 30px;
 `;
 
-const Header = ({ city, userAvatar, userInterests, view, changeView, setCurrentUser }) => {
+const Header = ({ city, userAvatar, userInterests, view, changeView, logout }) => {
 
   const [dropdown, setDropdown] = useState(false);
 
@@ -76,7 +76,7 @@ const Header = ({ city, userAvatar, userInterests, view, changeView, setCurrentU
         {dropdown ?
           <HeaderDropdown
             changeView={changeView}
-            setCurrentUser={setCurrentUser}
+            logout={logout}
           />
         : null}
       </UserSection>

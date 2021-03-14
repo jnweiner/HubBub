@@ -169,6 +169,11 @@ const App = () => {
       });
   };
 
+  const logout = () => {
+    setCurrentUser(null);
+    setView({ type: 'cityHub' });
+  };
+
   const fetchUserInfo = (currentUser) => {
     return axios.get(`/api/users/${currentUser}`)
       .then(({ data }) => {
@@ -355,7 +360,7 @@ const App = () => {
               userInterests={userInterests}
               view={view}
               changeView={changeView}
-              setCurrentUser={setCurrentUser}
+              logout={logout}
             />
             <DisplayContainer>
               <Nav

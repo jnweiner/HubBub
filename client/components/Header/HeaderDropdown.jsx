@@ -17,7 +17,7 @@ const DropdownContainer = styled.div`
   font-weight: 600;
 `;
 
-const HeaderDropdown = ({ changeView, setCurrentUser }) => (
+const HeaderDropdown = ({ changeView, logout }) => (
   <DropdownContainer>
     <span>
       <HoverText
@@ -33,7 +33,7 @@ const HeaderDropdown = ({ changeView, setCurrentUser }) => (
         hoveredColor="#e1ad01"
       />
     </span>
-    <span onClick={() => setCurrentUser(null)}>
+    <span onClick={logout}>
       <HoverText
         text={(<span><i className="fas fa-sign-out-alt"></i> Log Out</span>)}
         regColor="#f5f5f5"
