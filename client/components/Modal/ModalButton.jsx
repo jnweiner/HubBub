@@ -16,6 +16,8 @@ const SubmitButton = styled.button`
   font-size: 15px;
 `;
 
+SubmitButton.displayName = 'SubmitButton';
+
 const ModalButton = ({ content, onClickFunction }) => (
   <SubmitContainer>
     <SubmitButton onClick={onClickFunction}>
