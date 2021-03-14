@@ -12,7 +12,7 @@ const StyledModalHeader = styled.span`
   border-bottom: 1px solid #e1ad01;
 `;
 
-const CloseArrow = styled.span`
+const CloseX = styled.span`
   font-size: 20px;
   font-weight: 600;
 `;
@@ -20,13 +20,13 @@ const CloseArrow = styled.span`
 const ModalHeader = ({ headerText, toggleModal }) => (
   <StyledModalHeader>
     <span>{headerText}</span>
-    <CloseArrow onClick={() => toggleModal(null)}>
+    <CloseX onClick={() => toggleModal(null)}>
       <HoverText
-        text={(<i className="fas fa-chevron-down"></i>)}
+        text={(<i className="fas fa-times"></i>)}
         regColor="#f5f5f5"
         hoveredColor="#e1ad01"
       />
-    </CloseArrow>
+    </CloseX>
   </StyledModalHeader>
 );
 
