@@ -42,6 +42,8 @@ const LoggedInContainer = styled.div`
   justify-content: space-between;
 `
 
+LoggedInContainer.displayName = 'LoggedInContainer';
+
 const LoggedOutContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -49,6 +51,8 @@ const LoggedOutContainer = styled.div`
   width: 95vw;
   height: 95vh;
 `;
+
+LoggedOutContainer.displayName = 'LoggedOutContainer';
 
 // Display refers to the Nav + View areas
 const DisplayContainer = styled.div`
@@ -355,10 +359,9 @@ const App = () => {
         ? (
           <LoggedInContainer>
             <Header
-              city={city}
+              cityName={city.name}
               userAvatar={userInfo.avatar}
               userInterests={userInterests}
-              view={view}
               changeView={changeView}
               logout={logout}
             />

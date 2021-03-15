@@ -6,11 +6,15 @@ const StyledContent = styled.span`
   cursor: pointer;
 `;
 
+StyledContent.displayName = 'StyledContent';
+
 const StyledBackground = styled.span`
   background-color: ${props => props.isHovered ? props.hoveredColor : props.regColor };
   border-radius: 5px;
   cursor: pointer;
 `;
+
+StyledBackground.displayName = 'StyledBackground';
 
 const HoverText = ({ effect = 'content', text, hoveredColor, regColor }) => {
 

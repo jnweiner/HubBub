@@ -17,6 +17,8 @@ const CloseX = styled.span`
   font-weight: 600;
 `;
 
+CloseX.displayName = 'CloseX';
+
 const ModalHeader = ({ headerText, toggleModal }) => (
   <StyledModalHeader>
     <span>{headerText}</span>
