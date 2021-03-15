@@ -45,18 +45,18 @@ const Header = ({ cityName, userAvatar, userInterests, changeView, logout }) => 
   const [dropdown, setDropdown] = useState(false);
 
   useEffect(() => {
-
     const dropdownHandler = () => {
       setDropdown(false);
-      document.body.removeEventListener('click', dropdownHandler)
-    }
+    };
 
     if (dropdown) {
       document.body.addEventListener('click', dropdownHandler);
     }
 
     return function cleanup() {
-      document.body.removeEventListener('click', dropdownHandler);
+      if (dropdown) {
+        document.body.removeEventListener('click', dropdownHandler);
+      }
     }
 
   }, [dropdown])
